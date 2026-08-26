@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    scroll-behavior: smooth;
+    background-color: #F5F5F0;
+    color: #1A1A1A;
+  }
+
+  .font-tamil {
+    font-family: 'Noto Sans Tamil', 'Noto Serif Tamil', sans-serif;
+  }
+
+  .font-tamil-serif {
+    font-family: 'Noto Serif Tamil', 'Playfair Display', serif;
+  }
+
+  .font-serif-display {
+    font-family: 'Playfair Display', 'Noto Serif Tamil', serif;
+  }
+
+  .font-heading {
+    font-family: 'Playfair Display', 'Cinzel', serif;
+  }
+}
+
+/* Custom subtle scrollbar with warm organic tones */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #EBEBE3;
+}
+::-webkit-scrollbar-thumb {
+  background: #5A5A40/30;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #5A5A40/50;
+}

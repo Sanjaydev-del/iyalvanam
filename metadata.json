@@ -1,0 +1,6 @@
+{
+  "name": "Iyalvanam Iyarkai Vazhviyal Koodam",
+  "description": "Official platform and community portal for Iyalvanam – conscious living, nature immersion, community joining, donations, and updates.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

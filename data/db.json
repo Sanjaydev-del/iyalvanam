@@ -1,0 +1,193 @@
+{
+  "users": [
+    {
+      "id": "usr-admin-01",
+      "username": "admin",
+      "passwordHash": "$2b$10$g1P8v0.H1a5SsQ4/0LKfAeVklFp3ZycLkQBjxSXOrfTayxSa1kCe6",
+      "email": "contact@iyalvanam.org",
+      "role": "ADMIN",
+      "createdAt": "2026-08-26T18:26:44.647Z"
+    }
+  ],
+  "blogPosts": [
+    {
+      "id": "post-01",
+      "title": "Restoring the Western Ghats: Our First Sapling Drive in Dharmapuramadam",
+      "titleTamil": "மேற்குத் தொடர்ச்சி மலையின் மடியில் முதல் மரக்கன்றுகள் நடும் விழா",
+      "slug": "restoring-western-ghats-sapling-drive",
+      "excerpt": "A glimpse into our collective effort at Dharmapuramadam, planting native Western Ghats species to restore the natural canopy and protect soil biodiversity.",
+      "content": "At the foothills of the Agastiyar Malai Biosphere Reserve in Tenkasi District, our journey began not with concrete foundations, but with native seeds and saplings. \n\nIn harmony with the natural ecosystem of the Western Ghats, we gathered with friends, local botanists, and prospective community members to plant over 150 indigenous varieties, including Kadamba, Marudham, Vembu, and wild fruit trees that sustain local bird and pollinator populations.\n\n### Principles in Action\nOur approach follows the five foundational principles of Iyalvanam:\n1. **Non-Artificial Intervention**: Avoiding synthetic fertilizers and chemicals, relying purely on mulching, indigenous soil microbes, and companion planting.\n2. **The Forest as Our Teacher**: Observing how natural deciduous and evergreen forest canopies layer themselves to retain ground moisture and microclimates.\n3. **Collective Joy**: Working with our hands in soil, sharing fresh tender coconuts, and singing folk songs in gratitude for the earth.\n\nAs the monsoon showers from the Kalakad-Mundanthurai range bless our soil, we invite all seekers and nature lovers to visit, immerse, and participate in our upcoming community gathering.",
+      "imageUrl": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1200&q=80",
+      "author": "Iyalvanam Core Circle",
+      "category": "Ecology & Land",
+      "tags": [
+        "Western Ghats",
+        "Reforestation",
+        "Agastiyar Malai",
+        "Native Species"
+      ],
+      "readTime": "4 min read",
+      "published": true,
+      "createdAt": "2026-06-15T09:30:00.000Z",
+      "updatedAt": "2026-06-15T09:30:00.000Z"
+    },
+    {
+      "id": "post-02",
+      "title": "Why Non-Artificial Living is the Greatest Healing: Water, Sun & Soil",
+      "titleTamil": "செயற்கையற்ற வாழ்வியலே மெய்யான நலம் – பஞ்சபூதங்களின் மருத்துவம்",
+      "slug": "why-non-artificial-living-is-healing",
+      "excerpt": "Exploring our natural health philosophy: how fresh air, pure open well water, direct sunlight, and barefoot grounding restore human vitality.",
+      "content": "Modern human life has systematically isolated us from the primal elements: we walk on rubber soles, breathe air conditioned through synthetic ducts, drink demineralized bottled water, and hide behind screens from dawn to dusk.\n\nAt Iyalvanam, health is not an expensive medical commodity; it is the natural consequence of being in direct resonance with the five elements (Pancha Bhootas).\n\n### The Four Pillars of Natural Wellness\n* **Sunlight (Surya Upasana)**: Morning absorption of soft sunrays stimulates circadian synchronization, natural Vitamin D synthesis, and deep cellular energy.\n* **Grounding (Earth Connection)**: Walking barefoot on living forest loam transfers free electrons from the earth, neutralizing chronic systemic inflammation.\n* **Living Water**: Sourced from our unpolluted deep open well, rich in dissolved natural minerals without chemical chlorination.\n* **Mindful Fasting and Seasonal Fruits**: Eating fresh produce harvested right from the trees, honoring digestive rest and internal biological rhythms.\n\n> \"We don’t create a new health system—we return to the timeless natural one that built the human body over millions of years.\"",
+      "imageUrl": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=80",
+      "author": "Health & Living Circle",
+      "category": "Conscious Living",
+      "tags": [
+        "Holistic Health",
+        "Grounding",
+        "Natural Living",
+        "Pancha Bhoota"
+      ],
+      "readTime": "5 min read",
+      "published": true,
+      "createdAt": "2026-07-02T11:15:00.000Z",
+      "updatedAt": "2026-07-02T11:15:00.000Z"
+    },
+    {
+      "id": "post-03",
+      "title": "Consensus Governance: How Decisions Are Made Without Hierarchy",
+      "titleTamil": "அதிகாரமற்ற கூட்டுறவு நிர்வாகம் – ஒருமித்த கருத்தின் வலிமை",
+      "slug": "consensus-governance-without-hierarchy",
+      "excerpt": "Understanding the dual trust structure of Iyalvanam Asset Trust and SEYON Operational Trust, safeguarding collective stewardship.",
+      "content": "How can a multi-family community thrive over generations without creating bureaucratic power structures, landlords, or marginalized voices?\n\nThe answer lies in our dual-trust legal architecture and sacred consensus circles:\n\n### The Legal Framework\n1. **Iyalvanam Asset Trust**: Holds the sacred land in perpetuity. No single individual owns private parcels of land. The land belongs to nature and the collective community.\n2. **SEYON Operational Trust**: Manages daily logistical functions, shared infrastructure maintenance, water distribution, and ecological activities.\n\n### The Decision Circle\nEvery major decision is not subject to simple majority voting (which creates winners and losers), but to **Consensus Processing**. Every voice is heard until collective harmony and mutual understanding are reached.\n\nConflicts are addressed through open circle dialogues under the shade of our communal banyan tree, grounded in truth, compassion, and shared responsibility.",
+      "imageUrl": "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1200&q=80",
+      "author": "SEYON Trust Circle",
+      "category": "Community Governance",
+      "tags": [
+        "Governance",
+        "Trust Architecture",
+        "Consensus",
+        "Collective Stewardship"
+      ],
+      "readTime": "6 min read",
+      "published": true,
+      "createdAt": "2026-07-20T14:00:00.000Z",
+      "updatedAt": "2026-07-20T14:00:00.000Z"
+    },
+    {
+      "id": "post-04",
+      "title": "Earthen Architecture & Eco-Infrastructure in Tenkasi",
+      "titleTamil": "இயற்கை வீடுகள் மற்றும் நிலைத்தன்மை உள்கட்டமைப்புகள்",
+      "slug": "earthen-architecture-eco-infrastructure",
+      "excerpt": "Constructing breathable lime-mud homes, dry compost toilets, and decentralized solar grids in Tenkasi district.",
+      "content": "Our living spaces are designed to leave zero toxic residue on the earth. Built using sun-dried mud blocks, lime plaster, bamboo roofing, and terracotta tiles, these structures remain naturally cool during tropical summers and warm during mountain winters.\n\n### Current Infrastructure Highlights\n- **Dry Compost Toilets**: Transforming human waste into safe, pathogen-free compost for non-food agroforestry, conserving thousands of liters of clean groundwater.\n- **Solar Micro-Grid**: Off-grid renewable power powering essential lighting, communication, and water pumping.\n- **Community Kitchen & Library**: Shared communal spaces where meals are cooked collectively on fuel-efficient earthen stoves using dry fallen wood.",
+      "imageUrl": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80",
+      "author": "Infrastructure Circle",
+      "category": "Architecture & Land",
+      "tags": [
+        "Eco Architecture",
+        "Solar",
+        "Compost Toilets",
+        "Mud Houses"
+      ],
+      "readTime": "4 min read",
+      "published": true,
+      "createdAt": "2026-08-10T16:20:00.000Z",
+      "updatedAt": "2026-08-10T16:20:00.000Z"
+    }
+  ],
+  "memberInquiries": [
+    {
+      "id": "inq-101",
+      "name": "Arunachalam S.",
+      "email": "arun.nature@example.com",
+      "phone": "+91 98401 23456",
+      "skills": "Organic farming, Permaculture design, Earthen masonry",
+      "areaOfContribution": "Land development, Agriculture, Food forest",
+      "numberOfMembers": 3,
+      "preferredInteractionMethod": "In-person visit & stay",
+      "message": "My family and I have been practicing natural farming for 4 years in Madurai. We are deeply aligned with the Iyalvanam vision of non-artificial living and consensus governance.",
+      "status": "PENDING",
+      "submittedAt": "2026-08-20T10:15:00.000Z"
+    },
+    {
+      "id": "inq-102",
+      "name": "Dr. Meenakshi Sundaram",
+      "email": "drmeena.eco@example.com",
+      "phone": "+91 94440 98765",
+      "skills": "Naturopathy, Traditional Siddha herbal medicine, Children's education",
+      "areaOfContribution": "Community health, Experiential learning for children",
+      "numberOfMembers": 2,
+      "preferredInteractionMethod": "Phone call followed by weekend visit",
+      "message": "Wishing to transition away from urban hospital practice to a pure nature-based preventative life. Ready to contribute medical knowledge and herbal botanical garden development.",
+      "status": "CONTACTED",
+      "notes": "Spoke on phone on Aug 22. Scheduled orientation stay for first week of September.",
+      "submittedAt": "2026-08-18T14:40:00.000Z"
+    },
+    {
+      "id": "inq-103",
+      "name": "Karthikeyan & Priya",
+      "email": "karthi.priya@example.com",
+      "phone": "+91 97900 11223",
+      "skills": "Renewable energy, Solar microgrids, Carpentry, Water harvesting",
+      "areaOfContribution": "Infrastructure, Solar power, Rainwater systems",
+      "numberOfMembers": 4,
+      "preferredInteractionMethod": "In-person immersion",
+      "message": "We have visited the Dharmapuramadam land and completed the initial 1-month transition stay. We are ready to make the founding member contribution and join full-time.",
+      "status": "JOINED",
+      "notes": "Completed orientation and consensus circle dialogue. Invited as active resident family.",
+      "submittedAt": "2026-07-28T09:00:00.000Z"
+    }
+  ],
+  "contactInquiries": [
+    {
+      "id": "cnt-201",
+      "name": "Senthil Kumar",
+      "email": "senthil.k@example.com",
+      "phone": "+91 98840 55667",
+      "subject": "Volunteering for upcoming sapling plantation weekend",
+      "message": "Hello Iyalvanam team, I would love to bring a group of 5 college students to volunteer for tree planting and ditch contouring next weekend. Please let us know the visiting protocol.",
+      "submittedAt": "2026-08-24T12:30:00.000Z",
+      "responded": true
+    },
+    {
+      "id": "cnt-202",
+      "name": "Ananya Iyer",
+      "email": "ananya.iyer@example.com",
+      "subject": "Donation of traditional heirloom vegetable seeds",
+      "message": "Namaskaram! I have conserved over 30 indigenous varieties of Tamil Nadu brinjal, lady's finger, pumpkin, and greens seeds. I would like to courier them or deliver personally.",
+      "submittedAt": "2026-08-25T15:10:00.000Z",
+      "responded": false
+    }
+  ],
+  "donations": [
+    {
+      "id": "don-301",
+      "donorName": "Venkatesh R.",
+      "donorEmail": "venkat.r@example.com",
+      "amount": 50000,
+      "type": "Infrastructure-specific support",
+      "description": "Contribution towards the Community Hall open well deepening and solar pump setup.",
+      "status": "RECEIVED",
+      "createdAt": "2026-08-12T11:00:00.000Z"
+    },
+    {
+      "id": "don-302",
+      "donorName": "Dr. Lakshmi Narayanan",
+      "donorEmail": "dr.lakshmi@example.com",
+      "amount": 25000,
+      "type": "Monetary support",
+      "description": "Support for planting 200 native forest saplings along the Western Ghats perimeter.",
+      "status": "RECEIVED",
+      "createdAt": "2026-08-19T16:45:00.000Z"
+    },
+    {
+      "id": "don-303",
+      "donorName": "Sundar Rajan",
+      "donorEmail": "sundar.rajan@example.com",
+      "type": "Seeds",
+      "description": "Pledge to supply 50 kg of organic heirloom paddy and millet seeds from Thiruvannamalai.",
+      "status": "PENDING",
+      "createdAt": "2026-08-25T17:20:00.000Z"
+    }
+  ]
+}
