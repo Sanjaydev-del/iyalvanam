@@ -9,8 +9,12 @@ import {
   Bookmark, 
   TreePine, 
   Sparkles,
-  ChevronRight
+  ChevronRight,
+  Feather
 } from 'lucide-react';
+import { Container } from '../components/common/Container';
+import { Button } from '../components/common/Button';
+import { BotanicalFlourish, LeafBullet } from '../components/OrganicIcons';
 import { BlogPost } from '../types';
 import { api } from '../services/api';
 
@@ -26,16 +30,16 @@ export const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ slugOrId, naviga
   const [relatedPosts, setRelatedPosts] = useState<BlogPost[]>([]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const loadPost = async () => {
       setLoading(true);
       try {
         const data = await api.getBlogPost(slugOrId);
         setPost(data);
-        // Load some related posts
         const all = await api.getBlogPosts();
         setRelatedPosts(all.filter((p) => p.id !== data.id).slice(0, 2));
       } catch (err) {
-        console.error('Failed to load blog detail', err);
+        console.warn('Failed to load blog detail', err);
       } finally {
         setLoading(false);
       }
@@ -52,177 +56,138 @@ export const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ slugOrId, naviga
 
   if (loading) {
     return (
-      <div className="max-w-4xl mx-auto px-4 py-20 space-y-6">
-        <div className="h-6 w-32 bg-[#EBEBE3] rounded-lg animate-pulse" />
-        <div className="h-12 w-3/4 bg-[#EBEBE3] rounded-xl animate-pulse" />
-        <div className="h-96 w-full bg-[#EBEBE3] rounded-3xl animate-pulse" />
-      </div>
+      <Container size="narrow" className="py-20 space-y-6">
+        <div className="h-6 w-32 bg-[#f7f2e7] rounded-lg animate-pulse" />
+        <div className="h-12 w-3/4 bg-[#f7f2e7] rounded-xl animate-pulse" />
+        <div className="h-96 w-full bg-[#f7f2e7] rounded-3xl animate-pulse" />
+      </Container>
     );
   }
 
   if (!post) {
     return (
-      <div className="max-w-4xl mx-auto px-4 py-20 text-center space-y-4">
-        <h2 className="text-2xl font-serif font-bold text-[#4A3728]">Article Not Found</h2>
-        <p className="text-sm text-[#5A5A40]">The requested journal chronicle could not be located.</p>
-        <button
-          onClick={() => navigate('/blog')}
-          className="px-6 py-2.5 rounded-full bg-[#B35C44] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#9B4F3B] transition-colors"
-        >
+      <Container size="narrow" className="py-20 text-center space-y-4">
+        <h2 className="text-2xl font-serif-display font-bold text-[#2d2013]">Article Not Found</h2>
+        <p className="text-sm text-[#3d2f21]/70">The requested journal chronicle could not be located.</p>
+        <Button variant="primary" size="md" onClick={() => navigate('/blog')}>
           Return to Blog
-        </button>
-      </div>
+        </Button>
+      </Container>
     );
   }
 
   return (
-    <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
-      {/* Back Button */}
-      <button
-        onClick={() => navigate('/blog')}
-        className="inline-flex items-center gap-2 text-xs font-bold text-[#4A3728] hover:text-[#B35C44] transition-colors uppercase tracking-wider"
-      >
-        <ArrowLeft className="w-4 h-4" />
-        <span>Back to All Chronicles</span>
-      </button>
+    <article className="bg-[#f0e6d2] text-[#2d2013] space-y-8 sm:space-y-12 pb-16 sm:pb-24">
+      
+      {/* Top Header & Breadcrumb */}
+      <section className="pt-6 sm:pt-8 pb-6 border-b border-[#7a2e1a]/15 bg-[#f7f2e7]">
+        <Container size="narrow">
+          <div className="flex items-center justify-between">
+            <button
+              onClick={() => navigate('/blog')}
+              className="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-bold text-[#1f3d1f] hover:text-[#7a2e1a] transition-colors py-1"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              <span>Back to All Chronicles</span>
+            </button>
 
-      {/* Header */}
-      <header className="space-y-4">
-        <div className="flex flex-wrap items-center gap-3 text-xs">
-          <span className="bg-[#4A3728] text-white font-bold text-[11px] px-3.5 py-1 rounded-full uppercase tracking-wider">
-            {post.category}
-          </span>
-          <span className="text-[#5A5A40] flex items-center gap-1">
-            <Calendar className="w-3.5 h-3.5" />
-            {new Date(post.publishedAt).toLocaleDateString('en-US', {
-              month: 'long',
-              day: 'numeric',
-              year: 'numeric',
-            })}
-          </span>
-          <span className="text-[#5A5A40] flex items-center gap-1">
-            <Clock className="w-3.5 h-3.5" />
-            {post.readTime}
-          </span>
-        </div>
+            <button
+              onClick={handleShare}
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-[#7a2e1a]/30 text-xs font-serif font-bold uppercase tracking-wider text-[#7a2e1a] hover:bg-[#f0e6d2] transition-colors"
+            >
+              <Share2 className="w-3.5 h-3.5" />
+              <span>Share</span>
+            </button>
+          </div>
+        </Container>
+      </section>
 
-        {post.titleTamil && (
-          <p className="text-base sm:text-lg font-bold text-[#5A5A40] font-tamil">
-            {post.titleTamil}
-          </p>
-        )}
-
-        <h1 className="text-3xl sm:text-5xl font-serif font-bold text-[#4A3728] leading-tight">
-          {post.title}
-        </h1>
-
-        <div className="flex items-center justify-between pt-4 border-t border-[#5A5A40]/15">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-[#EBEBE3] border border-[#5A5A40]/20 flex items-center justify-center font-bold text-sm text-[#4A3728]">
-              {post.author[0]}
+      {/* Main Article Content */}
+      <Container size="narrow">
+        <div className="space-y-6 sm:space-y-8">
+          
+          <header className="space-y-3 sm:space-y-4">
+            <div className="flex flex-wrap items-center gap-2.5 text-xs">
+              <span className="bg-[#1f3d1f] text-[#f7f2e7] font-bold text-[10px] sm:text-[11px] px-3.5 py-1 rounded-full uppercase tracking-wider">
+                {post.category}
+              </span>
+              <span className="text-[#7a2e1a] flex items-center gap-1">
+                <Clock className="w-3.5 h-3.5" />
+                <span>{post.readTime || '5 min read'}</span>
+              </span>
+              <span className="text-[#3d2f21]/70">• By {post.author}</span>
             </div>
-            <div>
-              <div className="text-xs font-bold text-[#4A3728]">{post.author}</div>
-              <div className="text-[11px] text-[#5A5A40]">Iyalvanam Community Steward</div>
-            </div>
+
+            <h1 className="text-2xl sm:text-4xl md:text-5xl font-serif-display font-bold text-[#2d2013] tracking-tight leading-tight break-words">
+              {post.title}
+            </h1>
+
+            {post.titleTamil && (
+              <p className="text-sm sm:text-base font-tamil text-[#7a2e1a] font-semibold break-words">
+                {post.titleTamil}
+              </p>
+            )}
+          </header>
+
+          {/* Featured Image */}
+          <div className="relative aspect-[16/9] rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg border-2 border-[#1f3d1f]/20 bg-[#f7f2e7]">
+            <img
+              src={post.imageUrl || 'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80'}
+              alt={post.title}
+              className="w-full h-full object-cover"
+            />
           </div>
 
-          <button
-            onClick={handleShare}
-            className="p-2.5 rounded-full bg-[#EBEBE3] hover:bg-[#dedecf] text-[#4A3728] text-xs font-bold flex items-center gap-1.5 transition-colors border border-[#5A5A40]/20 uppercase tracking-wider"
-            title="Share article"
-          >
-            <Share2 className="w-4 h-4 text-[#B35C44]" />
-            <span className="hidden sm:inline">Share</span>
-          </button>
-        </div>
-      </header>
+          {/* Body Content */}
+          <div className="text-base sm:text-lg text-[#3d2f21] font-serif-body leading-relaxed space-y-5 whitespace-pre-line pt-2">
+            {post.content}
+          </div>
 
-      {/* Featured Image */}
-      <div className="rounded-3xl overflow-hidden shadow-lg border border-[#5A5A40]/20 max-h-[460px]">
-        <img
-          src={post.imageUrl}
-          alt={post.title}
-          className="w-full h-full object-cover"
-        />
-      </div>
-
-      {/* Article Body */}
-      <div className="prose prose-stone max-w-none text-[#1A1A1A] space-y-6 text-base sm:text-lg leading-relaxed font-sans font-normal">
-        {post.content.split('\n\n').map((paragraph, index) => {
-          if (paragraph.startsWith('### ')) {
-            return (
-              <h3 key={index} className="text-2xl font-bold font-serif text-[#4A3728] pt-4">
-                {paragraph.replace('### ', '')}
-              </h3>
-            );
-          }
-          if (paragraph.startsWith('## ')) {
-            return (
-              <h2 key={index} className="text-3xl font-bold font-serif text-[#4A3728] pt-6 border-b border-[#5A5A40]/15 pb-2">
-                {paragraph.replace('## ', '')}
-              </h2>
-            );
-          }
-          if (paragraph.startsWith('> ')) {
-            return (
-              <blockquote key={index} className="p-6 bg-[#EBEBE3] rounded-2xl border-l-4 border-[#B35C44] italic text-lg text-[#4A3728] font-serif">
-                {paragraph.replace('> ', '')}
-              </blockquote>
-            );
-          }
-          return (
-            <p key={index} className="text-[#1A1A1A]/85 leading-relaxed">
-              {paragraph}
-            </p>
-          );
-        })}
-      </div>
-
-      {/* Tags */}
-      {post.tags && post.tags.length > 0 && (
-        <div className="pt-6 border-t border-[#5A5A40]/15 flex flex-wrap items-center gap-2">
-          <span className="text-xs font-bold text-[#5A5A40] flex items-center gap-1 uppercase tracking-wider">
-            <Tag className="w-3.5 h-3.5 text-[#B35C44]" /> Topics:
-          </span>
-          {post.tags.map((tag, i) => (
-            <span key={i} className="text-xs px-3 py-1 rounded-full bg-[#EBEBE3] border border-[#5A5A40]/15 text-[#4A3728] font-semibold">
-              #{tag}
-            </span>
-          ))}
-        </div>
-      )}
-
-      {/* Related Posts */}
-      {relatedPosts.length > 0 && (
-        <div className="pt-10 border-t border-[#5A5A40]/15 space-y-6">
-          <h3 className="text-xl font-bold font-serif text-[#4A3728]">
-            Related Chronicles
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {relatedPosts.map((rel) => (
-              <div
-                key={rel.id}
-                onClick={() => {
-                  navigate(`/blog/${rel.slug || rel.id}`);
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
-                className="p-5 rounded-2xl bg-[#EBEBE3] border border-[#5A5A40]/15 hover:border-[#5A5A40] transition-all cursor-pointer space-y-2 group"
-              >
-                <span className="text-[10px] font-bold text-[#B35C44] bg-[#B35C44]/10 px-2.5 py-0.5 rounded-full uppercase tracking-wider">
-                  {rel.category}
+          {/* Tags */}
+          {post.tags && post.tags.length > 0 && (
+            <div className="pt-6 border-t border-[#7a2e1a]/15 flex flex-wrap items-center gap-2">
+              <span className="text-xs font-serif font-bold uppercase tracking-widest text-[#7a2e1a]">Tags:</span>
+              {post.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="px-3 py-1 rounded-full bg-[#f7f2e7] border border-[#7a2e1a]/20 text-xs font-serif font-medium text-[#2d2013]"
+                >
+                  #{tag}
                 </span>
-                <h4 className="font-bold text-sm font-serif text-[#4A3728] group-hover:text-[#B35C44] transition-colors line-clamp-2">
-                  {rel.title}
-                </h4>
-                <p className="text-xs text-[#4A3728]/80 line-clamp-2">
-                  {rel.excerpt}
-                </p>
+              ))}
+            </div>
+          )}
+
+          {/* Related Articles */}
+          {relatedPosts.length > 0 && (
+            <div className="pt-10 border-t border-[#7a2e1a]/15 space-y-6">
+              <h3 className="text-xl sm:text-2xl font-serif-display font-bold text-[#2d2013]">
+                Related Chronicles
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                {relatedPosts.map((rp) => (
+                  <div
+                    key={rp.id}
+                    onClick={() => navigate(`/blog/${rp.slug || rp.id}`)}
+                    className="p-5 rounded-2xl bg-[#f7f2e7] border border-[#7a2e1a]/15 hover:border-[#1f3d1f] shadow-xs cursor-pointer space-y-2 group"
+                  >
+                    <span className="text-[10px] uppercase font-bold text-[#7a2e1a]">{rp.category}</span>
+                    <h4 className="text-base font-serif-display font-bold text-[#2d2013] group-hover:text-[#1f3d1f] transition-colors leading-snug break-words">
+                      {rp.title}
+                    </h4>
+                    <span className="text-xs font-serif font-bold text-[#1f3d1f] flex items-center gap-1 pt-1">
+                      <span>Read Story</span>
+                      <ChevronRight className="w-3.5 h-3.5" />
+                    </span>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </div>
+          )}
+
         </div>
-      )}
+      </Container>
+
     </article>
   );
 };

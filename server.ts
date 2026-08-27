@@ -77,6 +77,26 @@ interface DBData {
     status: 'PENDING' | 'RECEIVED';
     createdAt: string;
   }>;
+  leadershipProfiles?: Array<{
+    id: string;
+    designation: 'FOUNDER' | 'CO_FOUNDER';
+    displayName: string;
+    roleTitle: string;
+    roleTitleTamil?: string;
+    shortBio: string;
+    fullBiography: string;
+    profileImage: string;
+    coverImage?: string;
+    visionStatement: string;
+    philosophy: string;
+    quote: string;
+    displayOrder: number;
+    isPublished: boolean;
+    projects?: string[];
+    socialLinks?: any;
+    createdAt?: string;
+    updatedAt?: string;
+  }>;
 }
 
 // Ensure data folder and db file
@@ -296,6 +316,48 @@ Conflicts are addressed through open circle dialogues under the shade of our com
         createdAt: "2026-08-25T17:20:00.000Z",
       },
     ],
+    leadershipProfiles: [
+      {
+        id: "lead-01",
+        designation: "FOUNDER",
+        displayName: "Sanjay Dev",
+        roleTitle: "Founder & Vision Steward",
+        roleTitleTamil: "நிறுவனர் & தொலைநோக்கு வழிகாட்டி",
+        shortBio: "A dedicated land steward and philosopher championing sovereign land preservation and non-artificial human living in the Western Ghats.",
+        fullBiography: "Sanjay Dev initiated the Iyalvanam movement after witnessing the rapid acceleration of urban dependency, soil depletion, and ecological fragmentation. Rooted in the ancient Tamil ethos of living in harmony with nature and inspired by natural forest ecologies, he envisioned a dual-trust architecture that guarantees land is held in perpetuity as a sacred commonwealth—never to be bought, sold, or fragmented by individuals.\n\nHis stewardship focuses on establishing permanent food forests, native seed repositories, and sovereign consensus-based living where humanity reconnects with the five primal elements (Pancha Bhootas).",
+        profileImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
+        coverImage: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1600&q=80",
+        visionStatement: "To create an immutable, generational sanctuary where human life returns to its effortless natural state, guided by living soil and timeless consensus.",
+        philosophy: "Nature does not build factories or hierarchies. It creates boundless abundance through interconnected cooperation. When we step outside synthetic systems, we reclaim our time, health, and true sovereignty.",
+        quote: "“We do not create a new life system; we simply return to the timeless natural one that built the human body over millions of years.”",
+        displayOrder: 1,
+        isPublished: true,
+        projects: ["Iyalvanam Asset Trust Legal Architecture", "Dharmapuramadam Food Forest", "Heirloom Seed Repository"],
+        socialLinks: { email: "sanjay@iyalvanam.org", phone: "+91 96007 56007" },
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      },
+      {
+        id: "lead-02",
+        designation: "CO_FOUNDER",
+        displayName: "Dr. Meenakshi Sundaram",
+        roleTitle: "Co-Founder & Operational Steward",
+        roleTitleTamil: "இணை நிறுவனர் & கள ஒருங்கிணைப்பாளர்",
+        shortBio: "Pioneering traditional Siddha herbal health, community consensus circles, and experiential education at SEYON.",
+        fullBiography: "Dr. Meenakshi Sundaram brings over a decade of dedication to natural wellness, traditional herbal medicine, and regenerative community facilitation. As the operational steward of SEYON Operational Trust, she leads on-ground community transitions, experiential workshops, natural earthen architecture initiatives, and the orientation of incoming families.\n\nHer work bridges traditional indigenous botanical wisdom with practical daily rhythms—ensuring that children grow barefoot in pure soil, meals are medicine, and community conflicts dissolve naturally under open dialogue circles.",
+        profileImage: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80",
+        coverImage: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1600&q=80",
+        visionStatement: "To cultivate a vibrant, caring community platform where education, health, and daily labor flow seamlessly from nature’s living patterns.",
+        philosophy: "Health is not an expensive commodity manufactured in hospitals. It is the direct consequence of living soil, unchlorinated open-well water, morning sunlight, and loving human cooperation.",
+        quote: "“True luxury is clean mountain air, living water, unpoisoned food, and a quiet, sovereign mind.”",
+        displayOrder: 2,
+        isPublished: true,
+        projects: ["SEYON Community Health & Herbal Grove", "Natural Earthen Architecture Program", "Family Orientation Immersion"],
+        socialLinks: { email: "meenakshi@iyalvanam.org", phone: "+91 94440 98765" },
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      },
+    ],
   };
 }
 
@@ -422,6 +484,124 @@ app.get("/api/auth/me", authenticateAdmin, (req, res) => {
     role: user.role,
     createdAt: user.createdAt,
   });
+});
+
+// Leadership Endpoints
+app.get("/api/leadership", (req, res) => {
+  const db = readDB();
+  const { all } = req.query;
+  let list = db.leadershipProfiles || [];
+  if (all !== "true") {
+    list = list.filter((l) => l.isPublished);
+  }
+  list = [...list].sort((a, b) => (a.displayOrder || 1) - (b.displayOrder || 1));
+  res.json(list);
+});
+
+app.get("/api/leadership/:id", (req, res) => {
+  const db = readDB();
+  const idOrDesignation = req.params.id.toLowerCase();
+  const list = db.leadershipProfiles || [];
+
+  const profile = list.find(
+    (l) =>
+      l.id.toLowerCase() === idOrDesignation ||
+      (idOrDesignation === "founder" && l.designation === "FOUNDER") ||
+      ((idOrDesignation === "co-founder" || idOrDesignation === "cofounder") && l.designation === "CO_FOUNDER")
+  );
+
+  if (!profile) {
+    res.status(404).json({ error: "Leadership profile not found" });
+    return;
+  }
+  res.json(profile);
+});
+
+app.post("/api/leadership", authenticateAdmin, (req, res) => {
+  const {
+    designation,
+    displayName,
+    roleTitle,
+    roleTitleTamil,
+    shortBio,
+    fullBiography,
+    profileImage,
+    coverImage,
+    visionStatement,
+    philosophy,
+    quote,
+    displayOrder,
+    isPublished,
+    projects,
+    socialLinks,
+  } = req.body;
+
+  if (!displayName) {
+    res.status(400).json({ error: "Display name is required" });
+    return;
+  }
+
+  const db = readDB();
+  if (!db.leadershipProfiles) db.leadershipProfiles = [];
+
+  const newProfile = {
+    id: `lead-${Date.now()}`,
+    designation: designation || "FOUNDER",
+    displayName,
+    roleTitle: roleTitle || "Community Steward",
+    roleTitleTamil: roleTitleTamil || "",
+    shortBio: shortBio || "",
+    fullBiography: fullBiography || "",
+    profileImage: profileImage || "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
+    coverImage: coverImage || "",
+    visionStatement: visionStatement || "",
+    philosophy: philosophy || "",
+    quote: quote || "",
+    displayOrder: Number(displayOrder) || 1,
+    isPublished: isPublished ?? true,
+    projects: Array.isArray(projects) ? projects : [],
+    socialLinks: socialLinks || {},
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  };
+
+  db.leadershipProfiles.push(newProfile);
+  writeDB(db);
+  res.status(201).json(newProfile);
+});
+
+app.put("/api/leadership/:id", authenticateAdmin, (req, res) => {
+  const db = readDB();
+  if (!db.leadershipProfiles) db.leadershipProfiles = [];
+  const index = db.leadershipProfiles.findIndex((l) => l.id === req.params.id);
+  if (index === -1) {
+    res.status(404).json({ error: "Leadership profile not found" });
+    return;
+  }
+
+  const existing = db.leadershipProfiles[index];
+  const updated = {
+    ...existing,
+    ...req.body,
+    updatedAt: new Date().toISOString(),
+  };
+
+  db.leadershipProfiles[index] = updated;
+  writeDB(db);
+  res.json(updated);
+});
+
+app.delete("/api/leadership/:id", authenticateAdmin, (req, res) => {
+  const db = readDB();
+  if (!db.leadershipProfiles) db.leadershipProfiles = [];
+  const index = db.leadershipProfiles.findIndex((l) => l.id === req.params.id);
+  if (index === -1) {
+    res.status(404).json({ error: "Leadership profile not found" });
+    return;
+  }
+  db.leadershipProfiles.splice(index, 1);
+  writeDB(db);
+  res.json({ message: "Leadership profile deleted successfully" });
 });
 
 // Blog Endpoints

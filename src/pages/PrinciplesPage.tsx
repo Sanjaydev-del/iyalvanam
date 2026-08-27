@@ -1,328 +1,190 @@
-import React from 'react';
-import { 
-  Scale, 
-  RefreshCw, 
-  HeartHandshake, 
-  Eye, 
-  Feather, 
-  ShieldAlert, 
-  Sun, 
-  Users, 
-  Sparkles, 
-  XCircle, 
-  CheckCircle2,
-  VolumeX,
-  Smile,
-  Compass,
-  ArrowRight
-} from 'lucide-react';
+import React, { useEffect } from 'react';
+import { ArrowRight, Scale, Leaf } from 'lucide-react';
+import { Container } from '../components/common/Container';
+import { Button } from '../components/common/Button';
 
 interface PrinciplesPageProps {
   navigate: (path: string) => void;
 }
 
 export const PrinciplesPage: React.FC<PrinciplesPageProps> = ({ navigate }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const naturalLaws = [
     {
-      title: '1. Interconnectedness (ஒன்றிணைவு)',
-      desc: 'All living and non-living elements in the universe form a seamless, unified web. An action impacting a single blade of grass or water drop creates ripples across the entire ecosystem.',
-      icon: <Sparkles className="w-5 h-5 text-[#B35C44]" />,
+      num: '01',
+      title: 'Interconnectedness',
+      tamil: 'ஒன்றிணைவு',
+      statement: 'All elements in existence form a seamless, indivisible whole.',
+      desc: 'An action impacting a single blade of grass, droplet of spring water, or organism creates ripples across the living whole. We organize our thoughts and community structures to honor this sacred web.',
     },
     {
-      title: '2. Cause & Effect (காரண காரியம்)',
-      desc: 'Every choice carries inevitable ecological and karmic consequences. Degraded soil yields sickness; nurtured living earth yields vitality, pure spring water, and perennial peace.',
-      icon: <RefreshCw className="w-5 h-5 text-[#5A5A40]" />,
+      num: '02',
+      title: 'Cause & Effect (Karma of Soil)',
+      tamil: 'காரண காரியம்',
+      statement: 'Every ecological choice carries inescapable consequences.',
+      desc: 'Degraded, poisoned soil yields sickness, tension, and economic dependence. Nurtured, chemical-free living soil yields perennial health, abundant clean water, and sustained community peace.',
     },
     {
-      title: '3. Balance (சமநிலை)',
-      desc: 'Nature continuously balances extreme forces through cycles of day and night, drought and monsoon, activity and deep rest. Our lives must mirror this dynamic equilibrium.',
-      icon: <Scale className="w-5 h-5 text-[#4A3728]" />,
+      num: '03',
+      title: 'Dynamic Balance & Equilibrium',
+      tamil: 'சமநிலை',
+      statement: 'Nature balances extreme polarities through effortless rhythm.',
+      desc: 'Sunlight and darkness, drought and monsoon, intense physical work and meditative quiet stillness. Daily life at Iyalvanam synchronizes with these ancient natural cycles.',
     },
     {
-      title: '4. Self-Responsibility (சுய பொறுப்புணர்வு)',
-      desc: 'We do not blame governments, corporations, or past generations. Each resident takes radical responsibility for their thoughts, waste, nourishment, and energy footprint.',
-      icon: <Eye className="w-5 h-5 text-[#B35C44]" />,
+      num: '04',
+      title: 'Self-Responsibility & Sovereignty',
+      tamil: 'சுய பொறுப்புணர்வு',
+      statement: 'We do not outsource responsibility for our living needs.',
+      desc: 'Each resident family takes conscious stewardship over their nutrition, energy, waste, emotional presence, and carbon footprint without blaming external corporations or state apparatuses.',
     },
     {
-      title: '5. Regeneration (மீளுருவாக்கம்)',
-      desc: 'Human presence on earth should not merely be "sustainable" (neutral); it must be actively regenerative—leaving soil richer, forests denser, and water tables higher than we found them.',
-      icon: <Feather className="w-5 h-5 text-[#5A5A40]" />,
+      num: '05',
+      title: 'Active Ecological Regeneration',
+      tamil: 'மீளுருவாக்கம்',
+      statement: 'Human presence must leave the earth richer than we found it.',
+      desc: 'Sustainability is not enough. We practice active regeneration: building deep topsoil organic matter, planting native diverse food forests, and recharging mountain aquifers.',
     },
     {
-      title: '6. Non-Harm (அகிம்சை / இன்னா செய்யாமை)',
-      desc: 'Reverence for life requires that we cause no unnecessary suffering or destruction to soil organisms, wildlife, insects, domestic animals, or our fellow humans.',
-      icon: <HeartHandshake className="w-5 h-5 text-[#B35C44]" />,
+      num: '06',
+      title: 'Reverence for Life (Ahimsa)',
+      tamil: 'இன்னா செய்யாமை / பேரன்பு',
+      statement: 'Causing no unnecessary harm to soil, plants, beasts, or fellows.',
+      desc: 'We cultivate radical gentleness toward soil microbes, indigenous fauna, pollinating insects, domestic helpers, and fellow humans walking beside us.',
     },
     {
-      title: '7. Abundance through Cooperation (கூட்டுறவின் வளம்)',
-      desc: 'Scarcity is created by hoarding and competition. Nature generates endless abundance when sunlight, seeds, labor, water, and knowledge are shared freely in common stewardship.',
-      icon: <Users className="w-5 h-5 text-[#4A3728]" />,
-    },
-  ];
-
-  const guidingValues = [
-    {
-      name: 'Unity in Diversity',
-      tamil: 'பன்முகத்தன்மையில் ஒருமைப்பாடு',
-      desc: 'Honoring distinct skills, backgrounds, languages, and unique expressions while uniting under one common love for nature.',
-    },
-    {
-      name: 'Simplicity & Sufficiency',
-      tamil: 'எளிமையும் போதுமென்ற மனமும்',
-      desc: 'Cultivating the art of living with what is genuinely necessary, finding joyful contentment without consumerist accumulation.',
-    },
-    {
-      name: 'Learning as a Way of Life',
-      tamil: 'வாழ்நாள் வழியே கற்றல்',
-      desc: 'Freeing learning from rigid classrooms; embracing experiential learning through soil, carpentry, cooking, weaving, and quiet reflection.',
-    },
-    {
-      name: 'Harmony with Nature',
-      tamil: 'இயற்கையோடு இயைந்திருத்தல்',
-      desc: 'Aligning our sleep with the sun, our food with the seasons, and our architectural materials with local geology.',
-    },
-    {
-      name: 'Conscious Use of Money',
-      tamil: 'பணத்தின் விழிப்புணர்வு பயன்பாடு',
-      desc: 'Viewing financial resources solely as a temporary tool for collective infrastructure and land stewardship, not as a measure of personal worth.',
-    },
-    {
-      name: 'Collective Ownership',
-      tamil: 'கூட்டு உடைமை',
-      desc: 'Holding the sanctuary land under Iyalvanam Asset Trust in perpetuity so that no individual may buy, sell, or exploit the earth.',
-    },
-    {
-      name: 'Truth & Transparency',
-      tamil: 'வாய்மையும் வெளிப்படைத்தன்மையும்',
-      desc: 'Uncompromising transparency in consensus decisions, financial accounting, personal interactions, and community communication.',
+      num: '07',
+      title: 'Abundance through Common Stewardship',
+      tamil: 'கூட்டுறவின் வளம்',
+      statement: 'Scarcity is an illusion born of hoarding; sharing generates life.',
+      desc: 'When land, water, seeds, labor, and wisdom are held in common stewardship rather than speculative commercial ownership, nature provides endless abundance for all.',
     },
   ];
 
-  const dailyPractices = [
+  const communityEthos = [
     {
-      title: 'Silence (மௌனம் / Silence)',
-      desc: 'Designated morning and evening hours of silence to calm the nervous system, quiet the ego, and attune our ears to forest sounds.',
-      icon: <VolumeX className="w-6 h-6 text-[#5A5A40]" />,
+      title: 'Simplicity & Sufficiency (போதுமென்ற மனம்)',
+      desc: 'Finding joy in what is genuinely nourishing, freeing human energy from artificial consumerist accumulation and unnecessary material clutter.',
     },
     {
-      title: 'Gratitude (நன்றி உணர்வு / Gratitude)',
-      desc: 'Daily heartfelt pauses before meals and work to thank the sun, soil, pollinators, ancestors, and fellow contributors for their gifts.',
-      icon: <Smile className="w-6 h-6 text-[#B35C44]" />,
+      title: 'Consensus Decision Making (ஒருமித்த கலந்தாய்வு)',
+      desc: 'Decisions impacting the sanctuary land and residents are reached through open-circle consultation, mutual listening, and shared consent, rather than authoritarian decree.',
     },
     {
-      title: 'Living with Nature (இயற்கையோடு வாழ்தல்)',
-      desc: 'Barefoot walking on natural earth, bathing in unpolluted spring water, sunbathing at dawn, and working with hands in living soil.',
-      icon: <Sun className="w-6 h-6 text-[#4A3728]" />,
+      title: 'Lifelong Living Learning (வாழ்நாள் வழியே கற்றல்)',
+      desc: 'Education is integrated into daily life with soil, seeds, herbal medicine, carpentry, weaving, and quiet contemplative inquiry rather than competitive industrial exams.',
     },
     {
-      title: 'Mindful Communication (நல்-உரையாடல்)',
-      desc: 'Speaking without aggression, listening with full attention in consensus circles, and resolving interpersonal friction promptly through compassion.',
-      icon: <HeartHandshake className="w-6 h-6 text-[#5A5A40]" />,
-    },
-  ];
-
-  const bannedConcepts = [
-    {
-      title: 'Private Land Ownership (தனிநபர் நில உரிமை)',
-      desc: 'The earth belongs to itself and future generations. No individual holds private title or proprietary control over Iyalvanam land parcels.',
-    },
-    {
-      title: 'Religious Dogma & Sectarianism (மதவாத பிரிவினைகள்)',
-      desc: 'We are bound by universal natural laws, not rigid sectarian dogmas, religious hierarchies, or ritual compulsions.',
-    },
-    {
-      title: 'Caste Discrimination & Hierarchies (சாதிய படிநிலைகள்)',
-      desc: 'Any manifestation of caste hierarchy, untouchability, or ancestral social prejudice is strictly prohibited and antithetical to natural law.',
-    },
-    {
-      title: 'Racial / Regional Superiority (இன / மொழி மேலாதிக்கம்)',
-      desc: 'Every human being is welcomed with equal dignity, mutual reverence, and common kinship regardless of origin or language.',
-    },
-    {
-      title: 'Money as Personal Identity (பணமே அந்தஸ்து என்ற எண்ணம்)',
-      desc: 'Financial net worth confers zero hierarchy, voting dominance, or preferential treatment in our consensus circle.',
-    },
-    {
-      title: 'Artificial Labeling & Ideological Tribalism (செயற்கை அடையாளங்கள்)',
-      desc: 'We leave behind modern political party affiliations, corporate ranks, consumerist status symbols, and rigid ideological labels.',
+      title: 'Sovereign Health through Prana (தூய வாழ்வியல்)',
+      desc: 'Health is nurtured through five primal elements: living spring water, direct solar contact, barefoot earthing, fresh mountain air, and unadulterated whole plant foods.',
     },
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-24">
-      {/* Header Banner */}
-      <section className="text-center max-w-4xl mx-auto space-y-4">
-        <span className="text-xs font-bold uppercase tracking-widest text-[#B35C44] bg-[#B35C44]/10 px-4 py-1 rounded-full">
-          Principles & Values • கோட்பாடுகள்
-        </span>
-        <h1 className="text-3xl sm:text-5xl font-serif font-bold text-[#4A3728]">
-          Living by Natural Law & Guiding Values
-        </h1>
-        <p className="text-lg text-[#4A3728]/80 max-w-3xl mx-auto leading-relaxed">
-          Nature operates by fundamental cosmic principles that cannot be bypassed by human convenience. At Iyalvanam, we anchor all our individual actions, community governance, and ecological stewardship in these immutable truths.
-        </p>
-      </section>
-
-      {/* 7 Natural Law Principles */}
-      <section className="space-y-8">
-        <div className="text-center max-w-3xl mx-auto space-y-3">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#B35C44] bg-[#B35C44]/10 px-4 py-1 rounded-full">
-            Cosmic Order
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-[#4A3728]">
-            The Seven Natural Law Principles
-          </h2>
-          <p className="text-sm text-[#5A5A40]">
-            These principles guide our agriculture, decision-making circles, personal hygiene, and ecological integration.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {naturalLaws.map((law, idx) => (
-            <div
-              key={idx}
-              className={`p-6 rounded-3xl bg-[#EBEBE3] border border-[#5A5A40]/15 space-y-3 hover:border-[#5A5A40] transition-all hover:shadow-xs ${
-                idx === 6 ? 'md:col-span-2 lg:col-span-1' : ''
-              }`}
-            >
-              <div className="w-10 h-10 rounded-full bg-[#F5F5F0] flex items-center justify-center shadow-xs">
-                {law.icon}
-              </div>
-              <h3 className="text-lg font-bold text-[#4A3728] font-serif">
-                {law.title}
-              </h3>
-              <p className="text-xs text-[#4A3728]/80 leading-relaxed">
-                {law.desc}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Guiding Values */}
-      <section className="bg-[#EBEBE3] rounded-3xl p-8 sm:p-12 border border-[#5A5A40]/15 space-y-10">
-        <div className="text-center max-w-3xl mx-auto space-y-3">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#B35C44] bg-[#B35C44]/10 px-4 py-1 rounded-full">
-            Community Ethics
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-[#4A3728]">
-            Our Seven Guiding Values
-          </h2>
-          <p className="text-sm text-[#5A5A40]">
-            The foundational ethos practiced daily by all resident families, long-term volunteers, and community trustees.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {guidingValues.map((val, idx) => (
-            <div
-              key={idx}
-              className="p-6 rounded-2xl bg-[#F5F5F0] border border-[#5A5A40]/15 space-y-2 shadow-xs"
-            >
-              <h3 className="text-lg font-bold text-[#4A3728] font-serif">
-                {val.name}
-              </h3>
-              <div className="text-xs font-semibold text-[#5A5A40] font-tamil">
-                {val.tamil}
-              </div>
-              <p className="text-xs text-[#4A3728]/80 leading-relaxed pt-1">
-                {val.desc}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Daily Practices */}
-      <section className="space-y-8">
-        <div className="text-center max-w-3xl mx-auto space-y-3">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#B35C44] bg-[#B35C44]/10 px-4 py-1 rounded-full">
-            Rhythms & Routines
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-[#4A3728]">
-            Daily Spiritual & Physical Practices
-          </h2>
-          <p className="text-sm text-[#5A5A40]">
-            How we anchor our inner peace and physical vitality from sunrise to sunset.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {dailyPractices.map((prac, idx) => (
-            <div
-              key={idx}
-              className="p-6 rounded-3xl bg-[#EBEBE3] border border-[#5A5A40]/15 space-y-3 hover:border-[#5A5A40] transition-colors"
-            >
-              <div className="w-12 h-12 rounded-full bg-[#F5F5F0] flex items-center justify-center shadow-xs">
-                {prac.icon}
-              </div>
-              <h3 className="text-lg font-bold text-[#4A3728] font-serif">
-                {prac.title}
-              </h3>
-              <p className="text-xs text-[#4A3728]/80 leading-relaxed">
-                {prac.desc}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* WHAT HAS NO PLACE HERE - Critical Section from PDF */}
-      <section className="bg-[#3B2C20] text-[#F5F5F0] rounded-3xl p-8 sm:p-12 border border-[#5A5A40]/30 space-y-8 shadow-xl">
-        <div className="max-w-3xl mx-auto text-center space-y-3">
-          <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-[#B35C44]/20 text-[#EBEBE3] text-xs font-bold uppercase tracking-widest border border-[#B35C44]/40">
-            <XCircle className="w-4 h-4 text-[#B35C44]" /> Essential Boundaries
+    <div className="bg-[#f4eedb] text-[#261a12] space-y-16 sm:space-y-24 pb-20 sm:pb-32">
+      
+      {/* 1. Header Banner */}
+      <section className="pt-10 sm:pt-16 pb-8 border-b border-[#6b2816]/12 bg-[#faf6eb]">
+        <Container>
+          <div className="max-w-3xl space-y-3">
+            <span className="text-xs font-serif uppercase tracking-widest text-[#6b2816] font-semibold block">
+              Manifesto & Philosophical Foundation
+            </span>
+            <h1 className="text-3xl sm:text-5xl font-serif-display font-bold text-[#1b331b] tracking-tight leading-tight">
+              The Universal Natural Laws
+            </h1>
+            <p className="text-sm font-tamil text-[#6b2816] font-medium">
+              “விழுமியங்களும் மாறாத இயற்கை விதிகளும்”
+            </p>
+            <p className="text-base sm:text-lg text-[#574637] font-serif-body leading-relaxed pt-1">
+              Our principles are not arbitrary dogmas. They are the immutable laws observed in soil, water, forest ecosystems, and human consciousness.
+            </p>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-white">
-            What Has No Place Here (இங்கு இடமில்லாதவை)
-          </h2>
-          <p className="text-xs sm:text-sm text-[#EBEBE3]/80 leading-relaxed">
-            To preserve the sacred purity, psychological safety, and egalitarian balance of Iyalvanam, the following conventional constructs are strictly absent:
-          </p>
-        </div>
+        </Container>
+      </section>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {bannedConcepts.map((item, idx) => (
-            <div
-              key={idx}
-              className="p-6 rounded-2xl bg-[#4A3728] border border-[#5A5A40]/40 space-y-2"
-            >
-              <div className="flex items-center gap-2 text-[#EBEBE3] font-bold text-sm font-serif">
-                <XCircle className="w-4 h-4 text-[#B35C44] shrink-0" />
-                <span>{item.title}</span>
+      {/* 2. Numbered Manifesto List */}
+      <Container>
+        <div className="space-y-12">
+          
+          <div className="border-t border-[#6b2816]/15 divide-y divide-[#6b2816]/15">
+            {naturalLaws.map((law) => (
+              <div key={law.num} className="py-8 sm:py-12 grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 items-start">
+                
+                <div className="lg:col-span-2">
+                  <span className="font-mono text-3xl sm:text-4xl font-bold text-[#6b2816]">
+                    {law.num}
+                  </span>
+                </div>
+
+                <div className="lg:col-span-4 space-y-1">
+                  <h2 className="text-xl sm:text-2xl font-serif-display font-bold text-[#1b331b]">
+                    {law.title}
+                  </h2>
+                  <span className="text-xs font-tamil text-[#6b2816] block font-medium">
+                    {law.tamil}
+                  </span>
+                  <p className="text-xs font-serif italic text-[#574637] pt-1">
+                    “{law.statement}”
+                  </p>
+                </div>
+
+                <div className="lg:col-span-6">
+                  <p className="text-sm sm:text-base text-[#574637] font-serif-body leading-relaxed">
+                    {law.desc}
+                  </p>
+                </div>
+
               </div>
-              <p className="text-xs text-[#EBEBE3]/80 leading-relaxed">
-                {item.desc}
-              </p>
+            ))}
+          </div>
+
+        </div>
+      </Container>
+
+      {/* 3. Community Ethos & Inviolate Lines */}
+      <section className="bg-[#faf6eb] py-16 border-t border-b border-[#6b2816]/12">
+        <Container>
+          <div className="space-y-10">
+            
+            <div className="max-w-2xl space-y-2">
+              <span className="text-xs font-serif font-bold uppercase tracking-widest text-[#6b2816]">
+                Community Ethos
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-serif-display font-bold text-[#1b331b]">
+                Guiding Values in Daily Life
+              </h2>
             </div>
-          ))}
-        </div>
 
-        <div className="p-4 bg-[#2C1F16] rounded-2xl border border-[#5A5A40]/30 text-center text-xs text-[#EBEBE3]/80 max-w-2xl mx-auto">
-          <p>
-            By joining or supporting Iyalvanam, all members unconditionally agree to transcend these artificial divisions and relate purely as conscious stewards of the living earth.
-          </p>
-        </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-[#6b2816]/12 pt-8">
+              {communityEthos.map((ethos, idx) => (
+                <div key={idx} className="space-y-2">
+                  <h3 className="text-lg font-serif-display font-bold text-[#1b331b]">
+                    {ethos.title}
+                  </h3>
+                  <p className="text-sm text-[#574637] font-serif-body leading-relaxed">
+                    {ethos.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <div className="pt-6 border-t border-[#6b2816]/12 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+              <span className="text-xs font-serif text-[#574637]">
+                Ready to align your life with these immutable principles?
+              </span>
+              <Button variant="primary" size="md" showArrow onClick={() => navigate('/join')}>
+                Express Alignment to Join
+              </Button>
+            </div>
+
+          </div>
+        </Container>
       </section>
 
-      {/* Next Step CTA */}
-      <section className="text-center space-y-4 pt-4">
-        <h3 className="text-2xl font-serif font-bold text-[#4A3728]">
-          Experience Community Life
-        </h3>
-        <p className="text-sm text-[#5A5A40] max-w-xl mx-auto">
-          See how our daily food, health practices, children's education, and consensus governance operate on the land.
-        </p>
-        <div className="pt-2">
-          <button
-            onClick={() => navigate('/community-life')}
-            className="px-8 py-3.5 rounded-full bg-[#B35C44] hover:bg-[#9B4F3B] text-white font-bold text-xs uppercase tracking-widest shadow-sm shadow-[#B35C44]/20 transition-all inline-flex items-center gap-2"
-          >
-            <span>Explore Community Life & Governance</span>
-            <ArrowRight className="w-4 h-4" />
-          </button>
-        </div>
-      </section>
     </div>
   );
 };

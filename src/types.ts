@@ -14,7 +14,9 @@ export interface User {
   id: string;
   username: string;
   email: string;
-  role: 'ADMIN' | 'MEMBER' | 'GUEST';
+  role: 'SUPER_ADMIN' | 'ADMIN' | 'PROJECT_LEAD' | 'MEMBER' | 'GUEST';
+  fullName?: string;
+  phone?: string;
   createdAt: string;
 }
 
@@ -77,6 +79,49 @@ export interface BlogPost {
   updatedAt: string;
 }
 
+export type LeadershipDesignation = 'FOUNDER' | 'CO_FOUNDER';
+
+export interface LeadershipProfile {
+  id: string;
+  designation: LeadershipDesignation;
+  displayName: string;
+  roleTitle: string;
+  roleTitleTamil?: string;
+  shortBio: string;
+  fullBiography: string;
+  profileImage: string;
+  coverImage?: string;
+  visionStatement: string;
+  philosophy: string;
+  quote: string;
+  displayOrder: number;
+  isPublished: boolean;
+  projects?: string[];
+  socialLinks?: {
+    email?: string;
+    phone?: string;
+    website?: string;
+    linkedin?: string;
+  };
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface Project {
+  id: string;
+  name: string;
+  nameTamil?: string;
+  category: string;
+  shortDescription: string;
+  fullDescription?: string;
+  imageUrl: string;
+  status: 'ACTIVE' | 'IN_PROGRESS' | 'COMPLETED' | 'PROPOSED';
+  trustDomain: 'IYALVANAM_ASSET' | 'SEYON_OPERATIONAL';
+  leadSteward?: string;
+  location?: string;
+  highlights?: string[];
+}
+
 export interface DashboardStats {
   totalBlogPosts: number;
   publishedPosts: number;
@@ -86,4 +131,5 @@ export interface DashboardStats {
   donationRecords: number;
   totalPledgedAmount: number;
   receivedDonationsCount: number;
+  totalLeadershipProfiles?: number;
 }

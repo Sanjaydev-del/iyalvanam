@@ -189,5 +189,63 @@
       "status": "PENDING",
       "createdAt": "2026-08-25T17:20:00.000Z"
     }
+  ],
+  "leadershipProfiles": [
+    {
+      "id": "lead-01",
+      "designation": "FOUNDER",
+      "displayName": "Rajesh",
+      "roleTitle": "Founder & Vision Steward",
+      "roleTitleTamil": "நிறுவனர் & தொலைநோக்கு வழிகாட்டி",
+      "shortBio": "A former banker who stepped away from corporate systems to explore natural living, farming, community sovereignty, and the return to what is fundamental.",
+      "fullBiography": "Rajesh is a former banker who chose to step away from the corporate world and question the way modern society defines life, success and freedom.\n\nHis journey took him through farming, travel and a search for communities where people could live with greater simplicity, freedom and connection. Along the way, he began to see a deeper disconnect—between humans and nature, between people and each other, and between the way life was designed to be lived and the systems built around it.\n\nToday, Rajesh is working to turn that realization into something tangible through IYALVANAM – Center for Natural Living and SEYON.\n\nHis vision is simple yet profound: to create spaces where people can step away from the noise of modern life, reconnect with nature, rediscover community, and explore a life guided by natural principles rather than imposed systems.\n\nFor Rajesh, this is not just a project. It is a journey back to what is fundamental—freedom, nature, connection and a meaningful way of living.",
+      "profileImage": "/images/founder-emblem.jpg",
+      "coverImage": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1600&q=80",
+      "visionStatement": "To create spaces where people can step away from the noise of modern life, reconnect with nature, rediscover community, and explore a life guided by natural principles rather than imposed systems.",
+      "philosophy": "Life was designed to be lived in freedom and effortless connection with nature, not constrained by artificial corporate and economic constructs.",
+      "quote": "“For us, this is not just a project. It is a journey back to what is fundamental—freedom, nature, connection and a meaningful way of living.”",
+      "displayOrder": 1,
+      "isPublished": true,
+      "projects": [
+        "IYALVANAM – Center for Natural Living Foundation",
+        "Dharmapuramadam Sanctuary Land Stewardship",
+        "Non-Artificial Living Philosophy & Study",
+        "Dual-Trust Collective Community Architecture"
+      ],
+      "socialLinks": {
+        "email": "rajesh@iyalvanam.org",
+        "phone": "+91 96007 56007"
+      },
+      "createdAt": "2026-08-27T00:00:00.000Z",
+      "updatedAt": "2026-08-27T00:00:00.000Z"
+    },
+    {
+      "id": "lead-02",
+      "designation": "CO_FOUNDER",
+      "displayName": "Shanmugavel",
+      "roleTitle": "Co-Founder & Operational Steward",
+      "roleTitleTamil": "இணை நிறுவனர் & கள ஒருங்கிணைப்பாளர்",
+      "shortBio": "Designer and mechanical engineering researcher from Coimbatore whose 45-day ICU recovery inspired the SEYON Nature Life movement and 50+ experiential camps.",
+      "fullBiography": "Shanmugavel, from Coimbatore, is a designer and researcher in mechanical engineering whose life took an unexpected turn after spending 45 days in intensive care during the COVID-19 pandemic.\n\nHis journey toward recovery led him to explore health, natural food and a simpler way of living. During six months of travel and research, he discovered the remarkable simplicity of foods such as coconut and banana and began experiencing profound changes in his own well-being.\n\nHis search eventually brought him to Sivasailam, at the foothills of Pothigai, where the experience of natural surroundings deeply influenced his understanding of life. It inspired him to move closer to nature and share his experiences of natural food and natural living with others.\n\nSEYON Nature Life Foundation was created in the post-COVID period with a simple purpose—to help people experience natural living rather than merely hear about it. Through monthly nature camps, SEYON has so far conducted 50+ camps, giving 1,000+ people an opportunity to experience nature, natural food and a simpler way of life.\n\nToday, Shanmugavel continues to explore, learn and share this journey, hoping to create a bridge for those who wish to reconnect with nature.",
+      "profileImage": "/images/co-founder-emblem.jpg",
+      "coverImage": "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1600&q=80",
+      "visionStatement": "To help people directly experience natural living, natural food, and holistic well-being rather than merely hear about it.",
+      "philosophy": "True health emerges from the simplicity of natural foods and immersion in pristine mountain surroundings.",
+      "quote": "“Let us live happily together with nature, as much as possible.”",
+      "displayOrder": 2,
+      "isPublished": true,
+      "projects": [
+        "SEYON Nature Life Foundation",
+        "50+ Monthly Experiential Nature Living Camps (1,000+ Participants)",
+        "Sivasailam Foothills Natural Food Research",
+        "Community Onboarding & Nature Living Immersion"
+      ],
+      "socialLinks": {
+        "email": "shanmugavel@iyalvanam.org",
+        "phone": "+91 94440 98765"
+      },
+      "createdAt": "2026-08-27T00:00:00.000Z",
+      "updatedAt": "2026-08-27T00:00:00.000Z"
+    }
   ]
 }

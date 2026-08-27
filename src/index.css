@@ -1,42 +1,64 @@
 @import "tailwindcss";
 
 @layer base {
+  :root {
+    --color-forest: #1b331b;
+    --color-forest-dark: #122412;
+    --color-terracotta: #6b2816;
+    --color-terracotta-dark: #501d0f;
+    --color-parchment: #f4eedb;
+    --color-parchment-light: #faf6eb;
+    --color-parchment-deep: #e8dfc8;
+    --color-espresso: #261a12;
+    --color-muted: #574637;
+    --color-border: rgba(107, 40, 22, 0.12);
+  }
+
   html {
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     scroll-behavior: smooth;
-    background-color: #F5F5F0;
-    color: #1A1A1A;
+    background-color: #f4eedb;
+    color: #261a12;
+    -webkit-font-smoothing: antialiased;
   }
 
-  .font-tamil {
-    font-family: 'Noto Sans Tamil', 'Noto Serif Tamil', sans-serif;
-  }
-
-  .font-tamil-serif {
-    font-family: 'Noto Serif Tamil', 'Playfair Display', serif;
+  body {
+    background-color: #f4eedb;
+    color: #261a12;
+    margin: 0;
+    padding: 0;
   }
 
   .font-serif-display {
-    font-family: 'Playfair Display', 'Noto Serif Tamil', serif;
+    font-family: 'Playfair Display', Georgia, Cambria, 'Times New Roman', serif;
   }
 
-  .font-heading {
-    font-family: 'Playfair Display', 'Cinzel', serif;
+  .font-serif-body {
+    font-family: 'Playfair Display', Georgia, Cambria, serif;
+  }
+
+  .font-tamil {
+    font-family: 'Noto Serif Tamil', 'Noto Sans Tamil', serif;
+  }
+
+  ::selection {
+    background-color: #6b2816;
+    color: #faf6eb;
   }
 }
 
-/* Custom subtle scrollbar with warm organic tones */
+/* Restrained scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
 }
 ::-webkit-scrollbar-track {
-  background: #EBEBE3;
+  background: #e8dfc8;
 }
 ::-webkit-scrollbar-thumb {
-  background: #5A5A40/30;
-  border-radius: 9999px;
+  background: #574637;
+  border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #5A5A40/50;
+  background: #1b331b;
 }

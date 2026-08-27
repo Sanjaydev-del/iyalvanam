@@ -10,6 +10,9 @@ import { AboutPage } from './pages/AboutPage';
 import { PrinciplesPage } from './pages/PrinciplesPage';
 import { CommunityLifePage } from './pages/CommunityLifePage';
 import { LandPage } from './pages/LandPage';
+import { LeadershipPage } from './pages/LeadershipPage';
+import { FounderPage } from './pages/FounderPage';
+import { CoFounderPage } from './pages/CoFounderPage';
 import { JoinPage } from './pages/JoinPage';
 import { SupportPage } from './pages/SupportPage';
 import { BlogPage } from './pages/BlogPage';
@@ -19,7 +22,6 @@ import { AdminLoginPage } from './pages/AdminLoginPage';
 import { AdminPage } from './pages/AdminPage';
 
 export default function App() {
-  // Simple client-side router based on window.location.pathname or state
   const [currentPath, setCurrentPath] = useState<string>(() => {
     return window.location.pathname || '/';
   });
@@ -65,8 +67,17 @@ export default function App() {
     if (currentPath === '/community-life') {
       return <CommunityLifePage navigate={navigate} />;
     }
-    if (currentPath === '/land') {
+    if (currentPath === '/land' || currentPath === '/projects') {
       return <LandPage navigate={navigate} />;
+    }
+    if (currentPath === '/leadership') {
+      return <LeadershipPage navigate={navigate} />;
+    }
+    if (currentPath === '/leadership/founder') {
+      return <FounderPage navigate={navigate} />;
+    }
+    if (currentPath === '/leadership/co-founder' || currentPath === '/leadership/cofounder') {
+      return <CoFounderPage navigate={navigate} />;
     }
     if (currentPath === '/join') {
       return <JoinPage navigate={navigate} showToast={showToast} />;
@@ -95,21 +106,21 @@ export default function App() {
     return <LandingPage navigate={navigate} showToast={showToast} />;
   };
 
-  const isAdminRoute = currentPath.startsWith('/admin');
-
   return (
     <AuthProvider>
-      <div className="min-h-screen flex flex-col bg-[#F5F5F0] text-[#1A1A1A] font-sans antialiased selection:bg-[#B35C44] selection:text-white">
-        {/* Navigation Bar */}
+      <div className="min-h-screen flex flex-col bg-[#f0e6d2] text-[#2d2013] font-sans antialiased selection:bg-[#7a2e1a] selection:text-[#f7f2e7]">
+        {/* Navigation Component (Left Sidebar on Desktop lg+, Top Sticky on Mobile) */}
         <Navbar currentPath={currentPath} navigate={navigate} />
 
-        {/* Main Page Content */}
-        <main className="flex-grow">
-          {renderRoute()}
-        </main>
+        {/* Main Content Layout Wrapper (Offset by sidebar on Desktop) */}
+        <div className="flex-1 flex flex-col lg:pl-72 xl:pl-80 w-full min-w-0 transition-all duration-300">
+          <main className="flex-grow w-full">
+            {renderRoute()}
+          </main>
 
-        {/* Footer */}
-        <Footer navigate={navigate} />
+          {/* Footer */}
+          <Footer navigate={navigate} />
+        </div>
 
         {/* Toast Container */}
         <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none">

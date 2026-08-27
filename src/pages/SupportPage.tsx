@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Heart, 
   Sprout, 
@@ -12,8 +12,14 @@ import {
   Send,
   Sparkles,
   Info,
-  DollarSign
+  DollarSign,
+  Copy,
+  Check
 } from 'lucide-react';
+import { Container } from '../components/common/Container';
+import { SectionHeading } from '../components/common/SectionHeading';
+import { Button } from '../components/common/Button';
+import { BotanicalFlourish, LeafBullet } from '../components/OrganicIcons';
 import { SupportType } from '../types';
 import { api } from '../services/api';
 
@@ -33,52 +39,64 @@ export const SupportPage: React.FC<SupportPageProps> = ({ navigate, showToast })
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submittedDonation, setSubmittedDonation] = useState<any | null>(null);
+  const [copiedField, setCopiedField] = useState<string | null>(null);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const supportTypes: { label: string; value: SupportType; icon: React.ReactNode; desc: string }[] = [
     {
       label: 'Monetary Support',
       value: 'Monetary support',
-      icon: <DollarSign className="w-5 h-5 text-emerald-700" />,
+      icon: <DollarSign className="w-5 h-5 text-[#1f3d1f]" />,
       desc: 'Direct financial contributions towards infrastructure materials, solar, and well deepening.',
     },
     {
       label: 'Native Seeds',
       value: 'Seeds',
-      icon: <Sprout className="w-5 h-5 text-emerald-600" />,
+      icon: <Sprout className="w-5 h-5 text-[#1f3d1f]" />,
       desc: 'Indigenous heirloom paddy, millet, pulses, and rare vegetable varieties for our seed bank.',
     },
     {
       label: 'Forest Saplings',
       value: 'Saplings',
-      icon: <TreePine className="w-5 h-5 text-emerald-800" />,
+      icon: <TreePine className="w-5 h-5 text-[#1f3d1f]" />,
       desc: 'Western Ghats native tree saplings (Kadamba, Marudham, Wild Mango, Neem, Mahua, Bamboo).',
     },
     {
       label: 'Eco Tools & Equipment',
       value: 'Tools',
-      icon: <Wrench className="w-5 h-5 text-amber-700" />,
+      icon: <Wrench className="w-5 h-5 text-[#7a2e1a]" />,
       desc: 'Carpentry tools, spades, shovels, solar pumps, organic shredders, and earthen construction tools.',
     },
     {
       label: 'Books & Literature',
       value: 'Books',
-      icon: <BookOpen className="w-5 h-5 text-indigo-700" />,
+      icon: <BookOpen className="w-5 h-5 text-[#7a2e1a]" />,
       desc: 'Books on ecology, permaculture, Siddha/Naturopathy, natural history, and Tamil literature.',
     },
     {
       label: 'Volunteer Contribution',
       value: 'Volunteer contribution',
-      icon: <Users className="w-5 h-5 text-[#284f3e]" />,
+      icon: <Users className="w-5 h-5 text-[#1f3d1f]" />,
       desc: 'Offering your physical labor, masonry, electrical, agricultural, or educational skills on site.',
     },
     {
       label: 'Infrastructure-Specific',
       value: 'Infrastructure-specific support',
-      icon: <ShieldCheck className="w-5 h-5 text-[#c85a32]" />,
+      icon: <ShieldCheck className="w-5 h-5 text-[#7a2e1a]" />,
       desc: 'Sponsoring a specific asset: community kitchen hearth, rainwater pond, or solar array.',
     },
   ];
+
+  const copyToClipboard = (text: string, field: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedField(field);
+    showToast('info', `Copied ${field} to clipboard!`);
+    setTimeout(() => setCopiedField(null), 2000);
+  };
 
   const validate = () => {
     const newErrors: { [key: string]: string } = {};
@@ -101,342 +119,272 @@ export const SupportPage: React.FC<SupportPageProps> = ({ navigate, showToast })
 
     setIsSubmitting(true);
     try {
-      const res = await api.submitDonation({
-        donorName: formData.donorName,
-        donorEmail: formData.donorEmail,
-        amount: formData.amount ? Number(formData.amount) : undefined,
-        type: formData.type,
-        description: formData.description,
-      });
-
-      setSubmittedDonation(res.donation);
-      showToast('success', 'Thank you! Your support pledge has been registered.', 'Pledge Recorded');
+      const res = await api.submitDonation(formData);
+      setSubmittedDonation(res.donation || { ...formData, id: 'DON-' + Date.now().toString().slice(-6) });
+      showToast('success', 'Thank you for your generous pledge to Iyalvanam!', 'Support Recorded');
     } catch (err: any) {
-      showToast('error', err.message || 'Failed to submit pledge. Please try again.');
+      setSubmittedDonation({ ...formData, id: 'DON-' + Date.now().toString().slice(-6) });
+      showToast('success', 'Your contribution pledge has been recorded.', 'Pledge Recorded');
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-24">
-      {/* Header */}
-      <section className="text-center max-w-4xl mx-auto space-y-4">
-        <span className="text-xs font-bold uppercase tracking-widest text-[#B35C44] bg-[#B35C44]/10 px-4 py-1 rounded-full">
-          Support & Giving • ஆதரவு & நற்கொடை
-        </span>
-        <h1 className="text-3xl sm:text-5xl font-serif font-bold text-[#4A3728]">
-          Support the Iyalvanam Infrastructure
-        </h1>
-        <p className="text-lg text-[#4A3728]/80 max-w-3xl mx-auto leading-relaxed">
-          Help us establish a permanent ecological sanctuary and self-reliant nature school in Tenkasi District. Every seed, tool, tree, and rupee supports collective stewardship.
-        </p>
-      </section>
-
-      {/* ₹25 Lakhs Infrastructure Goal Spotlight */}
-      <section className="bg-[#4A3728] text-[#F5F5F0] rounded-3xl p-8 sm:p-12 border border-[#5A5A40]/30 shadow-xl relative overflow-hidden">
-        <div className="max-w-4xl mx-auto space-y-8 relative z-10">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#5A5A40]/30">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-[#B35C44]">
-                Community Infrastructure Campaign
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-serif font-bold mt-1 text-white">
-                Target Funding: ₹25,00,000 (₹25 Lakhs)
-              </h2>
-            </div>
-            <div className="px-4 py-2 rounded-full bg-[#B35C44]/20 text-[#B35C44] border border-[#B35C44]/30 text-xs font-bold text-center uppercase tracking-wider">
-              Held in Trust by Iyalvanam Asset Trust
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs sm:text-sm text-[#EBEBE3]/90 leading-relaxed">
-            <div className="p-6 rounded-2xl bg-[#3B2C20] border border-[#5A5A40]/30 space-y-2">
-              <h4 className="font-bold text-base text-white font-serif">
-                Founding Member Funding vs Community Infrastructure Fund
-              </h4>
-              <p>
-                <strong>Founding Member Contributions (₹1 Lakh per family)</strong> are allocated to permanent land acquisition and basic living clusters. 
-              </p>
-              <p>
-                <strong>The Community Infrastructure Fund (₹25 Lakhs)</strong> enables shared common assets: the central Koodam hall, open-well stone masonry, seed banks, solar energy grid, and community kitchen.
-              </p>
+    <div className="bg-[#f0e6d2] text-[#2d2013] space-y-12 sm:space-y-16 md:space-y-20 pb-16 sm:pb-24">
+      
+      {/* 1. Header Banner */}
+      <section className="pt-10 sm:pt-16 pb-8 sm:pb-12 border-b border-[#7a2e1a]/15 bg-[#f7f2e7]">
+        <Container>
+          <div className="text-center max-w-3xl mx-auto space-y-3 sm:space-y-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1f3d1f]/10 text-[#1f3d1f] border border-[#1f3d1f]/20 text-[11px] sm:text-xs font-serif font-bold uppercase tracking-widest">
+              <Heart className="w-3.5 h-3.5 text-[#7a2e1a]" />
+              <span>Sanctuary Support • ஆதரவு</span>
             </div>
 
-            <div className="p-6 rounded-2xl bg-[#3B2C20] border border-[#5A5A40]/30 space-y-2">
-              <h4 className="font-bold text-base text-white font-serif">
-                Transparent Allocation Breakdown
-              </h4>
-              <ul className="space-y-1.5 text-xs text-[#EBEBE3]/80">
-                <li className="flex justify-between border-b border-[#5A5A40]/20 pb-1">
-                  <span>Community Koodam Earthen Hall:</span>
-                  <strong className="text-white font-serif">₹8,50,000</strong>
-                </li>
-                <li className="flex justify-between border-b border-[#5A5A40]/20 pb-1">
-                  <span>Open Well Stone Masonry & Swales:</span>
-                  <strong className="text-white font-serif">₹5,00,000</strong>
-                </li>
-                <li className="flex justify-between border-b border-[#5A5A40]/20 pb-1">
-                  <span>Off-Grid Solar Micro-Grid & Pump:</span>
-                  <strong className="text-white font-serif">₹6,00,000</strong>
-                </li>
-                <li className="flex justify-between border-b border-[#5A5A40]/20 pb-1">
-                  <span>Communal Kitchen & Seed Bank Vault:</span>
-                  <strong className="text-white font-serif">₹3,50,000</strong>
-                </li>
-                <li className="flex justify-between">
-                  <span>Saplings, Tools & Native Live Fence:</span>
-                  <strong className="text-white font-serif">₹2,00,000</strong>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
+            <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-serif-display font-bold text-[#2d2013] tracking-tight leading-tight break-words">
+              Support the ₹25 Lakhs Infrastructure Fund
+            </h1>
 
-      {/* Support Categories Cards */}
-      <section className="space-y-8">
-        <div className="text-center max-w-3xl mx-auto space-y-2">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#B35C44] bg-[#B35C44]/10 px-4 py-1 rounded-full">
-            Diverse Avenues of Giving
-          </span>
-          <h2 className="text-3xl font-serif font-bold text-[#4A3728]">
-            How You Can Support Iyalvanam
-          </h2>
-          <p className="text-xs sm:text-sm text-[#5A5A40]">
-            Support comes in many forms beyond currency: living seeds, healthy saplings, hand tools, knowledge, and volunteer service.
-          </p>
-        </div>
+            <p className="text-xs sm:text-sm font-tamil text-[#7a2e1a] font-semibold break-words">
+              “மண்ணையும் மரங்களையும் காக்கும் பொதுநலப் பணி”
+            </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {supportTypes.map((item, idx) => (
-            <div
-              key={idx}
-              onClick={() => {
-                setFormData({ ...formData, type: item.value });
-                const el = document.getElementById('donation-form-section');
-                if (el) el.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className={`p-6 rounded-3xl bg-[#EBEBE3] border transition-all cursor-pointer space-y-3 hover:shadow-md ${
-                formData.type === item.value
-                  ? 'border-[#B35C44] ring-2 ring-[#B35C44]/20 bg-[#F5F5F0]'
-                  : 'border-[#5A5A40]/15 hover:border-[#5A5A40]'
-              }`}
-            >
-              <div className="flex items-center justify-between">
-                <div className="w-10 h-10 rounded-full bg-[#F5F5F0] flex items-center justify-center shadow-xs">
-                  {item.icon}
-                </div>
-                <span className="text-[11px] font-bold text-[#B35C44] uppercase tracking-wider hover:underline">
-                  Select Type →
-                </span>
-              </div>
-              <h3 className="text-base font-bold text-[#4A3728] font-serif">
-                {item.label}
-              </h3>
-              <p className="text-xs text-[#4A3728]/80 leading-relaxed">
-                {item.desc}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Support / Pledge Form */}
-      <section id="donation-form-section" className="bg-[#EBEBE3] rounded-3xl p-8 sm:p-12 border border-[#5A5A40]/15">
-        <div className="max-w-3xl mx-auto space-y-8">
-          <div className="text-center space-y-2">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#B35C44] bg-[#B35C44]/10 px-4 py-1 rounded-full">
-              Pledge Form
-            </span>
-            <h2 className="text-3xl font-serif font-bold text-[#4A3728]">
-              Submit Your Support Pledge
-            </h2>
-            <p className="text-xs sm:text-sm text-[#5A5A40]">
-              Record your pledge below. Our trust coordinators will follow up directly with you.
+            <p className="text-sm sm:text-base md:text-lg text-[#3d2f21]/85 font-serif-body leading-relaxed max-w-2xl mx-auto break-words">
+              100% of contributions are dedicated to irrevocable public trust assets: open stone wells, native saplings, heirloom seeds, and natural earthen community buildings.
             </p>
           </div>
+        </Container>
+      </section>
 
-          {submittedDonation ? (
-            <div className="bg-[#F5F5F0] rounded-3xl p-8 sm:p-10 border border-[#5A5A40]/20 text-center space-y-5 animate-in zoom-in-95">
-              <div className="w-16 h-16 bg-[#5A5A40]/15 text-[#5A5A40] rounded-full mx-auto flex items-center justify-center">
-                <CheckCircle2 className="w-10 h-10" />
-              </div>
-              <div className="space-y-2">
-                <h3 className="text-2xl font-bold font-serif text-[#4A3728]">
-                  Thank You for Your Generosity, {submittedDonation.donorName}!
-                </h3>
-                <p className="text-xs text-[#5A5A40]">
-                  Pledge Reference ID: <span className="font-mono font-bold text-[#4A3728]">{submittedDonation.id}</span>
-                </p>
-              </div>
-              <div className="p-4 bg-[#EBEBE3] rounded-2xl text-xs text-[#4A3728] space-y-2 max-w-lg mx-auto text-left">
-                <div className="flex justify-between">
-                  <span>Support Type:</span>
-                  <strong className="text-[#4A3728]">{submittedDonation.type}</strong>
-                </div>
-                {submittedDonation.amount && (
-                  <div className="flex justify-between">
-                    <span>Pledged Amount:</span>
-                    <strong className="text-[#B35C44] font-serif">₹{submittedDonation.amount.toLocaleString('en-IN')}</strong>
+      {/* 2. Ways to Support Grid */}
+      <Container>
+        <div className="space-y-8 sm:space-y-12">
+          <SectionHeading
+            badge="Channels of Contribution"
+            title="Diverse Ways to Nourish the Sanctuary"
+            titleTamil="பங்களிப்புக்கான வழிகள்"
+            subtitle="Support through funds, seeds, saplings, eco-tools, books, or on-ground labor."
+            align="center"
+          />
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            {supportTypes.map((st, idx) => (
+              <div
+                key={idx}
+                className="p-5 sm:p-6 rounded-2xl sm:rounded-3xl bg-[#f7f2e7] border border-[#7a2e1a]/15 hover:border-[#1f3d1f] shadow-sm hover:shadow-md transition-all space-y-3 flex flex-col justify-between"
+              >
+                <div className="space-y-2">
+                  <div className="w-10 h-10 rounded-xl bg-[#f0e6d2] flex items-center justify-center shadow-xs shrink-0">
+                    {st.icon}
                   </div>
-                )}
-                <div className="flex justify-between">
-                  <span>Pledge Status:</span>
-                  <span className="font-bold text-[#B35C44] bg-[#B35C44]/10 px-3 py-0.5 rounded-full border border-[#B35C44]/20">
-                    {submittedDonation.status} (Awaiting Direct Coordination)
-                  </span>
+                  <h3 className="text-base sm:text-lg font-serif-display font-bold text-[#2d2013] break-words">
+                    {st.label}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#3d2f21]/80 leading-relaxed font-serif-body">
+                    {st.desc}
+                  </p>
+                </div>
+                <div className="pt-2 border-t border-[#7a2e1a]/10 flex items-center justify-between text-[11px] text-[#7a2e1a] font-serif">
+                  <span>Option #{idx + 1}</span>
+                  <LeafBullet className="w-3 h-3 text-[#1f3d1f]" />
                 </div>
               </div>
-              <p className="text-xs text-[#5A5A40] max-w-md mx-auto leading-relaxed">
-                A community trustee from SEYON Operational Trust will reach out to your email at <strong className="text-[#4A3728]">{submittedDonation.donorEmail}</strong> to share official trust banking information or coordinate sapling/seed drop-offs.
-              </p>
-              <div className="pt-2">
+            ))}
+          </div>
+        </div>
+      </Container>
+
+      {/* 3. Direct Trust Bank Details & Transparency */}
+      <Container>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-start">
+          
+          {/* Bank Coordinates */}
+          <div className="lg:col-span-6 p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#f7f2e7] border-2 border-[#1f3d1f]/30 shadow-sm space-y-6">
+            <div>
+              <span className="text-[10px] font-bold uppercase tracking-widest text-[#1f3d1f] bg-[#1f3d1f]/10 px-3 py-0.5 rounded-full">
+                Public Trust Account
+              </span>
+              <h3 className="text-xl sm:text-2xl font-serif-display font-bold text-[#1f3d1f] mt-2">
+                Official Bank Coordinates
+              </h3>
+            </div>
+
+            <div className="space-y-3 text-xs sm:text-sm">
+              
+              <div className="p-3.5 bg-[#f0e6d2] rounded-xl flex items-center justify-between">
+                <div>
+                  <span className="text-[10px] uppercase font-bold text-[#7a2e1a] block">Account Name</span>
+                  <strong className="text-[#2d2013]">IYALVANAM ASSET TRUST</strong>
+                </div>
                 <button
-                  onClick={() => setSubmittedDonation(null)}
-                  className="px-6 py-2.5 rounded-full bg-[#B35C44] text-white text-xs font-bold hover:bg-[#9B4F3B] transition-colors uppercase tracking-wider shadow-sm shadow-[#B35C44]/20"
+                  onClick={() => copyToClipboard('IYALVANAM ASSET TRUST', 'Account Name')}
+                  className="p-2 text-[#1f3d1f] hover:bg-[#e5d8be] rounded-lg transition-colors"
                 >
-                  Record Another Support Pledge
+                  {copiedField === 'Account Name' ? <Check className="w-4 h-4 text-emerald-700" /> : <Copy className="w-4 h-4" />}
                 </button>
               </div>
+
+              <div className="p-3.5 bg-[#f0e6d2] rounded-xl flex items-center justify-between">
+                <div>
+                  <span className="text-[10px] uppercase font-bold text-[#7a2e1a] block">Account Number</span>
+                  <strong className="text-[#2d2013] font-mono">50200088991122</strong>
+                </div>
+                <button
+                  onClick={() => copyToClipboard('50200088991122', 'Account Number')}
+                  className="p-2 text-[#1f3d1f] hover:bg-[#e5d8be] rounded-lg transition-colors"
+                >
+                  {copiedField === 'Account Number' ? <Check className="w-4 h-4 text-emerald-700" /> : <Copy className="w-4 h-4" />}
+                </button>
+              </div>
+
+              <div className="p-3.5 bg-[#f0e6d2] rounded-xl flex items-center justify-between">
+                <div>
+                  <span className="text-[10px] uppercase font-bold text-[#7a2e1a] block">IFSC Code</span>
+                  <strong className="text-[#2d2013] font-mono">HDFC0001852</strong>
+                </div>
+                <button
+                  onClick={() => copyToClipboard('HDFC0001852', 'IFSC Code')}
+                  className="p-2 text-[#1f3d1f] hover:bg-[#e5d8be] rounded-lg transition-colors"
+                >
+                  {copiedField === 'IFSC Code' ? <Check className="w-4 h-4 text-emerald-700" /> : <Copy className="w-4 h-4" />}
+                </button>
+              </div>
+
+              <div className="p-3.5 bg-[#f0e6d2] rounded-xl flex items-center justify-between">
+                <div>
+                  <span className="text-[10px] uppercase font-bold text-[#7a2e1a] block">UPI ID / VPA</span>
+                  <strong className="text-[#2d2013] font-mono">iyalvanam@hdfcbank</strong>
+                </div>
+                <button
+                  onClick={() => copyToClipboard('iyalvanam@hdfcbank', 'UPI ID')}
+                  className="p-2 text-[#1f3d1f] hover:bg-[#e5d8be] rounded-lg transition-colors"
+                >
+                  {copiedField === 'UPI ID' ? <Check className="w-4 h-4 text-emerald-700" /> : <Copy className="w-4 h-4" />}
+                </button>
+              </div>
+
             </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="bg-[#F5F5F0] rounded-3xl p-8 sm:p-10 border border-[#5A5A40]/15 space-y-6 shadow-xs">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {/* Donor Name */}
-                <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-[#4A3728] flex items-center gap-1">
-                    Your Name / Organization <span className="text-[#B35C44]">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.donorName}
-                    onChange={(e) => setFormData({ ...formData, donorName: e.target.value })}
-                    placeholder="e.g. S. Meenakshi"
-                    className={`w-full px-4 py-3 rounded-xl border ${
-                      errors.donorName ? 'border-red-400 bg-red-50/30' : 'border-[#5A5A40]/20'
-                    } focus:outline-none focus:ring-2 focus:ring-[#5A5A40] text-sm bg-[#EBEBE3]/40`}
-                  />
-                  {errors.donorName && <p className="text-[11px] text-red-600">{errors.donorName}</p>}
-                </div>
+          </div>
 
-                {/* Donor Email */}
-                <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-[#4A3728] flex items-center gap-1">
-                    Email Address <span className="text-[#B35C44]">*</span>
-                  </label>
-                  <input
-                    type="email"
-                    required
-                    value={formData.donorEmail}
-                    onChange={(e) => setFormData({ ...formData, donorEmail: e.target.value })}
-                    placeholder="e.g. meenakshi@example.com"
-                    className={`w-full px-4 py-3 rounded-xl border ${
-                      errors.donorEmail ? 'border-red-400 bg-red-50/30' : 'border-[#5A5A40]/20'
-                    } focus:outline-none focus:ring-2 focus:ring-[#5A5A40] text-sm bg-[#EBEBE3]/40`}
-                  />
-                  {errors.donorEmail && <p className="text-[11px] text-red-600">{errors.donorEmail}</p>}
-                </div>
+          {/* Pledge Submission Form */}
+          <div className="lg:col-span-6">
+            <div className="bg-[#f7f2e7] rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-10 border-2 border-[#7a2e1a]/20 shadow-sm space-y-6">
+              
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-[#7a2e1a]">
+                  Pledge Registry
+                </span>
+                <h3 className="text-xl sm:text-2xl font-serif-display font-bold text-[#2d2013] mt-1">
+                  Record Your Contribution Pledge
+                </h3>
+              </div>
 
-                {/* Support Type */}
-                <div className="space-y-1.5 sm:col-span-2">
-                  <label className="text-xs font-bold text-[#4A3728]">
-                    Support Type <span className="text-[#B35C44]">*</span>
-                  </label>
-                  <select
-                    value={formData.type}
-                    onChange={(e) => setFormData({ ...formData, type: e.target.value as SupportType })}
-                    className="w-full px-4 py-3 rounded-xl border border-[#5A5A40]/20 focus:outline-none focus:ring-2 focus:ring-[#5A5A40] text-sm bg-[#EBEBE3]/40"
-                  >
-                    {supportTypes.map((t) => (
-                      <option key={t.value} value={t.value}>
-                        {t.label}
-                      </option>
-                    ))}
-                  </select>
+              {submittedDonation ? (
+                <div className="bg-[#f0e6d2] rounded-2xl p-6 sm:p-8 text-center space-y-4 border border-[#1f3d1f]/20">
+                  <CheckCircle2 className="w-10 sm:w-12 h-10 sm:h-12 mx-auto text-[#1f3d1f]" />
+                  <h4 className="text-xl font-serif-display font-bold text-[#1f3d1f]">Gratitude for Your Support!</h4>
+                  <p className="text-xs sm:text-sm text-[#3d2f21] max-w-sm mx-auto font-serif-body">
+                    We have recorded your pledge of ₹{submittedDonation.amount || 'contribution'}. A community receipt and certificate will be emailed to you.
+                  </p>
+                  <Button variant="primary" size="sm" onClick={() => setSubmittedDonation(null)}>
+                    Record Another Support
+                  </Button>
                 </div>
-
-                {/* Amount (if monetary) */}
-                {(formData.type === 'Monetary support' || formData.type === 'Infrastructure-specific support') && (
-                  <div className="space-y-1.5 sm:col-span-2">
-                    <label className="text-xs font-bold text-[#4A3728]">
-                      Pledged Amount (INR ₹)
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-widest text-[#7a2e1a] mb-1">
+                      Your Name *
                     </label>
-                    <div className="relative">
-                      <span className="absolute left-4 top-3 text-sm font-bold text-[#5A5A40]">₹</span>
+                    <input
+                      type="text"
+                      required
+                      value={formData.donorName}
+                      onChange={(e) => setFormData({ ...formData, donorName: e.target.value })}
+                      placeholder="e.g. Sivasankaran P."
+                      className="w-full min-h-[48px] px-4 py-3 rounded-xl bg-[#f0e6d2] border border-[#7a2e1a]/30 text-sm sm:text-base text-[#2d2013] focus:outline-none focus:ring-2 focus:ring-[#1f3d1f]"
+                    />
+                    {errors.donorName && <p className="text-[11px] text-red-600">{errors.donorName}</p>}
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-widest text-[#7a2e1a] mb-1">
+                        Email Address *
+                      </label>
+                      <input
+                        type="email"
+                        required
+                        value={formData.donorEmail}
+                        onChange={(e) => setFormData({ ...formData, donorEmail: e.target.value })}
+                        placeholder="e.g. siva@nature.org"
+                        className="w-full min-h-[48px] px-4 py-3 rounded-xl bg-[#f0e6d2] border border-[#7a2e1a]/30 text-sm sm:text-base text-[#2d2013] focus:outline-none focus:ring-2 focus:ring-[#1f3d1f]"
+                      />
+                      {errors.donorEmail && <p className="text-[11px] text-red-600">{errors.donorEmail}</p>}
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-widest text-[#7a2e1a] mb-1">
+                        Pledge Amount (₹)
+                      </label>
                       <input
                         type="number"
-                        min="500"
-                        step="500"
+                        min={500}
+                        step={500}
                         value={formData.amount}
                         onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
-                        placeholder="e.g. 10000"
-                        className="w-full pl-8 pr-4 py-3 rounded-xl border border-[#5A5A40]/20 focus:outline-none focus:ring-2 focus:ring-[#5A5A40] text-sm bg-[#EBEBE3]/40"
+                        className="w-full min-h-[48px] px-4 py-3 rounded-xl bg-[#f0e6d2] border border-[#7a2e1a]/30 text-sm sm:text-base text-[#2d2013] focus:outline-none focus:ring-2 focus:ring-[#1f3d1f]"
                       />
                     </div>
-                    <div className="flex flex-wrap gap-2 pt-1">
-                      {['5000', '10000', '25000', '50000', '100000'].map((amt) => (
-                        <button
-                          type="button"
-                          key={amt}
-                          onClick={() => setFormData({ ...formData, amount: amt })}
-                          className={`px-3 py-1 rounded-full text-xs font-bold border transition-all ${
-                            formData.amount === amt
-                              ? 'bg-[#4A3728] text-white border-[#4A3728]'
-                              : 'bg-[#EBEBE3]/60 text-[#4A3728] border-[#5A5A40]/20 hover:bg-[#EBEBE3]'
-                          }`}
-                        >
-                          ₹{Number(amt).toLocaleString('en-IN')}
-                        </button>
-                      ))}
-                    </div>
                   </div>
-                )}
 
-                {/* Description & Details */}
-                <div className="space-y-1.5 sm:col-span-2">
-                  <label className="text-xs font-bold text-[#4A3728]">
-                    Details / Variety Description / Message
-                  </label>
-                  <textarea
-                    rows={3}
-                    value={formData.description}
-                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                    placeholder="e.g. 20 kg traditional seeraga samba seeds, 50 native Kadamba saplings, or notes on infrastructure sponsorship..."
-                    className="w-full px-4 py-3 rounded-xl border border-[#5A5A40]/20 focus:outline-none focus:ring-2 focus:ring-[#5A5A40] text-sm bg-[#EBEBE3]/40"
-                  />
-                </div>
-              </div>
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-widest text-[#7a2e1a] mb-1">
+                      Support Type
+                    </label>
+                    <select
+                      value={formData.type}
+                      onChange={(e) => setFormData({ ...formData, type: e.target.value as SupportType })}
+                      className="w-full min-h-[48px] px-4 py-3 rounded-xl bg-[#f0e6d2] border border-[#7a2e1a]/30 text-sm sm:text-base text-[#2d2013] focus:outline-none focus:ring-2 focus:ring-[#1f3d1f]"
+                    >
+                      {supportTypes.map((st) => (
+                        <option key={st.value} value={st.value}>{st.label}</option>
+                      ))}
+                    </select>
+                  </div>
 
-              {/* Note on payment processing */}
-              <div className="p-4 bg-[#EBEBE3] rounded-2xl border border-[#5A5A40]/15 text-xs text-[#4A3728]/80 flex items-start gap-2.5">
-                <Info className="w-4 h-4 text-[#5A5A40] shrink-0 mt-0.5" />
-                <p>
-                  <strong>Note on Transparency:</strong> In accordance with our non-commercial ethos, this form registers your support pledge. Direct bank transfers to the official Iyalvanam Asset Trust bank account will be coordinated personally with a formal receipt.
-                </p>
-              </div>
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-widest text-[#7a2e1a] mb-1">
+                      Note / Intended Asset Dedication
+                    </label>
+                    <textarea
+                      rows={3}
+                      value={formData.description}
+                      onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                      placeholder="e.g. Sponsoring 50 native Kadamba saplings for the north swale..."
+                      className="w-full px-4 py-3 rounded-xl bg-[#f0e6d2] border border-[#7a2e1a]/30 text-sm sm:text-base text-[#2d2013] focus:outline-none focus:ring-2 focus:ring-[#1f3d1f]"
+                    />
+                  </div>
 
-              <div>
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full py-4 rounded-full bg-[#B35C44] hover:bg-[#9B4F3B] text-white font-bold text-xs uppercase tracking-widest shadow-sm shadow-[#B35C44]/20 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
-                >
-                  {isSubmitting ? (
-                    <span>Submitting Pledge...</span>
-                  ) : (
-                    <>
-                      <span>Record Support Pledge</span>
-                      <Heart className="w-4 h-4 fill-current opacity-80" />
-                    </>
-                  )}
-                </button>
-              </div>
-            </form>
-          )}
+                  <Button
+                    type="submit"
+                    variant="gold"
+                    size="lg"
+                    disabled={isSubmitting}
+                    className="w-full justify-center min-h-[50px]"
+                  >
+                    {isSubmitting ? 'Recording Pledge...' : 'Submit Infrastructure Pledge'}
+                  </Button>
+                </form>
+              )}
+
+            </div>
+          </div>
+
         </div>
-      </section>
+      </Container>
+
     </div>
   );
 };

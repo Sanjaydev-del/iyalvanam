@@ -5,6 +5,7 @@ import {
   DashboardStats,
   Donation,
   InquiryStatus,
+  LeadershipProfile,
   MemberInquiry,
   User,
 } from '../types';
@@ -42,6 +43,60 @@ export const api = {
       throw new Error('Failed to fetch user profile');
     }
     return res.json();
+  },
+
+  // Leadership Profiles
+  async getLeadershipProfiles(params?: { all?: boolean }): Promise<LeadershipProfile[]> {
+    const query = new URLSearchParams();
+    if (params?.all) query.append('all', 'true');
+
+    const res = await fetch(`${API_BASE}/leadership?${query.toString()}`, {
+      headers: params?.all ? getAuthHeader() : { 'Content-Type': 'application/json' },
+    });
+    if (!res.ok) throw new Error('Failed to fetch leadership profiles');
+    return res.json();
+  },
+
+  async getLeadershipProfile(idOrDesignation: string): Promise<LeadershipProfile> {
+    const res = await fetch(`${API_BASE}/leadership/${idOrDesignation}`);
+    if (!res.ok) throw new Error('Leadership profile not found');
+    return res.json();
+  },
+
+  async createLeadershipProfile(profile: Partial<LeadershipProfile>): Promise<LeadershipProfile> {
+    const res = await fetch(`${API_BASE}/leadership`, {
+      method: 'POST',
+      headers: getAuthHeader(),
+      body: JSON.stringify(profile),
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({ error: 'Failed to create leadership profile' }));
+      throw new Error(err.error || 'Failed to create profile');
+    }
+    return res.json();
+  },
+
+  async updateLeadershipProfile(id: string, profile: Partial<LeadershipProfile>): Promise<LeadershipProfile> {
+    const res = await fetch(`${API_BASE}/leadership/${id}`, {
+      method: 'PUT',
+      headers: getAuthHeader(),
+      body: JSON.stringify(profile),
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({ error: 'Failed to update leadership profile' }));
+      throw new Error(err.error || 'Failed to update profile');
+    }
+    return res.json();
+  },
+
+  async deleteLeadershipProfile(id: string): Promise<void> {
+    const res = await fetch(`${API_BASE}/leadership/${id}`, {
+      method: 'DELETE',
+      headers: getAuthHeader(),
+    });
+    if (!res.ok) {
+      throw new Error('Failed to delete leadership profile');
+    }
   },
 
   // Blog
@@ -141,7 +196,6 @@ export const api = {
 
   async deleteMemberInquiry(id: string): Promise<void> {
     const res = await fetch(`${API_BASE}/inquiries/members/${id}`, {
-      method: 'DELETE',
       headers: getAuthHeader(),
     });
     if (!res.ok) throw new Error('Failed to delete member inquiry');
@@ -177,7 +231,6 @@ export const api = {
 
   async deleteContactInquiry(id: string): Promise<void> {
     const res = await fetch(`${API_BASE}/inquiries/contacts/${id}`, {
-      method: 'DELETE',
       headers: getAuthHeader(),
     });
     if (!res.ok) throw new Error('Failed to delete contact inquiry');
@@ -223,7 +276,6 @@ export const api = {
 
   async deleteDonation(id: string): Promise<void> {
     const res = await fetch(`${API_BASE}/donations/${id}`, {
-      method: 'DELETE',
       headers: getAuthHeader(),
     });
     if (!res.ok) throw new Error('Failed to delete donation');
