@@ -172,11 +172,11 @@ export const LandPage: React.FC<LandPageProps> = ({ navigate }) => {
             </div>
 
             <div className="lg:col-span-6 space-y-2">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-sm border border-[#E3DDD2] bg-[#ECE6D8]">
+              <div className="overflow-hidden rounded-sm border border-[#E3DDD2] bg-[#FAF8F3]">
                 <img
                   src="/images/illupai-river-dam.jpg"
                   alt="Illupai River waterfall and check-dam near Sivasailam"
-                  className="w-full h-full object-cover"
+                  className="w-full h-auto object-contain block"
                 />
               </div>
               <p className="text-xs text-[#8B5A2B] text-center font-medium">
@@ -255,11 +255,11 @@ export const LandPage: React.FC<LandPageProps> = ({ navigate }) => {
               </div>
 
               <div className="lg:col-span-5 space-y-2">
-                <div className="relative aspect-[4/3] overflow-hidden rounded-sm border border-[#E3DDD2] bg-[#ECE6D8]">
+                <div className="overflow-hidden rounded-sm border border-[#E3DDD2] bg-[#FAF8F3]">
                   <img
                     src="/images/sanctuary-landscape.jpg"
                     alt="Sanctuary land clearing with palm trees and mountain background"
-                    className="w-full h-full object-cover"
+                    className="w-full h-auto object-contain block"
                   />
                 </div>
                 <p className="text-xs text-[#8B5A2B] text-center font-medium">

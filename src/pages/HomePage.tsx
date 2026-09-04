@@ -232,14 +232,13 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
 
             {/* Slide 1 Image: Sunrise over Western Ghats Mountains */}
             <div className="space-y-2">
-              <div className="relative aspect-[16/9] sm:aspect-[21/9] overflow-hidden rounded-sm border border-[#E3DDD2] bg-[#ECE6D8]">
+              <div className="overflow-hidden rounded-sm border border-[#E3DDD2] bg-[#FAF8F3]">
                 <img
                   src="/images/cover-mountain-sun.jpg"
                   alt="Misty morning sun rising over palm trees and Western Ghats mountain ridges at Dharmapuramadam"
-                  className="w-full h-full object-cover filter contrast-[0.98] brightness-[0.98]"
+                  className="w-full h-auto object-contain block"
                   loading="eager"
                   onError={(e) => {
-                    // Fallback to western-ghats-fields if needed
                     (e.target as HTMLElement).setAttribute('src', '/images/western-ghats-fields.jpg');
                   }}
                 />
@@ -482,11 +481,11 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
           </div>
 
           <div className="lg:col-span-6 space-y-2">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-sm border border-[#E3DDD2] bg-[#ECE6D8]">
+            <div className="overflow-hidden rounded-sm border border-[#E3DDD2] bg-[#FAF8F3]">
               <img
                 src="/images/western-ghats-fields.jpg"
                 alt="Western Ghats mountain ridge panorama over vibrant green paddy fields"
-                className="w-full h-full object-cover"
+                className="w-full h-auto object-contain block"
               />
             </div>
             <p className="text-xs text-[#8B5A2B] text-center font-medium">
@@ -583,11 +582,11 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
               </div>
             </div>
 
-            <div className="relative aspect-video overflow-hidden rounded-sm border border-[#E3DDD2]">
+            <div className="overflow-hidden rounded-sm border border-[#E3DDD2] bg-[#FAF8F3]">
               <img
                 src="/images/sivasailam-valley.jpg"
                 alt="Sivasailam river valley and dramatic mountain clouds"
-                className="w-full h-full object-cover"
+                className="w-full h-auto object-contain block"
               />
             </div>
           </div>
@@ -633,11 +632,11 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
               </p>
             </div>
 
-            <div className="relative aspect-video overflow-hidden rounded-sm border border-[#E3DDD2]">
+            <div className="overflow-hidden rounded-sm border border-[#E3DDD2] bg-[#FAF8F3]">
               <img
                 src="/images/zen-pebbles-stream.jpg"
                 alt="Balanced zen pebbles in running mountain stream"
-                className="w-full h-full object-cover"
+                className="w-full h-auto object-contain block"
               />
             </div>
           </div>

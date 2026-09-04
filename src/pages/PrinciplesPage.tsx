@@ -149,11 +149,11 @@ export const PrinciplesPage: React.FC<PrinciplesPageProps> = ({ navigate }) => {
             </div>
 
             <div className="lg:col-span-5 space-y-2">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-sm border border-[#E3DDD2] bg-[#ECE6D8]">
+              <div className="overflow-hidden rounded-sm border border-[#E3DDD2] bg-[#FAF8F3]">
                 <img
                   src="/images/banyan-river-forest.jpg"
                   alt="Ancient banyan tree and forest canopy over rushing river stream"
-                  className="w-full h-full object-cover"
+                  className="w-full h-auto object-contain block"
                 />
               </div>
               <p className="text-xs text-[#8B5A2B] text-center font-medium">
@@ -268,11 +268,11 @@ export const PrinciplesPage: React.FC<PrinciplesPageProps> = ({ navigate }) => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
             
             <div className="lg:col-span-5 space-y-2">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-sm border border-[#E3DDD2] bg-[#ECE6D8]">
+              <div className="overflow-hidden rounded-sm border border-[#E3DDD2] bg-[#FAF8F3]">
                 <img
                   src="/images/meditating-boy-river.jpg"
                   alt="Young child meditating in lotus posture on a river stone with mountain backdrop"
-                  className="w-full h-full object-cover"
+                  className="w-full h-auto object-contain block"
                 />
               </div>
               <p className="text-xs text-[#8B5A2B] text-center font-medium">
@@ -455,11 +455,11 @@ export const PrinciplesPage: React.FC<PrinciplesPageProps> = ({ navigate }) => {
             </div>
 
             <div className="lg:col-span-5">
-              <div className="relative aspect-[16/9] overflow-hidden rounded-sm border border-[#E3DDD2]">
+              <div className="overflow-hidden rounded-sm border border-[#E3DDD2] bg-[#FAF8F3]">
                 <img
                   src="/images/mountain-cascade.jpg"
                   alt="Mountain water cascade through lush rainforest"
-                  className="w-full h-full object-cover"
+                  className="w-full h-auto object-contain block"
                 />
               </div>
             </div>
