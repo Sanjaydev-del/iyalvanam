@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { AuthProvider } from './context/AuthContext';
+import { LanguageProvider } from './context/LanguageContext';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { Toast } from './components/Toast';
@@ -107,35 +108,37 @@ export default function App() {
   };
 
   return (
-    <AuthProvider>
-      <div className="min-h-screen flex flex-col bg-[#F5F2EB] text-[#241D17] font-sans antialiased selection:bg-[#2E4F2B] selection:text-[#F5F2EB]">
-        {/* Navigation Component (Left Sidebar on Desktop lg+, Top Sticky on Mobile) */}
-        <Navbar currentPath={currentPath} navigate={navigate} />
+    <LanguageProvider>
+      <AuthProvider>
+        <div className="min-h-screen flex flex-col bg-[#F5F2EB] text-[#241D17] font-sans antialiased selection:bg-[#2E4F2B] selection:text-[#F5F2EB]">
+          {/* Navigation Component (Left Sidebar on Desktop lg+, Top Sticky on Mobile) */}
+          <Navbar currentPath={currentPath} navigate={navigate} />
 
-        {/* Main Content Layout Wrapper (Offset by sidebar on Desktop) */}
-        <div className="flex-1 flex flex-col lg:pl-72 xl:pl-80 w-full min-w-0 transition-all duration-300">
-          <main className="flex-grow w-full">
-            {renderRoute()}
-          </main>
+          {/* Main Content Layout Wrapper (Offset by sidebar on Desktop) */}
+          <div className="flex-1 flex flex-col lg:pl-72 xl:pl-80 w-full min-w-0 transition-all duration-300">
+            <main className="flex-grow w-full">
+              {renderRoute()}
+            </main>
 
-          {/* Footer */}
-          <Footer navigate={navigate} />
+            {/* Footer */}
+            <Footer navigate={navigate} />
+          </div>
+
+          {/* Toast Container */}
+          <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none">
+            {toasts.map((toast) => (
+              <div key={toast.id} className="pointer-events-auto">
+                <Toast
+                  type={toast.type}
+                  title={toast.title}
+                  message={toast.message}
+                  onClose={() => removeToast(toast.id)}
+                />
+              </div>
+            ))}
+          </div>
         </div>
-
-        {/* Toast Container */}
-        <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none">
-          {toasts.map((toast) => (
-            <div key={toast.id} className="pointer-events-auto">
-              <Toast
-                type={toast.type}
-                title={toast.title}
-                message={toast.message}
-                onClose={() => removeToast(toast.id)}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-    </AuthProvider>
+      </AuthProvider>
+    </LanguageProvider>
   );
 }
