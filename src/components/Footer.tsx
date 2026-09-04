@@ -111,7 +111,9 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
             <li><button onClick={() => navigate('/craft')} className="hover:text-[#D4C5A9] transition-colors cursor-pointer">{content.nav.craft}</button></li>
             <li><button onClick={() => navigate('/sanctuary')} className="hover:text-[#D4C5A9] transition-colors cursor-pointer">{content.nav.sanctuary}</button></li>
             <li><button onClick={() => navigate('/blog')} className="hover:text-[#D4C5A9] transition-colors cursor-pointer">{content.nav.journal}</button></li>
-            <li><button onClick={() => navigate('/join')} className="hover:text-[#D4C5A9] transition-colors cursor-pointer">{content.nav.joinUs}</button></li>
+            <li><button onClick={() => navigate('/faq')} className="hover:text-[#D4C5A9] transition-colors cursor-pointer">{content.nav.faq}</button></li>
+            <li><button onClick={() => navigate('/contact')} className="hover:text-[#D4C5A9] transition-colors cursor-pointer">{content.nav.contact}</button></li>
+            <li><button onClick={() => navigate('/join')} className="hover:text-[#D4C5A9] transition-colors cursor-pointer text-[#D4C5A9] font-bold">{content.nav.joinUs} →</button></li>
           </ul>
         </div>
 

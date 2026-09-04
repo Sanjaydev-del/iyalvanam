@@ -46,6 +46,8 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, navigate }) => {
     { label: content.nav.craft, path: '/craft', match: (p: string) => p === '/craft' || p === '/sacred-craft' || p === '/sacred-work' },
     { label: content.nav.journal, path: '/blog', match: (p: string) => p.startsWith('/blog') || p === '/journal' },
     { label: content.nav.founders, path: '/leadership', match: (p: string) => p.startsWith('/leadership') || p === '/founders' },
+    { label: content.nav.faq, path: '/faq', match: (p: string) => p.startsWith('/faq') || p === '/community-faq' },
+    { label: content.nav.contact, path: '/contact', match: (p: string) => p === '/contact' },
   ];
 
   return (

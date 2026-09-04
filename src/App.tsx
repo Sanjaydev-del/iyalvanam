@@ -19,6 +19,7 @@ import { SupportPage } from './pages/SupportPage';
 import { BlogPage } from './pages/BlogPage';
 import { BlogDetailPage } from './pages/BlogDetailPage';
 import { ContactPage } from './pages/ContactPage';
+import { FAQPage } from './pages/FAQPage';
 import { PrinciplesPage } from './pages/PrinciplesPage';
 import { CommunityLifePage } from './pages/CommunityLifePage';
 import { LandingPage } from './pages/LandingPage';
@@ -110,6 +111,9 @@ export default function App() {
     }
     if (currentPath === '/contact') {
       return <ContactPage navigate={navigate} showToast={showToast} />;
+    }
+    if (currentPath === '/faq' || currentPath === '/faqs' || currentPath === '/community-faq') {
+      return <FAQPage navigate={navigate} />;
     }
     if (currentPath === '/admin/login') {
       return <AdminLoginPage navigate={navigate} showToast={showToast} />;

@@ -27,6 +27,7 @@ import { useLanguage } from '../context/LanguageContext';
 import { BlogPost } from '../types';
 import { api } from '../services/api';
 import { IyalvanamEmblem, SeyonEmblem, LeafBullet } from '../components/OrganicIcons';
+import { FAQSection } from '../components/FAQSection';
 
 interface HomePageProps {
   navigate: (path: string) => void;
@@ -692,6 +693,20 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
           </div>
         </Container>
       )}
+
+      {/* ========================================================================= */}
+      {/* 7.5. COMMUNITY FAQ & FOUNDATIONAL CLARITY (25 Q&As)                       */}
+      {/* ========================================================================= */}
+      <section className="bg-[#FAF8F3] py-16 sm:py-24 border-t border-[#E3DDD2]">
+        <Container>
+          <div className="bg-[#FAF8F3] border border-[#E3DDD2] rounded-md p-6 sm:p-10 lg:p-12 shadow-xs">
+            <FAQSection 
+              title="Community FAQ & Foundational Clarity"
+              subtitle="25 foundational answers regarding life, land stewardship, finances, and governance at Iyalvanam & Seyon."
+            />
+          </div>
+        </Container>
+      </section>
 
       {/* ========================================================================= */}
       {/* 8. CLOSING CALL TO ACTION & WHATSAPP (Slide 25)                           */}

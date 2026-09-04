@@ -20,6 +20,7 @@ export interface TranslationContent {
     sanctuary: string;
     joinUs: string;
     contact: string;
+    faq: string;
     subTitle: string;
     locationBadge: string;
     tagline: string;
@@ -266,6 +267,7 @@ export const translations: Record<'en' | 'ta', TranslationContent> = {
       sanctuary: 'Sanctuary',
       joinUs: 'Join Us',
       contact: 'Contact',
+      faq: 'Community FAQ',
       subTitle: 'Center for Natural Living',
       locationBadge: 'Sivasailam, Tenkasi',
       tagline: 'Two Trusts • One Sovereign Vision',
@@ -778,6 +780,7 @@ export const translations: Record<'en' | 'ta', TranslationContent> = {
       sanctuary: 'இயல் வனம்',
       joinUs: 'இணையுங்கள்',
       contact: 'தொடர்பு',
+      faq: 'பொது வினாக்கள் (FAQ)',
       subTitle: 'இயற்கை வாழ்வியல் கூடம்',
       locationBadge: 'சிவசைலம், தென்காசி',
       tagline: 'இரண்டு அறக்கட்டளைகள் • ஓர் உன்னத நோக்கம்',
