@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { 
-  Sprout, 
-  TreePine, 
-  Heart, 
-  Compass, 
-  Shield, 
-  Users, 
   ArrowRight, 
   MapPin, 
-  Droplets, 
-  Sun, 
-  Sparkles, 
-  Feather, 
-  Calendar, 
-  CheckCircle2,
-  Mountain,
-  Leaf
+  Wheat, 
+  HeartPulse, 
+  Hammer, 
+  Sprout, 
+  TreePine, 
+  MessageCircle, 
+  Sparkles,
+  Feather,
+  Clock,
+  ShieldCheck
 } from 'lucide-react';
+import { Container } from '../components/common/Container';
+import { Button } from '../components/common/Button';
+import { useLanguage } from '../context/LanguageContext';
 import { BlogPost } from '../types';
 import { api } from '../services/api';
 
@@ -25,468 +24,366 @@ interface HomePageProps {
 }
 
 export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
+  const { content, language } = useLanguage();
+  const isTamil = language === 'ta';
   const [recentPosts, setRecentPosts] = useState<BlogPost[]>([]);
-  const [loadingPosts, setLoadingPosts] = useState(true);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     api.getBlogPosts()
       .then((posts) => setRecentPosts(posts.slice(0, 3)))
-      .catch((err) => console.error('Failed to load posts', err))
-      .finally(() => setLoadingPosts(false));
+      .catch(() => {});
   }, []);
 
-  const foundations = [
-    {
-      number: '01',
-      title: 'Non-Artificial Living',
-      tamil: 'செயற்கையற்ற வாழ்வியல்',
-      desc: 'Freeing ourselves from synthetic dependencies, toxic chemicals, processed inputs, and unnatural lifestyle patterns.',
-      icon: <Sprout className="w-6 h-6 text-[#2d5a43]" />,
-    },
-    {
-      number: '02',
-      title: 'Interconnected Life',
-      tamil: 'இணைந்த பெருவாழ்வு',
-      desc: 'Recognizing the inseparable unity between human beings, soil, water, forest flora, fauna, and cosmic energies.',
-      icon: <Droplets className="w-6 h-6 text-[#356859]" />,
-    },
-    {
-      number: '03',
-      title: 'Collective Existence',
-      tamil: 'கூட்டு வாழ்வியல்',
-      desc: 'Moving from isolated hyper-individualism to consensus-driven, cooperative stewardship and mutual care.',
-      icon: <Users className="w-6 h-6 text-[#735338]" />,
-    },
-    {
-      number: '04',
-      title: 'Return to Natural State',
-      tamil: 'இயல்பு நிலைக்கு திரும்புதல்',
-      desc: 'Honoring natural circadian rhythms, barefoot earthing, sun exposure, living water, and organic nourishment.',
-      icon: <Sun className="w-6 h-6 text-[#c85a32]" />,
-    },
-    {
-      number: '05',
-      title: 'Forest as a Model',
-      tamil: 'காடே வழிகாட்டி',
-      desc: 'Observing how ancient self-sustaining forests manage fertility, biodiversity, water retention, and endless abundance without external force.',
-      icon: <TreePine className="w-6 h-6 text-[#1e3d2f]" />,
-    },
-  ];
-
   return (
-    <div className="space-y-24 pb-20">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden pt-8 pb-16 lg:pt-14 lg:pb-24">
-        {/* Background gradient blur */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[550px] bg-gradient-to-b from-[#EBEBE3] via-[#E6E6DC]/60 to-transparent rounded-3xl -z-10 opacity-70" />
+    <div className="bg-[#F5F2EB] text-[#241D17] space-y-16 sm:space-y-24 lg:space-y-32 pb-20 sm:pb-32">
+      
+      {/* ========================================================================= */}
+      {/* 1. HERO SECTION                                                          */}
+      {/* ========================================================================= */}
+      <section className="pt-10 sm:pt-16 lg:pt-20">
+        <Container>
+          <div className="space-y-10 sm:space-y-12">
+            
+            <div className="max-w-4xl space-y-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#ECE6D8] text-[#8B5A2B] text-xs font-semibold uppercase tracking-wider">
+                <MapPin className="w-3.5 h-3.5 text-[#2E4F2B]" />
+                <span>{content.hero.locationBadge} • {content.hero.subLocation}</span>
+              </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-4xl mx-auto space-y-6">
-            {/* Top Pill */}
-            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#5A5A40]/10 border border-[#5A5A40]/20 text-[#5A5A40] text-xs sm:text-sm font-semibold uppercase tracking-widest shadow-xs">
-              <span className="w-2 h-2 rounded-full bg-[#B35C44] animate-ping" />
-              <span>Dharmapuramadam, Tenkasi • Western Ghats Biosphere</span>
-            </div>
-
-            {/* Main Hero Headings */}
-            <div className="space-y-3">
-              <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold font-tamil text-[#5A5A40] leading-tight tracking-tight">
-                “இயன்ற வரை இயற்கைக்கு திரும்புவோம்”
-              </h2>
-              <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold font-serif text-[#1A1A1A] tracking-tight leading-[1.1]">
-                Return to nature as much as possible.
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-[#2E4F2B] tracking-tight leading-[1.12]">
+                {content.hero.title}
               </h1>
-            </div>
 
-            {/* Supporting Concept */}
-            <p className="text-lg sm:text-xl text-[#4A3728]/80 max-w-3xl mx-auto font-normal leading-relaxed">
-              A living blueprint for conscious human living, collective self-reliance, and spiritual evolution in harmony with natural laws.
-            </p>
-
-            {/* CTAs */}
-            <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
-              <button
-                id="hero-join-cta"
-                onClick={() => navigate('/join')}
-                className="px-8 py-3.5 rounded-full bg-[#B35C44] hover:bg-[#9B4F3B] text-white font-bold text-xs sm:text-sm uppercase tracking-widest shadow-lg shadow-[#B35C44]/20 transition-all flex items-center gap-2 group"
-              >
-                <span>Join the Community</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </button>
-
-              <button
-                id="hero-support-cta"
-                onClick={() => navigate('/support')}
-                className="px-8 py-3.5 rounded-full bg-[#EBEBE3] hover:bg-[#5A5A40] hover:text-white text-[#5A5A40] border border-[#5A5A40]/30 font-bold text-xs sm:text-sm uppercase tracking-widest shadow-xs transition-all flex items-center gap-2"
-              >
-                <Heart className="w-4 h-4 fill-current opacity-80" />
-                <span>Support Our ₹25L Goal</span>
-              </button>
-
-              <button
-                id="hero-learn-cta"
-                onClick={() => navigate('/about')}
-                className="px-6 py-3.5 rounded-full text-[#5A5A40] hover:text-[#4A3728] hover:bg-[#EBEBE3] font-bold text-xs sm:text-sm uppercase tracking-widest transition-colors"
-              >
-                Learn More
-              </button>
-            </div>
-          </div>
-
-          {/* Hero Visual Card Grid */}
-          <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="relative h-72 sm:h-80 rounded-t-[140px] rounded-b-3xl overflow-hidden shadow-md group border-4 border-white">
-              <img
-                src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80"
-                alt="Western Ghats forest and sacred land"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-6 text-white">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-[#EBEBE3]">Sanctuary</span>
-                <h3 className="text-xl font-bold font-serif">Western Ghats Foothills</h3>
-                <p className="text-xs text-gray-200 mt-1">Dharmapuramadam, Tenkasi District</p>
-              </div>
-            </div>
-
-            <div className="relative h-72 sm:h-80 rounded-t-[140px] rounded-b-3xl overflow-hidden shadow-md group border-4 border-white">
-              <img
-                src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=800&q=80"
-                alt="Organic farming and food forest"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-6 text-white">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-[#EBEBE3]">Self-Reliance</span>
-                <h3 className="text-xl font-bold font-serif">Food Forest & Permaculture</h3>
-                <p className="text-xs text-gray-200 mt-1">Heirloom seeds & zero-chemical living</p>
-              </div>
-            </div>
-
-            <div className="relative h-72 sm:h-80 rounded-t-[140px] rounded-b-3xl overflow-hidden shadow-md group border-4 border-white">
-              <img
-                src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=800&q=80"
-                alt="Community living circle"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-6 text-white">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-[#EBEBE3]">Stewardship</span>
-                <h3 className="text-xl font-bold font-serif">Consensus & Dual Trust</h3>
-                <p className="text-xs text-gray-200 mt-1">Iyalvanam Asset & SEYON Operational Trusts</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Meaning & Core Philosophy Spotlight */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#EBEBE3] rounded-3xl p-8 sm:p-12 border border-[#5A5A40]/15 shadow-xs">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            <div className="lg:col-span-7 space-y-5">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#5A5A40]/10 text-[#5A5A40] text-xs font-bold uppercase tracking-widest">
-                <Leaf className="w-3.5 h-3.5 text-[#B35C44]" /> What is Iyalvanam?
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-serif font-bold text-[#4A3728]">
-                “We don’t create a new system — we return to the natural one.”
-              </h2>
-              <p className="text-base text-[#4A3728]/80 leading-relaxed">
-                In modern society, humans have created artificial structures of ownership, competition, sensory overload, and ecological exploitation. <strong>Iyalvanam (இயல்வனம்)</strong> is not an escapist retreat or an artificial eco-resort; it is an intentional community sanctuary where families and seekers live, work, cultivate, and heal according to timeless Natural Law.
-              </p>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
-                <div className="p-3 bg-[#F5F5F0] rounded-2xl border border-[#5A5A40]/15">
-                  <div className="font-bold text-[#4A3728] text-sm">இயல் (Iyal)</div>
-                  <div className="text-xs text-[#5A5A40]">Nature / Essence</div>
-                </div>
-                <div className="p-3 bg-[#F5F5F0] rounded-2xl border border-[#5A5A40]/15">
-                  <div className="font-bold text-[#4A3728] text-sm">வனம் (Vanam)</div>
-                  <div className="text-xs text-[#5A5A40]">Living Forest</div>
-                </div>
-                <div className="p-3 bg-[#F5F5F0] rounded-2xl border border-[#5A5A40]/15">
-                  <div className="font-bold text-[#4A3728] text-sm">இயற்கை வாழ்வியல்</div>
-                  <div className="text-xs text-[#5A5A40]">Natural Living</div>
-                </div>
-                <div className="p-3 bg-[#F5F5F0] rounded-2xl border border-[#5A5A40]/15">
-                  <div className="font-bold text-[#4A3728] text-sm">கூடம் (Koodam)</div>
-                  <div className="text-xs text-[#5A5A40]">Sacred Gathering</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="lg:col-span-5 bg-[#F5F5F0] p-6 sm:p-8 rounded-3xl border border-[#5A5A40]/15 shadow-xs space-y-4">
-              <h3 className="text-lg font-bold text-[#4A3728] font-serif flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-[#B35C44]" />
-                Spiritual & Human Evolution
-              </h3>
-              <p className="text-sm text-[#5A5A40] leading-relaxed">
-                The shift required for humanity is not merely technological; it is an inner transformation of consciousness:
-              </p>
-              <div className="space-y-2.5">
-                <div className="flex items-center justify-between p-3 rounded-xl bg-[#EBEBE3] text-xs font-semibold text-[#4A3728]">
-                  <span>Fear (பயம்)</span>
-                  <ArrowRight className="w-4 h-4 text-[#B35C44]" />
-                  <span className="text-[#5A5A40] font-bold">Love (அன்பு)</span>
-                </div>
-                <div className="flex items-center justify-between p-3 rounded-xl bg-[#EBEBE3] text-xs font-semibold text-[#4A3728]">
-                  <span>Separation (பிரிவு)</span>
-                  <ArrowRight className="w-4 h-4 text-[#B35C44]" />
-                  <span className="text-[#5A5A40] font-bold">Unity (ஒருமைப்பாடு)</span>
-                </div>
-                <div className="flex items-center justify-between p-3 rounded-xl bg-[#EBEBE3] text-xs font-semibold text-[#4A3728]">
-                  <span>Survival (உயிர்வாழ்தல்)</span>
-                  <ArrowRight className="w-4 h-4 text-[#B35C44]" />
-                  <span className="text-[#5A5A40] font-bold">Creation (படைப்பு)</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 5 Core Foundations */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-12">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#B35C44] bg-[#B35C44]/10 px-4 py-1 rounded-full">
-            The Five Foundations
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-[#4A3728]">
-            Foundational Pillars of Iyalvanam
-          </h2>
-          <p className="text-base text-[#5A5A40]">
-            Our way of life stands upon five immutable ecological and philosophical principles from our founding blueprint.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {foundations.map((item, idx) => (
-            <div
-              key={idx}
-              className={`p-7 rounded-3xl bg-[#EBEBE3] border border-[#5A5A40]/15 hover:border-[#5A5A40] hover:shadow-md transition-all space-y-4 ${
-                idx === 4 ? 'md:col-span-2 lg:col-span-1' : ''
-              }`}
-            >
-              <div className="flex items-center justify-between">
-                <div className="w-12 h-12 rounded-full bg-[#F5F5F0] flex items-center justify-center shadow-xs">
-                  {item.icon}
-                </div>
-                <span className="text-3xl font-bold font-serif text-[#4A3728]/30">
-                  {item.number}
-                </span>
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-[#4A3728] font-serif">
-                  {item.title}
-                </h3>
-                <div className="text-xs font-semibold text-[#5A5A40] font-tamil mt-0.5">
-                  {item.tamil}
-                </div>
-              </div>
-              <p className="text-sm text-[#4A3728]/80 leading-relaxed">
-                {item.desc}
-              </p>
-            </div>
-          ))}
-
-          {/* Quick link card */}
-          <div className="p-7 rounded-3xl bg-[#5A5A40] text-[#F5F5F0] flex flex-col justify-between space-y-6 shadow-md border border-[#5A5A40]/40">
-            <div>
-              <span className="text-[10px] font-bold uppercase tracking-widest text-[#EBEBE3]">
-                Explore Everything
-              </span>
-              <h3 className="text-2xl font-bold font-serif mt-2 text-white">
-                Deep Dive into Our Principles & Ethics
-              </h3>
-              <p className="text-sm text-[#EBEBE3]/90 mt-2 leading-relaxed">
-                Discover the 7 Natural Laws, 7 Guiding Values, Daily Practices, and what holds no place in our community.
-              </p>
-            </div>
-            <button
-              onClick={() => navigate('/principles')}
-              className="px-6 py-3 rounded-full bg-[#F5F5F0] text-[#4A3728] font-bold text-xs uppercase tracking-widest hover:bg-white transition-colors flex items-center justify-between shadow-xs"
-            >
-              <span>Read Full Principles</span>
-              <ArrowRight className="w-4 h-4 text-[#B35C44]" />
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Community Life & Land Highlights */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
-          {/* Card 1: Land */}
-          <div className="bg-[#EBEBE3] rounded-3xl p-8 sm:p-10 border border-[#5A5A40]/15 flex flex-col justify-between space-y-6">
-            <div className="space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#5A5A40]/10 text-[#5A5A40] text-xs font-bold uppercase tracking-widest">
-                <Mountain className="w-3.5 h-3.5 text-[#B35C44]" /> Land & Sanctuary
-              </div>
-              <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#4A3728]">
-                Dharmapuramadam, Tenkasi District
-              </h3>
-              <p className="text-sm text-[#4A3728]/80 leading-relaxed">
-                Nestled directly in the foothills of the Western Ghats, adjoining the Agastiyar Malai Biosphere Reserve and Kalakad-Mundanthurai Tiger Reserve. Rich red soil, clean perennial groundwater, fresh mountain breezes, and rich ecological biodiversity.
-              </p>
-              <div className="grid grid-cols-2 gap-3 text-xs">
-                <div className="p-3 bg-[#F5F5F0] rounded-2xl border border-[#5A5A40]/15">
-                  <span className="font-semibold text-[#4A3728] block">Open Well & Rainwater</span>
-                  <span className="text-[#5A5A40]">Pristine mountain aquifer</span>
-                </div>
-                <div className="p-3 bg-[#F5F5F0] rounded-2xl border border-[#5A5A40]/15">
-                  <span className="font-semibold text-[#4A3728] block">Eco Infrastructure</span>
-                  <span className="text-[#5A5A40]">Lime-mud homes & dry toilets</span>
-                </div>
-              </div>
-            </div>
-            <button
-              onClick={() => navigate('/land')}
-              className="w-fit px-6 py-2.5 rounded-full bg-[#5A5A40] text-white text-xs uppercase tracking-widest font-bold hover:bg-[#4A3728] transition-colors flex items-center gap-2"
-            >
-              <span>Explore Land & Maps</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
-
-          {/* Card 2: Joining Process */}
-          <div className="bg-[#EBEBE3] rounded-3xl p-8 sm:p-10 border border-[#5A5A40]/15 flex flex-col justify-between space-y-6">
-            <div className="space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#B35C44]/15 text-[#B35C44] text-xs font-bold uppercase tracking-widest">
-                <Users className="w-3.5 h-3.5" /> Joining Process
-              </div>
-              <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#4A3728]">
-                Alignment → Interaction → Understanding → Invitation
-              </h3>
-              <p className="text-sm text-[#4A3728]/80 leading-relaxed">
-                Iyalvanam is not a commercial real estate scheme. Joining happens through mutual philosophical resonance, direct on-land interaction, a 1–3 month transition stay, and final consensus invitation.
-              </p>
-              <div className="p-4 bg-[#F5F5F0] rounded-2xl border border-[#5A5A40]/15 space-y-2 text-xs text-[#4A3728]/80">
-                <div className="flex items-center justify-between font-semibold text-[#4A3728]">
-                  <span>Joining Contribution (Non-refundable)</span>
-                  <span className="text-[#B35C44] font-bold">₹1,00,000 (up to 3 members)</span>
-                </div>
-                <p className="text-[11px] text-[#5A5A40]">
-                  + ₹25,000 per additional family member. Funds community infrastructure in perpetuity under Iyalvanam Asset Trust.
+              <div className="py-2 border-y border-[#D4C5A9]/60 max-w-2xl space-y-1">
+                <p className="text-base sm:text-lg font-bold text-[#8B5A2B]">
+                  {content.hero.tagline}
+                </p>
+                <p className="text-xs text-[#5C5044] uppercase tracking-wider font-semibold">
+                  {content.hero.trustsSubtitle}
                 </p>
               </div>
+
+              <p className="text-base sm:text-lg text-[#5C5044] leading-relaxed max-w-2xl">
+                {content.hero.description}
+              </p>
+
+              <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+                <button
+                  onClick={() => navigate('/join')}
+                  className="px-6 py-3.5 rounded-xl bg-[#2E4F2B] hover:bg-[#1E351C] text-[#FAF8F3] text-xs sm:text-sm font-semibold tracking-wide flex items-center justify-center gap-2 transition-all cursor-pointer shadow-xs"
+                >
+                  <span>{content.nav.joinUs}</span>
+                  <ArrowRight className="w-4 h-4 text-[#D4C5A9]" />
+                </button>
+
+                <button
+                  onClick={() => navigate('/about')}
+                  className="px-6 py-3.5 rounded-xl border border-[#D4C5A9] hover:bg-[#FAF8F3] text-[#2E4F2B] text-xs sm:text-sm font-semibold tracking-wide flex items-center justify-center gap-2 transition-all cursor-pointer"
+                >
+                  <span>{content.hero.ctaExplore}</span>
+                  <ArrowRight className="w-4 h-4 text-[#8B5A2B]" />
+                </button>
+              </div>
             </div>
-            <button
-              onClick={() => navigate('/join')}
-              className="w-fit px-6 py-2.5 rounded-full bg-[#B35C44] text-white text-xs uppercase tracking-widest font-bold hover:bg-[#9B4F3B] transition-colors flex items-center gap-2 shadow-sm shadow-[#B35C44]/20"
-            >
-              <span>View Joining Details & Form</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
+
+            {/* Softly Framed Documentary Photograph */}
+            <div className="space-y-3 pt-2">
+              <div className="relative aspect-[16/9] sm:aspect-[21/9] overflow-hidden rounded-2xl border border-[#D4C5A9] shadow-xs bg-[#ECE6D8]">
+                <img
+                  src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=2000&q=85"
+                  alt="Western Ghats lush forest canopy and mountain sanctuary"
+                  className="w-full h-full object-cover filter contrast-[0.98] brightness-[0.96]"
+                  loading="eager"
+                />
+              </div>
+
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 px-2 text-xs text-[#5C5044] border-b border-[#D4C5A9]/50 pb-3">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#2E4F2B]" />
+                  <span className="font-semibold text-[#241D17]">{content.hero.imageCaptionTitle}</span>
+                  <span className="text-[#8B5A2B] hidden sm:inline">•</span>
+                  <span className="text-[11px] text-[#5C5044]">{content.hero.imageCaptionSub}</span>
+                </div>
+                <span className="text-[10px] font-mono text-[#8B5A2B] uppercase tracking-wider">
+                  8.96° N, 77.31° E • Dharmapuramadam
+                </span>
+              </div>
+            </div>
+
           </div>
-        </div>
+        </Container>
       </section>
 
-      {/* Support / ₹25L Goal Callout Banner */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#4A3728] text-[#F5F5F0] rounded-3xl p-8 sm:p-12 border border-[#5A5A40]/30 relative overflow-hidden shadow-lg">
-          <div className="relative z-10 max-w-3xl space-y-4">
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#B35C44]/20 text-[#EBEBE3] text-xs font-bold uppercase tracking-widest border border-[#B35C44]/30">
-              <Heart className="w-3.5 h-3.5 fill-current text-[#B35C44]" /> Community Support Campaign
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-white">
-              Infrastructure Funding Goal: ₹25 Lakhs
-            </h2>
-            <p className="text-base text-[#EBEBE3]/90 leading-relaxed">
-              We are establishing the core community hall, open well deepening, solar micro-grid, heirloom seed repository, and native fruit forest. We welcome monetary support, seeds, saplings, eco-construction tools, and volunteer craftsmanship.
-            </p>
-            <div className="pt-2 flex flex-wrap gap-4">
-              <button
-                onClick={() => navigate('/support')}
-                className="px-6 py-3 rounded-full bg-[#B35C44] hover:bg-[#9B4F3B] text-white font-bold text-xs uppercase tracking-widest transition-colors shadow-sm shadow-[#B35C44]/20"
-              >
-                Submit Support Pledge
-              </button>
-              <button
-                onClick={() => navigate('/contact')}
-                className="px-6 py-3 rounded-full bg-[#5A5A40] hover:bg-[#3B2C20] text-[#F5F5F0] font-bold text-xs uppercase tracking-widest transition-colors border border-[#5A5A40]/40"
-              >
-                Contact Community Circle
-              </button>
+      {/* ========================================================================= */}
+      {/* 2. THREE PILLARS OF LIVING (FOOD • HEALTH • CRAFT)                        */}
+      {/* ========================================================================= */}
+      <section>
+        <Container>
+          <div className="space-y-10">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#D4C5A9]/60 pb-4">
+              <div className="space-y-2">
+                <span className="text-xs font-bold uppercase tracking-widest text-[#8B5A2B] block">
+                  {isTamil ? 'அன்றாட வாழ்வியல் தூண்கள்' : 'The Three Pillars of Living'}
+                </span>
+                <h2 className="text-2xl sm:text-4xl font-bold text-[#2E4F2B]">
+                  {isTamil ? 'உணவு • நல்வாழ்வு • கைவினை' : 'Food • Health • Sacred Craft'}
+                </h2>
+              </div>
+              <p className="text-xs sm:text-sm text-[#5C5044] max-w-md">
+                {isTamil
+                  ? 'செயற்கையற்ற வாழ்வியலை சாத்தியமாக்கும் 3 அடிப்படை களங்கள்.'
+                  : 'Three dedicated dimensions bringing non-artificial living from philosophy into daily practice.'}
+              </p>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Latest Blog / Chronicles Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
-          <div>
-            <span className="text-xs font-bold uppercase tracking-widest text-[#B35C44] bg-[#B35C44]/10 px-4 py-1 rounded-full">
-              Field Updates & Articles
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-[#4A3728] mt-2">
-              Community Chronicles
-            </h2>
-          </div>
-          <button
-            onClick={() => navigate('/blog')}
-            className="text-xs uppercase tracking-widest font-bold text-[#5A5A40] hover:text-[#4A3728] flex items-center gap-1.5 self-start sm:self-auto"
-          >
-            <span>View all articles</span>
-            <ArrowRight className="w-4 h-4 text-[#B35C44]" />
-          </button>
-        </div>
-
-        {loadingPosts ? (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[1, 2, 3].map((n) => (
-              <div key={n} className="h-80 rounded-3xl bg-[#EBEBE3] animate-pulse" />
-            ))}
-          </div>
-        ) : recentPosts.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {recentPosts.map((post) => (
-              <div
-                key={post.id}
-                onClick={() => navigate(`/blog/${post.slug || post.id}`)}
-                className="bg-[#EBEBE3] rounded-3xl overflow-hidden border border-[#5A5A40]/15 hover:border-[#5A5A40] hover:shadow-md transition-all cursor-pointer group flex flex-col justify-between"
-              >
-                <div>
-                  <div className="h-48 overflow-hidden relative">
-                    <img
-                      src={post.imageUrl}
-                      alt={post.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      loading="lazy"
-                    />
-                    <span className="absolute top-3 left-3 bg-[#4A3728]/90 backdrop-blur-xs text-[#F5F5F0] text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">
-                      {post.category}
-                    </span>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+              
+              {/* Card 1: Natural Food */}
+              <div className="p-7 sm:p-8 rounded-2xl bg-[#FAF8F3] border border-[#D4C5A9] flex flex-col justify-between space-y-6 shadow-xs hover:border-[#2E4F2B]/40 transition-colors">
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between pb-3 border-b border-[#D4C5A9]/50">
+                    <span className="text-xs font-mono font-bold text-[#8B5A2B]">01</span>
+                    <Wheat className="w-5 h-5 text-[#8B5A2B]" />
                   </div>
-                  <div className="p-6 space-y-2.5">
-                    {post.titleTamil && (
-                      <p className="text-xs font-semibold text-[#5A5A40] font-tamil line-clamp-1">
-                        {post.titleTamil}
-                      </p>
-                    )}
-                    <h3 className="text-lg font-bold text-[#4A3728] font-serif line-clamp-2 group-hover:text-[#B35C44] transition-colors">
-                      {post.title}
-                    </h3>
-                    <p className="text-xs text-[#4A3728]/80 line-clamp-3 leading-relaxed">
-                      {post.excerpt}
-                    </p>
-                  </div>
+                  <h3 className="text-xl font-bold text-[#2E4F2B]">
+                    {isTamil ? 'இயற்கை உணவு' : 'Natural Food'}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#5C5044] leading-relaxed">
+                    {isTamil
+                      ? 'பாரம்பரிய நாட்டின தானியங்கள், தீட்டப்படாத இயற்கை உணவு, மற்றும் ரசாயனமற்ற சமூக சமையலறை.'
+                      : 'Preserving native heritage grains, unpolished raw whole nutrition, and communal woodfire hearth dining.'}
+                  </p>
                 </div>
 
-                <div className="px-6 pb-6 pt-2 border-t border-[#5A5A40]/10 flex items-center justify-between text-xs text-[#5A5A40]">
-                  <span>{post.readTime}</span>
-                  <span className="font-bold uppercase tracking-wider text-[#B35C44] group-hover:underline flex items-center gap-1">
-                    Read Post <ArrowRight className="w-3.5 h-3.5" />
-                  </span>
+                <div className="pt-4 border-t border-[#D4C5A9]/40">
+                  <button
+                    onClick={() => navigate('/food')}
+                    className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#2E4F2B] hover:text-[#1E351C] transition-colors cursor-pointer group"
+                  >
+                    <span>{isTamil ? 'முழு விவரம் காண்க' : 'Explore Natural Food'}</span>
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                  </button>
                 </div>
               </div>
-            ))}
+
+              {/* Card 2: Living Health */}
+              <div className="p-7 sm:p-8 rounded-2xl bg-[#FAF8F3] border border-[#D4C5A9] flex flex-col justify-between space-y-6 shadow-xs hover:border-[#2E4F2B]/40 transition-colors">
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between pb-3 border-b border-[#D4C5A9]/50">
+                    <span className="text-xs font-mono font-bold text-[#8B5A2B]">02</span>
+                    <HeartPulse className="w-5 h-5 text-[#2E4F2B]" />
+                  </div>
+                  <h3 className="text-xl font-bold text-[#2E4F2B]">
+                    {isTamil ? 'இயற்கை நல்வாழ்வு' : 'Living Health'}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#5C5044] leading-relaxed">
+                    {isTamil
+                      ? 'சூரியக் கடிகார வாழ்வியல், தூய திறந்த கிணற்று நீர் பாசனம், மற்றும் வெறும் கால் பூமித் தொடர்பு.'
+                      : 'Circadian solar biology, vital mountain well water hydration, barefoot earthing, and sovereign immunity.'}
+                  </p>
+                </div>
+
+                <div className="pt-4 border-t border-[#D4C5A9]/40">
+                  <button
+                    onClick={() => navigate('/health')}
+                    className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#2E4F2B] hover:text-[#1E351C] transition-colors cursor-pointer group"
+                  >
+                    <span>{isTamil ? 'முழு விவரம் காண்க' : 'Explore Living Health'}</span>
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Card 3: Sacred Craft */}
+              <div className="p-7 sm:p-8 rounded-2xl bg-[#FAF8F3] border border-[#D4C5A9] flex flex-col justify-between space-y-6 shadow-xs hover:border-[#2E4F2B]/40 transition-colors">
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between pb-3 border-b border-[#D4C5A9]/50">
+                    <span className="text-xs font-mono font-bold text-[#8B5A2B]">03</span>
+                    <Hammer className="w-5 h-5 text-[#8B5A2B]" />
+                  </div>
+                  <h3 className="text-xl font-bold text-[#2E4F2B]">
+                    {isTamil ? 'புனிதக் கைவினை & உழைப்பு' : 'Sacred Work & Craft'}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#5C5044] leading-relaxed">
+                    {isTamil
+                      ? 'சுண்ணாம்பு மற்றும் மண் கட்டுமானம், மூங்கில் மர வேலைப்பாடு, மற்றும் உழைப்பின் மேன்மை.'
+                      : 'Non-toxic rammed earth masonry, bamboo carpentry, shramadaan collective labor, and sovereign craftsmanship.'}
+                  </p>
+                </div>
+
+                <div className="pt-4 border-t border-[#D4C5A9]/40">
+                  <button
+                    onClick={() => navigate('/craft')}
+                    className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#2E4F2B] hover:text-[#1E351C] transition-colors cursor-pointer group"
+                  >
+                    <span>{isTamil ? 'முழு விவரம் காண்க' : 'Explore Sacred Craft'}</span>
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                  </button>
+                </div>
+              </div>
+
+            </div>
           </div>
-        ) : (
-          <div className="p-12 text-center bg-[#EBEBE3] rounded-3xl border border-[#5A5A40]/15 text-[#5A5A40]">
-            No blog posts published yet.
-          </div>
-        )}
+        </Container>
       </section>
+
+      {/* ========================================================================= */}
+      {/* 3. SANCTUARY LAND DESTINATION HIGHLIGHT                                   */}
+      {/* ========================================================================= */}
+      <section className="bg-[#FAF8F3] py-16 sm:py-20 border-y border-[#D4C5A9]/60">
+        <Container>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            
+            <div className="lg:col-span-6 space-y-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#ECE6D8] text-[#8B5A2B] text-xs font-semibold uppercase tracking-wider">
+                <TreePine className="w-3.5 h-3.5 text-[#2E4F2B]" />
+                <span>{isTamil ? 'புனித பூமி' : 'Western Ghats Sanctuary'}</span>
+              </div>
+
+              <h2 className="text-2xl sm:text-4xl font-bold text-[#2E4F2B] leading-tight">
+                {isTamil ? 'சிவசைலம் & தர்மபுரமடம் இயற்கை சரணாலயம்' : 'Dharmapuramadam Sanctuary: 4.5+ Acres of Perpetual Commons'}
+              </h2>
+
+              <p className="text-sm sm:text-base text-[#5C5044] leading-relaxed">
+                {isTamil
+                  ? 'மேற்குத் தொடர்ச்சி மலை அடிவாரத்தில் அமைந்துள்ள இயற்கை சரணாலயம். இது எவராலும் விற்கவோ, பிரிக்கவோ முடியாத வண்ணம் நிரந்தர இயற்கை அறக்கட்டளையின் கீழ் பாதுகாக்கப்படுகிறது.'
+                  : 'Nestled at the base of the Agastiyar Malai Biosphere in Tenkasi District. Safeguarded under strict legal covenants where land, trees, and water bodies can never be divided, sold, or commercially exploited.'}
+              </p>
+
+              <div className="pt-2 flex flex-wrap gap-4">
+                <Button variant="primary" size="md" onClick={() => navigate('/sanctuary')}>
+                  {isTamil ? 'நிலம் & வரைபடம் காண்க' : 'View Sanctuary Land & Map'}
+                </Button>
+                <Button variant="outline" size="md" onClick={() => navigate('/about')}>
+                  {isTamil ? 'அறக்கட்டளை அமைப்பு →' : 'Read Trust Charter →'}
+                </Button>
+              </div>
+            </div>
+
+            <div className="lg:col-span-6 aspect-[4/3] rounded-2xl overflow-hidden border border-[#D4C5A9] shadow-xs bg-[#ECE6D8]">
+              <img
+                src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80"
+                alt="Iyalvanam Sanctuary Land at Tenkasi Western Ghats"
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+
+          </div>
+        </Container>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 4. RECENT JOURNAL REFLECTIONS                                            */}
+      {/* ========================================================================= */}
+      {recentPosts.length > 0 && (
+        <section>
+          <Container>
+            <div className="space-y-10">
+              <div className="flex items-center justify-between border-b border-[#D4C5A9]/60 pb-4">
+                <div className="space-y-1">
+                  <span className="text-xs font-bold uppercase tracking-widest text-[#8B5A2B] block">
+                    {isTamil ? 'பதிவுகள்' : 'Sanctuary Journal'}
+                  </span>
+                  <h2 className="text-2xl sm:text-3xl font-bold text-[#2E4F2B]">
+                    {isTamil ? 'கள அனுபவங்களும் சிந்தனைகளும்' : 'Chronicles & Living Reflections'}
+                  </h2>
+                </div>
+
+                <button
+                  onClick={() => navigate('/blog')}
+                  className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#2E4F2B] hover:text-[#1E351C] transition-colors cursor-pointer"
+                >
+                  <span>{isTamil ? 'அனைத்தும் காண்க' : 'View All'}</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                {recentPosts.map((post) => (
+                  <div
+                    key={post.id}
+                    onClick={() => navigate(`/blog/${post.slug || post.id}`)}
+                    className="rounded-2xl overflow-hidden bg-[#FAF8F3] border border-[#D4C5A9]/80 shadow-xs hover:border-[#2E4F2B]/50 transition-all flex flex-col justify-between cursor-pointer group"
+                  >
+                    <div>
+                      <div className="relative aspect-[16/10] overflow-hidden bg-[#ECE6D8] border-b border-[#D4C5A9]/50">
+                        <img
+                          src={post.imageUrl || 'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=800&q=80'}
+                          alt={post.title}
+                          className="w-full h-full object-cover group-hover:scale-104 transition-transform duration-500"
+                          loading="lazy"
+                        />
+                      </div>
+
+                      <div className="p-6 space-y-2.5">
+                        <div className="flex items-center justify-between text-[11px] uppercase tracking-wider font-bold text-[#8B5A2B]">
+                          <span>{post.category}</span>
+                          <span className="text-[#5C5044] font-normal lowercase">{post.readTime}</span>
+                        </div>
+
+                        <h3 className="text-base sm:text-lg font-bold text-[#2E4F2B] group-hover:text-[#1E351C] transition-colors leading-snug break-words">
+                          {post.title}
+                        </h3>
+
+                        <p className="text-xs sm:text-sm text-[#5C5044] line-clamp-2 leading-relaxed">
+                          {post.excerpt}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="p-6 pt-0 border-t border-[#D4C5A9]/40 flex items-center justify-between text-xs font-bold uppercase tracking-wider text-[#2E4F2B]">
+                      <span>{isTamil ? 'படிக்க' : 'Read Chronicle'}</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Container>
+        </section>
+      )}
+
+      {/* ========================================================================= */}
+      {/* 5. CLOSING INVITATION                                                    */}
+      {/* ========================================================================= */}
+      <section>
+        <Container>
+          <div className="p-8 sm:p-14 rounded-3xl bg-[#FAF8F3] border border-[#D4C5A9] text-center space-y-6 shadow-xs">
+            <span className="text-xs uppercase tracking-widest text-[#8B5A2B] font-bold block">
+              {content.closing.badge}
+            </span>
+            <h2 className="text-2xl sm:text-4xl font-bold text-[#2E4F2B] max-w-2xl mx-auto leading-tight">
+              {content.closing.heading}
+            </h2>
+            <p className="text-sm text-[#5C5044] leading-relaxed max-w-xl mx-auto">
+              {content.closing.subheading}
+            </p>
+
+            <div className="pt-3 flex flex-wrap items-center justify-center gap-4">
+              <button
+                onClick={() => navigate('/join')}
+                className="px-8 py-3.5 rounded-xl bg-[#2E4F2B] hover:bg-[#1E351C] text-[#FAF8F3] text-xs sm:text-sm font-semibold tracking-wide transition-all shadow-xs cursor-pointer flex items-center gap-2"
+              >
+                <span>{content.nav.joinUs}</span>
+                <ArrowRight className="w-4 h-4 text-[#D4C5A9]" />
+              </button>
+
+              <a
+                href="https://tinyurl.com/2zap33fy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-3.5 rounded-xl bg-[#FAF8F3] hover:bg-[#ECE6D8] text-[#241D17] border border-[#D4C5A9] text-xs sm:text-sm font-semibold tracking-wide flex items-center gap-2 cursor-pointer transition-colors"
+              >
+                <MessageCircle className="w-4 h-4 text-[#8B5A2B]" />
+                <span>{content.closing.btnWhatsapp}</span>
+              </a>
+            </div>
+          </div>
+        </Container>
+      </section>
+
     </div>
   );
 };

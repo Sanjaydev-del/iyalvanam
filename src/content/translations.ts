@@ -11,6 +11,15 @@ export interface TranslationContent {
     community: string;
     founders: string;
     journal: string;
+    home: string;
+    about: string;
+    living: string;
+    food: string;
+    health: string;
+    craft: string;
+    sanctuary: string;
+    joinUs: string;
+    contact: string;
     subTitle: string;
     locationBadge: string;
     tagline: string;
@@ -248,6 +257,15 @@ export const translations: Record<'en' | 'ta', TranslationContent> = {
       community: 'Community Life',
       founders: 'Founders',
       journal: 'Sanctuary Journal',
+      home: 'Home',
+      about: 'About',
+      living: 'Living',
+      food: 'Natural Food',
+      health: 'Living Health',
+      craft: 'Sacred Craft',
+      sanctuary: 'Sanctuary',
+      joinUs: 'Join Us',
+      contact: 'Contact',
       subTitle: 'Center for Natural Living',
       locationBadge: 'Sivasailam, Tenkasi',
       tagline: 'Two Trusts • One Sovereign Vision',
@@ -751,6 +769,15 @@ export const translations: Record<'en' | 'ta', TranslationContent> = {
       community: 'அன்றாட வாழ்வியல்',
       founders: 'நிறுவனர்கள்',
       journal: 'களப் பதிவுகள்',
+      home: 'முகப்பு',
+      about: 'எங்களை பற்றி',
+      living: 'வாழ்வியல்',
+      food: 'இயற்கை உணவு',
+      health: 'இயற்கை நல்வாழ்வு',
+      craft: 'கைவினை & உழைப்பு',
+      sanctuary: 'இயல் வனம்',
+      joinUs: 'இணையுங்கள்',
+      contact: 'தொடர்பு',
       subTitle: 'இயற்கை வாழ்வியல் கூடம்',
       locationBadge: 'சிவசைலம், தென்காசி',
       tagline: 'இரண்டு அறக்கட்டளைகள் • ஓர் உன்னத நோக்கம்',

@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   Menu, 
   X, 
+  ChevronDown, 
   ChevronRight, 
-  MessageCircle 
+  ArrowRight,
+  Wheat,
+  HeartPulse,
+  Hammer
 } from 'lucide-react';
 import { IyalvanamEmblem, SeyonEmblem } from './OrganicIcons';
 import { useLanguage } from '../context/LanguageContext';
@@ -16,8 +20,23 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({ currentPath, navigate }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState<string>('');
+  const [livingDropdownOpen, setLivingDropdownOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const { content, language } = useLanguage();
+  const isTamil = language === 'ta';
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     if (mobileMenuOpen) {
@@ -31,258 +50,350 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, navigate }) => {
   }, [mobileMenuOpen]);
 
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setMobileMenuOpen(false);
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setLivingDropdownOpen(false);
+      }
     };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Track scroll position for active section highlights
-  useEffect(() => {
-    if (currentPath !== '/' && currentPath !== '/landing' && currentPath !== '/home') return;
-
-    const sections = [
-      'hero', 'etymology', 'philosophy', 'vision', 'pillars', 
-      'stand-for', 'principles', 'spiritual', 'ethics', 
-      'land', 'governance', 'community', 'contribution', 'founders', 'contact'
-    ];
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: '-20% 0px -70% 0px', threshold: 0 }
-    );
-
-    sections.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, [currentPath]);
-
-  const handleNav = (target: string) => {
+  const handleNav = (path: string) => {
     setMobileMenuOpen(false);
-    if (target.startsWith('#')) {
-      if (currentPath !== '/' && currentPath !== '/landing' && currentPath !== '/home') {
-        navigate('/');
-        setTimeout(() => {
-          const el = document.getElementById(target.substring(1));
-          if (el) el.scrollIntoView({ behavior: 'smooth' });
-        }, 150);
-      } else {
-        const el = document.getElementById(target.substring(1));
-        if (el) {
-          el.scrollIntoView({ behavior: 'smooth' });
-          setActiveSection(target.substring(1));
-        }
-      }
-    } else {
-      navigate(target);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    setLivingDropdownOpen(false);
+    navigate(path);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const navItems = [
-    { name: content.nav.hero, path: '#hero' },
-    { name: content.nav.etymology, path: '#etymology' },
-    { name: content.nav.philosophy, path: '#philosophy' },
-    { name: content.nav.pillars, path: '#pillars' },
-    { name: content.nav.principles, path: '#principles' },
-    { name: content.nav.spiritual, path: '#spiritual' },
-    { name: content.nav.land, path: '#land' },
-    { name: content.nav.governance, path: '#governance' },
-    { name: content.nav.community, path: '#community' },
-    { name: content.nav.founders, path: '#founders' },
-    { name: content.nav.journal, path: '/blog' },
-  ];
+  const isLivingActive = currentPath === '/food' || currentPath === '/health' || currentPath === '/craft' || currentPath === '/community-life';
 
   return (
-    <>
-      {/* ========================================================================= */}
-      {/* 1. DESKTOP & LAPTOP LEFT SIDEBAR NAVBAR (lg: >= 1024px)                  */}
-      {/* Quiet Editorial Navigation Rail — Minimal, Human, Uncluttered            */}
-      {/* ========================================================================= */}
-      <aside
-        id="desktop-sidebar-nav"
-        className="hidden lg:flex flex-col fixed left-0 top-0 bottom-0 w-72 xl:w-80 bg-[#FAF8F3] border-r border-[#D4C5A9]/50 z-40 select-none justify-between overflow-y-auto"
-      >
-        {/* Top Branding Header with Single Global Language Selector */}
-        <div className="p-6 xl:p-7 space-y-3.5 border-b border-[#D4C5A9]/40">
-          <div className="flex items-center justify-between pb-1">
-            <div className="flex items-center gap-2">
+    <header
+      className={`sticky top-0 z-50 w-full transition-all duration-200 ${
+        isScrolled
+          ? 'bg-[#FAF8F3]/95 backdrop-blur-md shadow-xs border-b border-[#D4C5A9]/80 py-3'
+          : 'bg-[#FAF8F3] border-b border-[#D4C5A9]/50 py-4'
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between">
+          
+          {/* 1. Left Brand / Logo */}
+          <div
+            onClick={() => handleNav('/')}
+            className="flex items-center gap-3 cursor-pointer group select-none shrink-0"
+          >
+            <div className="flex items-center gap-1.5 shrink-0">
               <IyalvanamEmblem size={28} className="w-7 h-7 text-[#2E4F2B]" />
               <SeyonEmblem size={28} className="w-7 h-7 text-[#8B5A2B]" />
             </div>
-            {/* Desktop Language Switcher */}
-            <LanguageToggle size="sm" />
-          </div>
-
-          <div 
-            onClick={() => handleNav('#hero')}
-            className="cursor-pointer group space-y-1 block"
-          >
-            <span className="text-base xl:text-lg font-serif-heading font-bold text-[#2E4F2B] tracking-tight block leading-snug group-hover:text-[#1E351C] transition-colors">
-              IYALVANAM & SEYON
-            </span>
-            <span className={`text-[11px] block font-medium ${language === 'ta' ? 'font-tamil text-[#2E4F2B]' : 'text-[#8B5A2B] font-serif'}`}>
-              {content.nav.subTitle}
-            </span>
-          </div>
-        </div>
-
-        {/* Navigation Rail Links */}
-        <nav className="flex-1 px-4 py-4 space-y-1 overflow-y-auto">
-          {navItems.map((item) => {
-            const isAnchor = item.path.startsWith('#');
-            const targetId = isAnchor ? item.path.substring(1) : '';
-            const isActive = isAnchor
-              ? activeSection === targetId && (currentPath === '/' || currentPath === '/landing')
-              : currentPath.startsWith(item.path);
-
-            return (
-              <button
-                key={item.path}
-                onClick={() => handleNav(item.path)}
-                className={`w-full text-left px-3.5 py-2.5 rounded-lg text-xs font-medium tracking-wide transition-all flex items-center justify-between group cursor-pointer ${
-                  language === 'ta' ? 'font-tamil' : 'font-serif'
-                } ${
-                  isActive
-                    ? 'bg-[#2E4F2B] text-[#FAF8F3] font-semibold shadow-xs'
-                    : 'text-[#241D17] hover:bg-[#ECE6D8] hover:text-[#2E4F2B]'
-                }`}
-              >
-                <span>{item.name}</span>
-                <ChevronRight className={`w-3.5 h-3.5 transition-opacity ${isActive ? 'opacity-100 text-[#FAF8F3]' : 'opacity-25 group-hover:opacity-70 text-[#8B5A2B]'}`} />
-              </button>
-            );
-          })}
-        </nav>
-
-        {/* Bottom Primary Conversion Action (Single CTA) */}
-        <div className="p-5 xl:p-6 border-t border-[#D4C5A9]/40 bg-[#FAF8F3]">
-          <a
-            href="https://tinyurl.com/2zap33fy"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full py-3 px-4 rounded-xl bg-[#2E4F2B] hover:bg-[#1E351C] text-[#FAF8F3] text-xs font-semibold text-center flex items-center justify-center gap-2.5 transition-all cursor-pointer shadow-xs"
-          >
-            <MessageCircle className="w-4 h-4 text-[#D4C5A9]" />
-            <span className={language === 'ta' ? 'font-tamil' : 'font-serif'}>{content.nav.joinCommunity}</span>
-          </a>
-        </div>
-      </aside>
-
-      {/* ========================================================================= */}
-      {/* 2. MOBILE & TABLET HEADER (lg:hidden < 1024px)                            */}
-      {/* ========================================================================= */}
-      <header
-        id="mobile-header"
-        className="lg:hidden sticky top-0 z-50 bg-[#FAF8F3]/98 backdrop-blur-md border-b border-[#D4C5A9]/60 px-3 sm:px-4 py-2.5 flex items-center justify-between"
-      >
-        {/* Left Branding */}
-        <div
-          onClick={() => handleNav('#hero')}
-          className="flex items-center gap-2 cursor-pointer"
-        >
-          <div className="flex items-center gap-1 shrink-0">
-            <IyalvanamEmblem size={24} className="w-6 h-6 text-[#2E4F2B]" />
-            <SeyonEmblem size={24} className="w-6 h-6 text-[#8B5A2B]" />
-          </div>
-          <div className="flex flex-col">
-            <span className="text-xs sm:text-sm font-bold font-serif-heading text-[#2E4F2B] tracking-tight leading-none">
-              IYALVANAM & SEYON
-            </span>
-            <span className={`text-[9px] sm:text-[10px] text-[#8B5A2B] font-medium leading-tight ${language === 'ta' ? 'font-tamil' : 'font-serif'}`}>
-              {content.nav.subTitle}
-            </span>
-          </div>
-        </div>
-
-        {/* Right Action Group: Persistent Language Switcher + WhatsApp + Hamburger Menu */}
-        <div className="flex items-center gap-1.5 sm:gap-2">
-          {/* Always-visible Language Toggle */}
-          <LanguageToggle size="sm" />
-
-          {/* Quick WhatsApp Icon/Link */}
-          <a
-            href="https://tinyurl.com/2zap33fy"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="WhatsApp Community"
-            className="min-h-[32px] px-2 sm:px-2.5 py-1 bg-[#2E4F2B] text-[#FAF8F3] rounded-lg text-xs font-semibold flex items-center gap-1 cursor-pointer shadow-xs"
-          >
-            <MessageCircle className="w-3.5 h-3.5 text-[#D4C5A9]" />
-            <span className="hidden sm:inline text-[11px]">WhatsApp</span>
-          </a>
-
-          {/* Hamburger Toggle */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="min-w-[36px] min-h-[36px] flex items-center justify-center rounded-lg text-[#241D17] hover:bg-black/5 cursor-pointer"
-            aria-label={mobileMenuOpen ? 'Close navigation' : 'Open navigation'}
-          >
-            {mobileMenuOpen ? <X className="w-5 h-5 text-[#8B5A2B]" /> : <Menu className="w-5 h-5 text-[#2E4F2B]" />}
-          </button>
-        </div>
-
-        {/* Mobile Navigation Drawer */}
-        {mobileMenuOpen && (
-          <div
-            className="fixed inset-0 top-[53px] z-50 bg-black/40 backdrop-blur-xs"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            <div
-              className="w-full max-h-[calc(100vh-53px)] overflow-y-auto bg-[#FAF8F3] border-b border-[#D4C5A9] px-5 py-5 space-y-4 shadow-xl"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="grid grid-cols-1 gap-1">
-                {navItems.map((item) => {
-                  const isAnchor = item.path.startsWith('#');
-                  const targetId = isAnchor ? item.path.substring(1) : '';
-                  const isActive = isAnchor
-                    ? activeSection === targetId && (currentPath === '/' || currentPath === '/landing')
-                    : currentPath.startsWith(item.path);
-
-                  return (
-                    <button
-                      key={item.path}
-                      onClick={() => handleNav(item.path)}
-                      className={`w-full text-left px-3.5 py-2.5 min-h-[44px] rounded-lg text-xs font-medium tracking-wide transition-colors flex items-center justify-between cursor-pointer ${
-                        language === 'ta' ? 'font-tamil' : 'font-serif'
-                      } ${
-                        isActive ? 'bg-[#2E4F2B] text-[#FAF8F3] font-semibold' : 'text-[#241D17] hover:bg-[#ECE6D8]'
-                      }`}
-                    >
-                      <span>{item.name}</span>
-                      <ChevronRight className="w-3.5 h-3.5 opacity-50" />
-                    </button>
-                  );
-                })}
-              </div>
-
-              {/* Mobile Drawer Primary CTA */}
-              <div className="pt-2 border-t border-[#D4C5A9]/40">
-                <a
-                  href="https://tinyurl.com/2zap33fy"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full py-3 rounded-xl bg-[#2E4F2B] hover:bg-[#1E351C] text-[#FAF8F3] text-xs font-semibold text-center flex items-center justify-center gap-2 shadow-xs cursor-pointer"
-                >
-                  <MessageCircle className="w-4 h-4 text-[#D4C5A9]" />
-                  <span className={language === 'ta' ? 'font-tamil' : 'font-serif'}>{content.nav.joinCommunity}</span>
-                </a>
-              </div>
+            <div className="flex flex-col">
+              <span className="text-sm sm:text-base font-bold tracking-tight text-[#2E4F2B] group-hover:text-[#1E351C] transition-colors leading-tight">
+                IYALVANAM & SEYON
+              </span>
+              <span className="text-[10px] sm:text-[11px] text-[#8B5A2B] font-medium leading-none mt-0.5">
+                {content.nav.subTitle}
+              </span>
             </div>
           </div>
-        )}
-      </header>
-    </>
+
+          {/* 2. Center Navigation Links (Desktop lg+) */}
+          <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
+            
+            {/* Home */}
+            <button
+              onClick={() => handleNav('/')}
+              className={`px-3 py-1.5 rounded-md text-xs font-medium tracking-wide transition-colors cursor-pointer ${
+                currentPath === '/' || currentPath === '/home' || currentPath === '/landing'
+                  ? 'text-[#2E4F2B] font-bold bg-[#ECE6D8]'
+                  : 'text-[#241D17] hover:text-[#2E4F2B] hover:bg-[#ECE6D8]/60'
+              }`}
+            >
+              {content.nav.home}
+            </button>
+
+            {/* About */}
+            <button
+              onClick={() => handleNav('/about')}
+              className={`px-3 py-1.5 rounded-md text-xs font-medium tracking-wide transition-colors cursor-pointer ${
+                currentPath === '/about'
+                  ? 'text-[#2E4F2B] font-bold bg-[#ECE6D8]'
+                  : 'text-[#241D17] hover:text-[#2E4F2B] hover:bg-[#ECE6D8]/60'
+              }`}
+            >
+              {content.nav.about}
+            </button>
+
+            {/* Living Dropdown Group */}
+            <div className="relative" ref={dropdownRef}>
+              <button
+                onClick={() => setLivingDropdownOpen(!livingDropdownOpen)}
+                onMouseEnter={() => setLivingDropdownOpen(true)}
+                className={`px-3 py-1.5 rounded-md text-xs font-medium tracking-wide transition-colors cursor-pointer inline-flex items-center gap-1 ${
+                  isLivingActive
+                    ? 'text-[#2E4F2B] font-bold bg-[#ECE6D8]'
+                    : 'text-[#241D17] hover:text-[#2E4F2B] hover:bg-[#ECE6D8]/60'
+                }`}
+                aria-expanded={livingDropdownOpen}
+              >
+                <span>{content.nav.living}</span>
+                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${livingDropdownOpen ? 'rotate-180 text-[#2E4F2B]' : 'text-[#8B5A2B]'}`} />
+              </button>
+
+              {/* Dropdown Menu */}
+              {livingDropdownOpen && (
+                <div 
+                  onMouseLeave={() => setLivingDropdownOpen(false)}
+                  className="absolute top-full left-0 mt-1.5 w-60 rounded-xl bg-[#FAF8F3] border border-[#D4C5A9] shadow-lg p-2 space-y-1 animate-in fade-in zoom-in-95 duration-150 z-50"
+                >
+                  <button
+                    onClick={() => handleNav('/food')}
+                    className={`w-full text-left px-3 py-2 rounded-lg text-xs flex items-center gap-2.5 transition-colors cursor-pointer ${
+                      currentPath === '/food' ? 'bg-[#2E4F2B] text-[#FAF8F3] font-semibold' : 'text-[#241D17] hover:bg-[#ECE6D8]'
+                    }`}
+                  >
+                    <Wheat className="w-4 h-4 text-[#8B5A2B] shrink-0" />
+                    <div>
+                      <div className="font-medium">{content.nav.food}</div>
+                      <div className="text-[10px] text-[#5C5044] opacity-80">{isTamil ? 'பாரம்பரிய உணவு & விதைகள்' : 'Heirloom grains & unpolished diet'}</div>
+                    </div>
+                  </button>
+
+                  <button
+                    onClick={() => handleNav('/health')}
+                    className={`w-full text-left px-3 py-2 rounded-lg text-xs flex items-center gap-2.5 transition-colors cursor-pointer ${
+                      currentPath === '/health' ? 'bg-[#2E4F2B] text-[#FAF8F3] font-semibold' : 'text-[#241D17] hover:bg-[#ECE6D8]'
+                    }`}
+                  >
+                    <HeartPulse className="w-4 h-4 text-[#2E4F2B] shrink-0" />
+                    <div>
+                      <div className="font-medium">{content.nav.health}</div>
+                      <div className="text-[10px] text-[#5C5044] opacity-80">{isTamil ? 'சூரிய வாழ்வியல் & கிணற்று நீர்' : 'Circadian rhythm & well hydration'}</div>
+                    </div>
+                  </button>
+
+                  <button
+                    onClick={() => handleNav('/craft')}
+                    className={`w-full text-left px-3 py-2 rounded-lg text-xs flex items-center gap-2.5 transition-colors cursor-pointer ${
+                      currentPath === '/craft' ? 'bg-[#2E4F2B] text-[#FAF8F3] font-semibold' : 'text-[#241D17] hover:bg-[#ECE6D8]'
+                    }`}
+                  >
+                    <Hammer className="w-4 h-4 text-[#8B5A2B] shrink-0" />
+                    <div>
+                      <div className="font-medium">{content.nav.craft}</div>
+                      <div className="text-[10px] text-[#5C5044] opacity-80">{isTamil ? 'மண் கட்டுமானம் & மூங்கில்' : 'Earthen building & physical labor'}</div>
+                    </div>
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* Sanctuary / Land */}
+            <button
+              onClick={() => handleNav('/sanctuary')}
+              className={`px-3 py-1.5 rounded-md text-xs font-medium tracking-wide transition-colors cursor-pointer ${
+                currentPath === '/sanctuary' || currentPath === '/land'
+                  ? 'text-[#2E4F2B] font-bold bg-[#ECE6D8]'
+                  : 'text-[#241D17] hover:text-[#2E4F2B] hover:bg-[#ECE6D8]/60'
+              }`}
+            >
+              {content.nav.sanctuary}
+            </button>
+
+            {/* Journal */}
+            <button
+              onClick={() => handleNav('/blog')}
+              className={`px-3 py-1.5 rounded-md text-xs font-medium tracking-wide transition-colors cursor-pointer ${
+                currentPath.startsWith('/blog')
+                  ? 'text-[#2E4F2B] font-bold bg-[#ECE6D8]'
+                  : 'text-[#241D17] hover:text-[#2E4F2B] hover:bg-[#ECE6D8]/60'
+              }`}
+            >
+              {content.nav.journal}
+            </button>
+
+            {/* Founders */}
+            <button
+              onClick={() => handleNav('/leadership')}
+              className={`px-3 py-1.5 rounded-md text-xs font-medium tracking-wide transition-colors cursor-pointer ${
+                currentPath.startsWith('/leadership')
+                  ? 'text-[#2E4F2B] font-bold bg-[#ECE6D8]'
+                  : 'text-[#241D17] hover:text-[#2E4F2B] hover:bg-[#ECE6D8]/60'
+              }`}
+            >
+              {content.nav.founders}
+            </button>
+
+            {/* Contact */}
+            <button
+              onClick={() => handleNav('/contact')}
+              className={`px-3 py-1.5 rounded-md text-xs font-medium tracking-wide transition-colors cursor-pointer ${
+                currentPath === '/contact'
+                  ? 'text-[#2E4F2B] font-bold bg-[#ECE6D8]'
+                  : 'text-[#241D17] hover:text-[#2E4F2B] hover:bg-[#ECE6D8]/60'
+              }`}
+            >
+              {content.nav.contact}
+            </button>
+          </nav>
+
+          {/* 3. Right Action Group: Language Selector + Primary Join Us CTA */}
+          <div className="hidden lg:flex items-center gap-3">
+            <LanguageToggle size="sm" />
+
+            <button
+              onClick={() => handleNav('/join')}
+              className="px-4 py-2 rounded-lg bg-[#2E4F2B] hover:bg-[#1E351C] text-[#FAF8F3] text-xs font-semibold tracking-wide transition-all shadow-xs cursor-pointer flex items-center gap-1.5"
+            >
+              <span>{content.nav.joinUs}</span>
+              <ArrowRight className="w-3.5 h-3.5 text-[#D4C5A9]" />
+            </button>
+          </div>
+
+          {/* Mobile Right Controls (< lg) */}
+          <div className="flex lg:hidden items-center gap-2">
+            <LanguageToggle size="sm" />
+
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 rounded-lg text-[#241D17] hover:bg-[#ECE6D8] transition-colors cursor-pointer"
+              aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5 text-[#8B5A2B]" /> : <Menu className="w-5 h-5 text-[#2E4F2B]" />}
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      {/* Mobile Drawer Navigation (< lg) */}
+      {mobileMenuOpen && (
+        <div 
+          className="lg:hidden fixed inset-0 top-[60px] z-50 bg-black/40 backdrop-blur-xs"
+          onClick={() => setMobileMenuOpen(false)}
+        >
+          <div 
+            className="w-full max-h-[calc(100vh-60px)] overflow-y-auto bg-[#FAF8F3] border-b border-[#D4C5A9] px-6 py-6 space-y-6 shadow-xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <nav className="space-y-1 text-sm font-medium">
+              <button
+                onClick={() => handleNav('/')}
+                className={`w-full text-left px-3 py-2.5 rounded-lg flex items-center justify-between ${
+                  currentPath === '/' || currentPath === '/home' ? 'bg-[#2E4F2B] text-[#FAF8F3] font-bold' : 'text-[#241D17] hover:bg-[#ECE6D8]'
+                }`}
+              >
+                <span>{content.nav.home}</span>
+                <ChevronRight className="w-4 h-4 opacity-50" />
+              </button>
+
+              <button
+                onClick={() => handleNav('/about')}
+                className={`w-full text-left px-3 py-2.5 rounded-lg flex items-center justify-between ${
+                  currentPath === '/about' ? 'bg-[#2E4F2B] text-[#FAF8F3] font-bold' : 'text-[#241D17] hover:bg-[#ECE6D8]'
+                }`}
+              >
+                <span>{content.nav.about}</span>
+                <ChevronRight className="w-4 h-4 opacity-50" />
+              </button>
+
+              {/* Living Section Group on Mobile */}
+              <div className="pt-2 pb-1 px-3">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#8B5A2B] block">
+                  {content.nav.living}
+                </span>
+              </div>
+
+              <div className="pl-3 space-y-1 border-l-2 border-[#D4C5A9]/60 ml-3">
+                <button
+                  onClick={() => handleNav('/food')}
+                  className={`w-full text-left px-3 py-2 rounded-lg flex items-center justify-between ${
+                    currentPath === '/food' ? 'bg-[#2E4F2B] text-[#FAF8F3] font-bold' : 'text-[#241D17] hover:bg-[#ECE6D8]'
+                  }`}
+                >
+                  <span>{content.nav.food}</span>
+                  <Wheat className="w-3.5 h-3.5 opacity-60 text-[#8B5A2B]" />
+                </button>
+
+                <button
+                  onClick={() => handleNav('/health')}
+                  className={`w-full text-left px-3 py-2 rounded-lg flex items-center justify-between ${
+                    currentPath === '/health' ? 'bg-[#2E4F2B] text-[#FAF8F3] font-bold' : 'text-[#241D17] hover:bg-[#ECE6D8]'
+                  }`}
+                >
+                  <span>{content.nav.health}</span>
+                  <HeartPulse className="w-3.5 h-3.5 opacity-60 text-[#2E4F2B]" />
+                </button>
+
+                <button
+                  onClick={() => handleNav('/craft')}
+                  className={`w-full text-left px-3 py-2 rounded-lg flex items-center justify-between ${
+                    currentPath === '/craft' ? 'bg-[#2E4F2B] text-[#FAF8F3] font-bold' : 'text-[#241D17] hover:bg-[#ECE6D8]'
+                  }`}
+                >
+                  <span>{content.nav.craft}</span>
+                  <Hammer className="w-3.5 h-3.5 opacity-60 text-[#8B5A2B]" />
+                </button>
+              </div>
+
+              <div className="pt-2">
+                <button
+                  onClick={() => handleNav('/sanctuary')}
+                  className={`w-full text-left px-3 py-2.5 rounded-lg flex items-center justify-between ${
+                    currentPath === '/sanctuary' || currentPath === '/land' ? 'bg-[#2E4F2B] text-[#FAF8F3] font-bold' : 'text-[#241D17] hover:bg-[#ECE6D8]'
+                  }`}
+                >
+                  <span>{content.nav.sanctuary}</span>
+                  <ChevronRight className="w-4 h-4 opacity-50" />
+                </button>
+
+                <button
+                  onClick={() => handleNav('/blog')}
+                  className={`w-full text-left px-3 py-2.5 rounded-lg flex items-center justify-between ${
+                    currentPath.startsWith('/blog') ? 'bg-[#2E4F2B] text-[#FAF8F3] font-bold' : 'text-[#241D17] hover:bg-[#ECE6D8]'
+                  }`}
+                >
+                  <span>{content.nav.journal}</span>
+                  <ChevronRight className="w-4 h-4 opacity-50" />
+                </button>
+
+                <button
+                  onClick={() => handleNav('/leadership')}
+                  className={`w-full text-left px-3 py-2.5 rounded-lg flex items-center justify-between ${
+                    currentPath.startsWith('/leadership') ? 'bg-[#2E4F2B] text-[#FAF8F3] font-bold' : 'text-[#241D17] hover:bg-[#ECE6D8]'
+                  }`}
+                >
+                  <span>{content.nav.founders}</span>
+                  <ChevronRight className="w-4 h-4 opacity-50" />
+                </button>
+
+                <button
+                  onClick={() => handleNav('/contact')}
+                  className={`w-full text-left px-3 py-2.5 rounded-lg flex items-center justify-between ${
+                    currentPath === '/contact' ? 'bg-[#2E4F2B] text-[#FAF8F3] font-bold' : 'text-[#241D17] hover:bg-[#ECE6D8]'
+                  }`}
+                >
+                  <span>{content.nav.contact}</span>
+                  <ChevronRight className="w-4 h-4 opacity-50" />
+                </button>
+              </div>
+            </nav>
+
+            {/* Mobile Primary Join Button */}
+            <div className="pt-4 border-t border-[#D4C5A9]/50">
+              <button
+                onClick={() => handleNav('/join')}
+                className="w-full py-3.5 rounded-xl bg-[#2E4F2B] hover:bg-[#1E351C] text-[#FAF8F3] text-xs font-semibold text-center flex items-center justify-center gap-2 shadow-xs cursor-pointer"
+              >
+                <span>{content.nav.joinUs}</span>
+                <ArrowRight className="w-4 h-4 text-[#D4C5A9]" />
+              </button>
+            </div>
+
+          </div>
+        </div>
+      )}
+    </header>
   );
 };

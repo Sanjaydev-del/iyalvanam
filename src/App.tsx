@@ -5,11 +5,11 @@ import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { Toast } from './components/Toast';
 
-import { LandingPage } from './pages/LandingPage';
 import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
-import { PrinciplesPage } from './pages/PrinciplesPage';
-import { CommunityLifePage } from './pages/CommunityLifePage';
+import { FoodPage } from './pages/FoodPage';
+import { HealthPage } from './pages/HealthPage';
+import { CraftPage } from './pages/CraftPage';
 import { LandPage } from './pages/LandPage';
 import { LeadershipPage } from './pages/LeadershipPage';
 import { FounderPage } from './pages/FounderPage';
@@ -19,6 +19,9 @@ import { SupportPage } from './pages/SupportPage';
 import { BlogPage } from './pages/BlogPage';
 import { BlogDetailPage } from './pages/BlogDetailPage';
 import { ContactPage } from './pages/ContactPage';
+import { PrinciplesPage } from './pages/PrinciplesPage';
+import { CommunityLifePage } from './pages/CommunityLifePage';
+import { LandingPage } from './pages/LandingPage';
 import { AdminLoginPage } from './pages/AdminLoginPage';
 import { AdminPage } from './pages/AdminPage';
 
@@ -54,24 +57,30 @@ export default function App() {
     setToasts((prev) => prev.filter((t) => t.id !== id));
   };
 
-  // Route Resolver
+  // Route Resolver for Multi-Page Architecture
   const renderRoute = () => {
-    if (currentPath === '/' || currentPath === '/landing' || currentPath === '/home') {
+    if (currentPath === '/' || currentPath === '/home') {
+      return <HomePage navigate={navigate} />;
+    }
+    if (currentPath === '/landing') {
       return <LandingPage navigate={navigate} showToast={showToast} />;
     }
     if (currentPath === '/about') {
       return <AboutPage navigate={navigate} />;
     }
-    if (currentPath === '/principles') {
-      return <PrinciplesPage navigate={navigate} />;
+    if (currentPath === '/food' || currentPath === '/natural-food') {
+      return <FoodPage navigate={navigate} />;
     }
-    if (currentPath === '/community-life') {
-      return <CommunityLifePage navigate={navigate} />;
+    if (currentPath === '/health' || currentPath === '/living-health') {
+      return <HealthPage navigate={navigate} />;
     }
-    if (currentPath === '/land' || currentPath === '/projects') {
+    if (currentPath === '/craft' || currentPath === '/sacred-craft') {
+      return <CraftPage navigate={navigate} />;
+    }
+    if (currentPath === '/sanctuary' || currentPath === '/land' || currentPath === '/projects') {
       return <LandPage navigate={navigate} />;
     }
-    if (currentPath === '/leadership') {
+    if (currentPath === '/leadership' || currentPath === '/founders') {
       return <LeadershipPage navigate={navigate} />;
     }
     if (currentPath === '/leadership/founder') {
@@ -80,11 +89,17 @@ export default function App() {
     if (currentPath === '/leadership/co-founder' || currentPath === '/leadership/cofounder') {
       return <CoFounderPage navigate={navigate} />;
     }
-    if (currentPath === '/join') {
+    if (currentPath === '/join' || currentPath === '/how-to-join') {
       return <JoinPage navigate={navigate} showToast={showToast} />;
     }
     if (currentPath === '/support') {
       return <SupportPage navigate={navigate} showToast={showToast} />;
+    }
+    if (currentPath === '/principles') {
+      return <PrinciplesPage navigate={navigate} />;
+    }
+    if (currentPath === '/community-life') {
+      return <CommunityLifePage navigate={navigate} />;
     }
     if (currentPath === '/blog') {
       return <BlogPage navigate={navigate} />;
@@ -103,28 +118,26 @@ export default function App() {
       return <AdminPage navigate={navigate} showToast={showToast} />;
     }
 
-    // Default fallback
-    return <LandingPage navigate={navigate} showToast={showToast} />;
+    // Default fallback to HomePage
+    return <HomePage navigate={navigate} />;
   };
 
   return (
     <LanguageProvider>
       <AuthProvider>
         <div className="min-h-screen flex flex-col bg-[#F5F2EB] text-[#241D17] font-sans antialiased selection:bg-[#2E4F2B] selection:text-[#F5F2EB]">
-          {/* Navigation Component (Left Sidebar on Desktop lg+, Top Sticky on Mobile) */}
+          {/* Top Global Navigation Bar */}
           <Navbar currentPath={currentPath} navigate={navigate} />
 
-          {/* Main Content Layout Wrapper (Offset by sidebar on Desktop) */}
-          <div className="flex-1 flex flex-col lg:pl-72 xl:pl-80 w-full min-w-0 transition-all duration-300">
-            <main className="flex-grow w-full">
-              {renderRoute()}
-            </main>
+          {/* Full-Width Content Container */}
+          <main className="flex-1 w-full min-w-0">
+            {renderRoute()}
+          </main>
 
-            {/* Footer */}
-            <Footer navigate={navigate} />
-          </div>
+          {/* Global Footer */}
+          <Footer navigate={navigate} />
 
-          {/* Toast Container */}
+          {/* Toast Notification Container */}
           <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none">
             {toasts.map((toast) => (
               <div key={toast.id} className="pointer-events-auto">

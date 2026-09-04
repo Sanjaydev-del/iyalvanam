@@ -98,18 +98,20 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
           </div>
         </div>
 
-        {/* Section Anchors */}
+        {/* Multi-Page Navigation Column */}
         <div className="space-y-3">
-          <span className={`text-[10px] font-bold uppercase tracking-widest text-[#D4C5A9] block ${isTamil ? 'font-tamil' : 'font-serif'}`}>
-            {ftr.sectionsTitle}
+          <span className={`text-[10px] font-bold uppercase tracking-widest text-[#D4C5A9] block ${isTamil ? 'font-tamil' : ''}`}>
+            {isTamil ? 'பக்கங்கள்' : 'Explore Sanctuary'}
           </span>
-          <ul className={`space-y-2 text-[#F5F2EB]/85 ${isTamil ? 'font-tamil' : 'font-serif'}`}>
-            <li><button onClick={() => handleNav('#hero')} className="hover:text-[#D4C5A9] transition-colors cursor-pointer">{ftr.navHero}</button></li>
-            <li><button onClick={() => handleNav('#etymology')} className="hover:text-[#D4C5A9] transition-colors cursor-pointer">{ftr.navEtymology}</button></li>
-            <li><button onClick={() => handleNav('#philosophy')} className="hover:text-[#D4C5A9] transition-colors cursor-pointer">{ftr.navPhilosophy}</button></li>
-            <li><button onClick={() => handleNav('#pillars')} className="hover:text-[#D4C5A9] transition-colors cursor-pointer">{ftr.navPillars}</button></li>
-            <li><button onClick={() => handleNav('#principles')} className="hover:text-[#D4C5A9] transition-colors cursor-pointer">{ftr.navPrinciples}</button></li>
-            <li><button onClick={() => handleNav('#land')} className="hover:text-[#D4C5A9] transition-colors cursor-pointer">{ftr.navLand}</button></li>
+          <ul className={`space-y-2 text-[#F5F2EB]/85 ${isTamil ? 'font-tamil' : ''}`}>
+            <li><button onClick={() => navigate('/')} className="hover:text-[#D4C5A9] transition-colors cursor-pointer">{content.nav.home}</button></li>
+            <li><button onClick={() => navigate('/about')} className="hover:text-[#D4C5A9] transition-colors cursor-pointer">{content.nav.about}</button></li>
+            <li><button onClick={() => navigate('/food')} className="hover:text-[#D4C5A9] transition-colors cursor-pointer">{content.nav.food}</button></li>
+            <li><button onClick={() => navigate('/health')} className="hover:text-[#D4C5A9] transition-colors cursor-pointer">{content.nav.health}</button></li>
+            <li><button onClick={() => navigate('/craft')} className="hover:text-[#D4C5A9] transition-colors cursor-pointer">{content.nav.craft}</button></li>
+            <li><button onClick={() => navigate('/sanctuary')} className="hover:text-[#D4C5A9] transition-colors cursor-pointer">{content.nav.sanctuary}</button></li>
+            <li><button onClick={() => navigate('/blog')} className="hover:text-[#D4C5A9] transition-colors cursor-pointer">{content.nav.journal}</button></li>
+            <li><button onClick={() => navigate('/join')} className="hover:text-[#D4C5A9] transition-colors cursor-pointer">{content.nav.joinUs}</button></li>
           </ul>
         </div>
 
