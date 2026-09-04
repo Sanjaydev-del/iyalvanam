@@ -15,243 +15,298 @@ import {
   Compass,
   ArrowRight,
   Shield,
-  Sprout
+  Sprout,
+  Users,
+  Wheat,
+  HeartPulse,
+  Hammer
 } from 'lucide-react';
 import { Container } from '../components/common/Container';
-import { SectionHeading } from '../components/common/SectionHeading';
 import { Button } from '../components/common/Button';
-import { BotanicalFlourish, LeafBullet } from '../components/OrganicIcons';
+import { LeafBullet } from '../components/OrganicIcons';
 
 interface LandPageProps {
   navigate: (path: string) => void;
 }
 
 export const LandPage: React.FC<LandPageProps> = ({ navigate }) => {
-  const [activeTab, setActiveTab] = useState<'all' | 'completed' | 'in_progress' | 'planned'>('all');
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   const infrastructureList = [
     {
-      id: 'infra-1',
+      title: 'Community Hall (இயல்வனம் கூடம்)',
+      tamil: 'ஒன்றுகூடல் கூடம்',
+      desc: 'Spacious octagonal earthen hall with bamboo rafters, lime flooring, and terracotta roof for daily circle meetings and cultural gatherings.',
+      icon: <Home className="w-5 h-5 text-[#8B5A2B]" />,
+    },
+    {
+      title: 'Communal Kitchen & Wood Hearth',
+      tamil: 'கூட்டு சமையலறை',
+      desc: 'Smokeless high-efficiency earthen chulhas, solar cooking stations, and large storage for organic heirloom grains, fruits, coconuts, and bananas.',
+      icon: <Utensils className="w-5 h-5 text-[#2E4F2B]" />,
+    },
+    {
       title: 'Deep Open Well & Mountain Aquifer',
       tamil: 'பாரம்பரிய திறந்தவெளி கிணறு',
-      category: 'Water',
-      status: 'completed',
-      statusLabel: 'Active & Pure',
-      icon: <Droplets className="w-5 h-5 text-[#1f3d1f]" />,
       desc: 'Traditional open stone well tapping into pure Western Ghats subterranean springs. Tested zero heavy metals or chemical runoff.',
+      icon: <Droplets className="w-5 h-5 text-[#8B5A2B]" />,
     },
     {
-      id: 'infra-2',
-      title: 'Native Sapling & Fruit Forest',
-      tamil: 'நாட்டு மரங்கள் & கனி வனம்',
-      category: 'Agroforestry',
-      status: 'in_progress',
-      statusLabel: 'Phase 1 Planted',
-      icon: <TreePine className="w-5 h-5 text-[#1f3d1f]" />,
+      title: 'Vegetable Gardens & Native Fruit Forest',
+      tamil: 'கனி வனம் & மூலிகை தோட்டம்',
       desc: 'Over 200 native species including Kadamba, Marudham, Wild Guava, Mango, Amla, and medicinal shrubs along contour swales.',
+      icon: <TreePine className="w-5 h-5 text-[#2E4F2B]" />,
     },
     {
-      id: 'infra-3',
-      title: 'Community Hall (இயல்வனம் கூடம்)',
-      tamil: 'மத்திய ஒன்றுகூடல் கூடம்',
-      category: 'Community',
-      status: 'in_progress',
-      statusLabel: 'Foundation & Framing',
-      icon: <Home className="w-5 h-5 text-[#7a2e1a]" />,
-      desc: 'Spacious octagonal earthen hall with bamboo rafters, lime flooring, and terracotta roof for daily circle meetings and cultural gatherings.',
-    },
-    {
-      id: 'infra-4',
-      title: 'Communal Kitchen & Wood Hearth',
-      tamil: 'கூட்டு சமையலறை & பாரம்பரிய அடுப்பு',
-      category: 'Food',
-      status: 'in_progress',
-      statusLabel: 'In Construction',
-      icon: <Utensils className="w-5 h-5 text-[#7a2e1a]" />,
-      desc: 'Smokeless high-efficiency earthen chulhas, solar cooking stations, and large storage for organic heirloom grains.',
-    },
-    {
-      id: 'infra-5',
       title: 'Waterless Dry Compost Toilets',
       tamil: 'உலர் உரக் கழிவறைகள்',
-      category: 'Sanitation',
-      status: 'completed',
-      statusLabel: 'Functional Prototype',
-      icon: <Layers className="w-5 h-5 text-[#1f3d1f]" />,
       desc: 'Aerobic composting toilets using dry sawdust and rice husk. Conserves 100% water and safely enriches agroforestry soil after maturation.',
+      icon: <Layers className="w-5 h-5 text-[#8B5A2B]" />,
     },
     {
-      id: 'infra-6',
-      title: 'Heirloom Seed Bank & Library',
-      tamil: 'பாரம்பரிய விதை வங்கி & நூலகம்',
-      category: 'Knowledge',
-      status: 'planned',
-      statusLabel: 'Design Approved',
-      icon: <BookOpen className="w-5 h-5 text-[#7a2e1a]" />,
-      desc: 'Cool earthen vault storing indigenous non-hybrid seeds of paddy, millets, greens, and medicinal roots collected across Tamil Nadu.',
+      title: 'Natural Bio-Fencing & Green Corridors',
+      tamil: 'உயிர் வேலி & பசுமை பாதை',
+      desc: 'Living thorny hedges, agave, vetiver, and native bamboo protecting the sanctuary perimeter without concrete barriers.',
+      icon: <Shield className="w-5 h-5 text-[#2E4F2B]" />,
     },
     {
-      id: 'infra-7',
-      title: 'Decentralized Solar Micro-Grid',
-      tamil: 'தற்சார்பு சூரிய மின்சாரம்',
-      category: 'Energy',
-      status: 'in_progress',
-      statusLabel: '5kW Panels Installed',
-      icon: <Sun className="w-5 h-5 text-[#d4af37]" />,
-      desc: 'Off-grid solar generation powering water pumping, refrigeration for herbal extracts, community lighting, and communication devices.',
+      title: 'Rainwater Harvesting Swales & Ponds',
+      tamil: 'மழைநீர் சேகரிப்பு & குட்டைகள்',
+      desc: 'Contour bunds, percolation ponds, and rock check-dams capturing mountain runoff to elevate the groundwater table.',
+      icon: <Droplets className="w-5 h-5 text-[#8B5A2B]" />,
     },
     {
-      id: 'infra-8',
-      title: 'Resident Family Earthen Cottages',
-      tamil: 'குடிமக்கள் இயற்கை வாழ்விடங்கள்',
-      category: 'Housing',
-      status: 'planned',
-      statusLabel: 'Phase 2 Blueprint',
-      icon: <Home className="w-5 h-5 text-[#1f3d1f]" />,
-      desc: 'Modular adobe and cob dwellings for resident families, built using earth dug on site, river sand, and unslaked lime.',
+      title: 'Decentralized Solar-Powered Earthen Homes',
+      tamil: 'சூரிய சக்தி மண் இல்லங்கள்',
+      desc: '5 natural cob & rammed earth cluster units for resident families, built entirely with local earth, stone, and lime.',
+      icon: <Sun className="w-5 h-5 text-[#2E4F2B]" />,
     },
   ];
 
-  const filteredInfra = infrastructureList.filter((item) => {
-    if (activeTab === 'all') return true;
-    return item.status === activeTab;
-  });
+  const fundingBreakdown = [
+    { label: 'Houses (5 Natural Units)', amount: '₹10 Lakhs', percent: 40, width: 'w-2/5' },
+    { label: 'Community Hall & Kitchen', amount: '₹6 Lakhs', percent: 24, width: 'w-1/4' },
+    { label: 'Open Stone Well & Water', amount: '₹3 Lakhs', percent: 12, width: 'w-2/12' },
+    { label: 'Land Cleaning & Contour Setup', amount: '₹2 Lakhs', percent: 8, width: 'w-1/12' },
+    { label: 'Natural Bio-Fencing', amount: '₹2 Lakhs', percent: 8, width: 'w-1/12' },
+    { label: 'Solar, Rainwater & Seed Vault', amount: '₹2 Lakhs', percent: 8, width: 'w-1/12' },
+  ];
 
   return (
-    <div className="bg-[#f0e6d2] text-[#2d2013] space-y-12 sm:space-y-16 md:space-y-20 pb-16 sm:pb-24">
+    <div className="bg-[#F5F2EB] text-[#241D17] space-y-16 sm:space-y-24 pb-20 sm:pb-32">
       
-      {/* 1. Header Banner */}
-      <section className="pt-10 sm:pt-16 pb-8 sm:pb-12 border-b border-[#7a2e1a]/15 bg-[#f7f2e7]">
+      {/* 1. Header Banner (Slide 18) */}
+      <section className="pt-12 sm:pt-20 pb-12 border-b border-[#E3DDD2] bg-[#FAF8F3]">
         <Container>
-          <div className="text-center max-w-3xl mx-auto space-y-3 sm:space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1f3d1f]/10 text-[#1f3d1f] border border-[#1f3d1f]/20 text-[11px] sm:text-xs font-serif font-bold uppercase tracking-widest">
-              <MapPin className="w-3.5 h-3.5 text-[#7a2e1a]" />
-              <span>Sacred Land • நிலமும் திட்டங்களும்</span>
-            </div>
-
-            <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-serif-display font-bold text-[#2d2013] tracking-tight leading-tight break-words">
-              Tenkasi Sanctuary & Ecological Infrastructure
+          <div className="max-w-3xl space-y-4">
+            <span className="text-xs font-semibold uppercase tracking-widest text-[#8B5A2B] block">
+              Land & Commons • களம்
+            </span>
+            <h1 className="text-3xl sm:text-5xl font-bold text-[#2E4F2B] tracking-tight leading-tight">
+              Land, Ecology & Living Infrastructure
             </h1>
-
-            <p className="text-xs sm:text-sm font-tamil text-[#7a2e1a] font-semibold break-words">
-              “தர்மபுரமடம் – மேற்குத் தொடர்ச்சி மலையடிவாரத்தில் மலரும் எழில்வனம்”
+            <p className="text-sm text-[#8B5A2B] font-medium">
+              “சுத்தமான காற்று, மலை ஊற்று நீர், வளமான செம்மண் நிலம்”
             </p>
-
-            <p className="text-sm sm:text-base md:text-lg text-[#3d2f21]/85 font-serif-body leading-relaxed max-w-2xl mx-auto break-words">
-              Our 4.5+ acres in Dharmapuramadam, Tenkasi District, nestled at the base of the Agastiyar Malai Biosphere Reserve, is developing as a living model of non-artificial community infrastructure.
+            <p className="text-base sm:text-lg text-[#5A5046] leading-relaxed pt-1">
+              12 acres land secured near Sivasailam in Dharmapuramadam village, Tenkasi District, South India — nestled between the Illupai River and a natural mountain stream at the foothills of the Western Ghats within the Agastiyar Malai Biosphere.
             </p>
           </div>
         </Container>
       </section>
 
-      {/* 2. Geography & Bio-Region */}
+      {/* 2. Land Overview & Geography Cards (Slide 18) */}
       <Container>
-        <section className="p-5 sm:p-8 md:p-12 rounded-2xl sm:rounded-3xl bg-[#f7f2e7] border-2 border-[#1f3d1f]/20 shadow-sm space-y-6 sm:space-y-8">
-          <SectionHeading
-            badge="Geographic Context"
-            title="Dharmapuramadam Sanctuary Highlights"
-            titleTamil="நில அமைப்பும் இயற்கை வளமும்"
-            subtitle="An extraordinary microclimate fed by both Southwest and Northeast monsoons."
-            align="center"
-          />
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            <div className="p-5 sm:p-6 rounded-xl sm:rounded-2xl bg-[#f0e6d2] border border-[#7a2e1a]/15 space-y-2">
-              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-[#7a2e1a]">Location</span>
-              <h4 className="text-lg sm:text-xl font-serif-display font-bold text-[#1f3d1f] break-words">Dharmapuramadam</h4>
-              <p className="text-xs text-[#3d2f21]/80 font-serif-body">Tenkasi District, Tamil Nadu (Western Ghats Foothills)</p>
-            </div>
-
-            <div className="p-5 sm:p-6 rounded-xl sm:rounded-2xl bg-[#f0e6d2] border border-[#7a2e1a]/15 space-y-2">
-              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-[#7a2e1a]">Sanctuary Area</span>
-              <h4 className="text-lg sm:text-xl font-serif-display font-bold text-[#1f3d1f] break-words">4.5+ Acres</h4>
-              <p className="text-xs text-[#3d2f21]/80 font-serif-body">Held collectively in public trust perpetuity</p>
-            </div>
-
-            <div className="p-5 sm:p-6 rounded-xl sm:rounded-2xl bg-[#f0e6d2] border border-[#7a2e1a]/15 space-y-2">
-              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-[#7a2e1a]">Water Source</span>
-              <h4 className="text-lg sm:text-xl font-serif-display font-bold text-[#1f3d1f] break-words">Agastiyar Aquifer</h4>
-              <p className="text-xs text-[#3d2f21]/80 font-serif-body">Traditional stone open well + rain catchment swales</p>
-            </div>
-
-            <div className="p-5 sm:p-6 rounded-xl sm:rounded-2xl bg-[#f0e6d2] border border-[#7a2e1a]/15 space-y-2">
-              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-[#7a2e1a]">Soil Classification</span>
-              <h4 className="text-lg sm:text-xl font-serif-display font-bold text-[#1f3d1f] break-words">Red Loam & Clay</h4>
-              <p className="text-xs text-[#3d2f21]/80 font-serif-body">Rich in natural minerals, ideal for mud architecture</p>
-            </div>
-          </div>
-        </section>
-      </Container>
-
-      {/* 3. Infrastructure Filter & Grid */}
-      <Container>
-        <div className="space-y-6 sm:space-y-10">
+        <div className="space-y-12">
           
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-            <SectionHeading
-              badge="Master Plan"
-              title="Infrastructure & Physical Assets"
-              titleTamil="கள உள்கட்டமைப்பு திட்டங்கள்"
-              subtitle="Living systems designed to leave zero toxic residue on the earth."
-              align="left"
-            />
-
-            {/* Filter Tabs (Responsive Wrap) */}
-            <div className="flex flex-wrap bg-[#f7f2e7] p-1.5 rounded-2xl sm:rounded-full border border-[#7a2e1a]/20 text-xs font-serif font-bold uppercase tracking-wider self-start md:self-auto gap-1">
-              {(['all', 'completed', 'in_progress', 'planned'] as const).map((tab) => (
-                <button
-                  key={tab}
-                  onClick={() => setActiveTab(tab)}
-                  className={`min-h-[36px] px-3.5 py-1.5 rounded-full transition-colors ${
-                    activeTab === tab
-                      ? 'bg-[#1f3d1f] text-[#f7f2e7]'
-                      : 'text-[#2d2013]/70 hover:text-[#7a2e1a]'
-                  }`}
-                >
-                  {tab.replace('_', ' ')}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-            {filteredInfra.map((infra) => (
-              <div
-                key={infra.id}
-                className="p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl bg-[#f7f2e7] border border-[#7a2e1a]/15 hover:border-[#1f3d1f] shadow-sm hover:shadow-md transition-all space-y-4 flex flex-col justify-between"
-              >
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <div className="w-10 sm:w-12 h-10 sm:h-12 rounded-xl sm:rounded-2xl bg-[#f0e6d2] flex items-center justify-center shadow-xs">
-                      {infra.icon}
-                    </div>
-                    <span className={`px-2.5 sm:px-3 py-1 rounded-full text-[10px] font-serif font-bold uppercase tracking-wider ${
-                      infra.status === 'completed' ? 'bg-emerald-100 text-emerald-800' :
-                      infra.status === 'in_progress' ? 'bg-amber-100 text-amber-800' : 'bg-stone-100 text-stone-700'
-                    }`}>
-                      {infra.statusLabel}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <div className="lg:col-span-6 space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                
+                <div className="bg-[#FAF8F3] border border-[#E3DDD2] p-5 rounded-sm space-y-2">
+                  <div className="flex items-center gap-2">
+                    <Home className="w-4 h-4 text-[#8B5A2B]" />
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#8B5A2B]">
+                      Community House
                     </span>
                   </div>
-
-                  <h3 className="text-lg sm:text-xl font-serif-display font-bold text-[#2d2013] break-words">
-                    {infra.title}
+                  <h3 className="text-base font-bold text-[#241D17]">
+                    Temporary Base (2 km Away)
                   </h3>
-                  <p className="text-xs font-tamil text-[#7a2e1a] font-medium break-words">
-                    {infra.tamil}
-                  </p>
-                  <p className="text-xs sm:text-sm text-[#3d2f21]/80 leading-relaxed font-serif-body break-words">
-                    {infra.desc}
+                  <p className="text-xs text-[#5A5046] leading-relaxed">
+                    A nearby village home accommodates 30 people as a temporary setup until the sanctuary land construction is ready.
                   </p>
                 </div>
 
-                <div className="pt-3 border-t border-[#7a2e1a]/10 flex items-center justify-between text-[11px] text-[#1f3d1f] font-serif font-bold">
-                  <span>Category: {infra.category}</span>
-                  <LeafBullet className="w-3 h-3 text-[#7a2e1a]" />
+                <div className="bg-[#FAF8F3] border border-[#E3DDD2] p-5 rounded-sm space-y-2">
+                  <div className="flex items-center gap-2">
+                    <Users className="w-4 h-4 text-[#2E4F2B]" />
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#2E4F2B]">
+                      Land Capacity
+                    </span>
+                  </div>
+                  <h3 className="text-base font-bold text-[#241D17]">
+                    20 Families (~60 People)
+                  </h3>
+                  <p className="text-xs text-[#5A5046] leading-relaxed">
+                    Growth is gradual and conscious — 2 acres donated to the trust to begin, with 12 acres total secured.
+                  </p>
                 </div>
+
+              </div>
+
+              <div className="bg-[#FAF8F3] border border-[#E3DDD2] p-6 rounded-sm space-y-3">
+                <span className="text-xs font-semibold uppercase tracking-widest text-[#8B5A2B] block">
+                  Geographical Coordinates
+                </span>
+                <p className="text-sm font-bold text-[#2E4F2B]">
+                  Dharmapuramadam Village, Near Sivasailam, Tenkasi District
+                </p>
+                <p className="text-xs text-[#5A5046] leading-relaxed">
+                  Located between the perennial Illupai River and fresh mountain stream. Bordering the Kalakad-Mundanthurai Tiger Reserve buffer corridor with rich red loam soil and dual southwest & northeast monsoons.
+                </p>
+              </div>
+            </div>
+
+            <div className="lg:col-span-6 space-y-2">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-sm border border-[#E3DDD2] bg-[#ECE6D8]">
+                <img
+                  src="/images/illupai-river-dam.jpg"
+                  alt="Illupai River waterfall and check-dam near Sivasailam"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <p className="text-xs text-[#8B5A2B] text-center font-medium">
+                Illupai River Check-Dam & Mountain Stream — Sivasailam
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+      </Container>
+
+      {/* 3. LIFE AT IYALVANAM (Slide 19) */}
+      <section className="bg-[#FAF8F3] py-16 sm:py-20 border-t border-b border-[#E3DDD2]">
+        <Container>
+          <div className="space-y-12">
+            
+            <div className="max-w-2xl space-y-2">
+              <span className="text-xs font-semibold uppercase tracking-widest text-[#8B5A2B]">
+                Daily Living Rhythm (வாழ்வியல் முறை)
+              </span>
+              <h2 className="text-2xl sm:text-4xl font-bold text-[#2E4F2B]">
+                Life at Iyalvanam
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              
+              <div className="lg:col-span-7 space-y-6">
+                
+                {/* Food Pillar */}
+                <div className="bg-[#F5F2EB] border border-[#E3DDD2] p-6 rounded-sm space-y-2">
+                  <div className="flex items-center gap-2">
+                    <Wheat className="w-5 h-5 text-[#8B5A2B]" />
+                    <h3 className="text-base font-bold text-[#241D17]">
+                      Natural Food & Fruitarian Rhythm
+                    </h3>
+                  </div>
+                  <ul className="text-xs text-[#5A5046] space-y-1.5 pt-1">
+                    <li>• Natural raw food is primary, with one cooked VEGAN meal daily.</li>
+                    <li>• Fruitarian staples: Coconut, banana, and seasonal fruits available always.</li>
+                    <li>• Zero animal products consumed on the land.</li>
+                    <li>• Self-sufficiency through home vegetable gardens and food forests — no commercial monoculture farming.</li>
+                  </ul>
+                </div>
+
+                {/* Health Pillar */}
+                <div className="bg-[#F5F2EB] border border-[#E3DDD2] p-6 rounded-sm space-y-2">
+                  <div className="flex items-center gap-2">
+                    <HeartPulse className="w-5 h-5 text-[#2E4F2B]" />
+                    <h3 className="text-base font-bold text-[#241D17]">
+                      Self-Healing Living Health
+                    </h3>
+                  </div>
+                  <ul className="text-xs text-[#5A5046] space-y-1.5 pt-1">
+                    <li>• The human body is inherently a self-healing biological system.</li>
+                    <li>• Fresh air, pure well water, direct sunlight, grounding, and a peaceful mind are the foundations.</li>
+                    <li>• Holistic well-being across physical, emotional, mental, and spiritual planes.</li>
+                  </ul>
+                </div>
+
+                {/* Work Pillar */}
+                <div className="bg-[#F5F2EB] border border-[#E3DDD2] p-6 rounded-sm space-y-2">
+                  <div className="flex items-center gap-2">
+                    <Hammer className="w-5 h-5 text-[#8B5A2B]" />
+                    <h3 className="text-base font-bold text-[#241D17]">
+                      Sacred Work & Uniqueness
+                    </h3>
+                  </div>
+                  <ul className="text-xs text-[#5A5046] space-y-1.5 pt-1">
+                    <li>• Work is not for commercial money — it is the expression of each individual's uniqueness.</li>
+                    <li>• People do what brings them joy, creativity, and contributes to the whole.</li>
+                  </ul>
+                </div>
+
+              </div>
+
+              <div className="lg:col-span-5 space-y-2">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-sm border border-[#E3DDD2] bg-[#ECE6D8]">
+                  <img
+                    src="/images/sanctuary-landscape.jpg"
+                    alt="Sanctuary land clearing with palm trees and mountain background"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <p className="text-xs text-[#8B5A2B] text-center font-medium">
+                  Sanctuary Landscape & Foothill View — Tenkasi
+                </p>
+              </div>
+
+            </div>
+
+          </div>
+        </Container>
+      </section>
+
+      {/* 4. NATURAL INFRASTRUCTURE MATRIX (Slide 18) */}
+      <Container>
+        <div className="space-y-10">
+          
+          <div className="max-w-2xl space-y-2">
+            <span className="text-xs font-semibold uppercase tracking-widest text-[#8B5A2B]">
+              Ecological Design
+            </span>
+            <h2 className="text-2xl sm:text-4xl font-bold text-[#2E4F2B]">
+              Natural Infrastructure Elements
+            </h2>
+            <p className="text-sm text-[#5A5046]">
+              Every structure is crafted with hand tools using cob, rammed earth, bamboo, and lime masonry.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {infrastructureList.map((item, idx) => (
+              <div
+                key={idx}
+                className="bg-[#FAF8F3] border border-[#E3DDD2] p-6 rounded-sm space-y-3"
+              >
+                <div className="p-2 bg-[#F5F2EB] rounded-xs w-fit border border-[#E3DDD2]">
+                  {item.icon}
+                </div>
+                <h3 className="text-sm font-bold text-[#241D17]">
+                  {item.title}
+                </h3>
+                <p className="text-xs font-medium text-[#8B5A2B]">
+                  {item.tamil}
+                </p>
+                <p className="text-xs text-[#5A5046] leading-relaxed">
+                  {item.desc}
+                </p>
               </div>
             ))}
           </div>
@@ -259,37 +314,82 @@ export const LandPage: React.FC<LandPageProps> = ({ navigate }) => {
         </div>
       </Container>
 
-      {/* 4. Support & Visit CTA */}
-      <Container>
-        <div className="p-6 sm:p-10 md:p-12 rounded-2xl sm:rounded-3xl bg-[#1f3d1f] text-[#f7f2e7] text-center space-y-5 sm:space-y-6">
-          <BotanicalFlourish className="w-28 sm:w-36 h-4 sm:h-5 mx-auto text-[#d4af37]" />
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif-display font-bold text-[#f7f2e7] break-words">
-            Support Our ₹25L Infrastructure Goal
-          </h2>
-          <p className="text-xs sm:text-sm md:text-base text-[#f0e6d2]/85 max-w-xl mx-auto font-serif-body leading-relaxed break-words">
-            Help complete our community hall, heirloom seed vault, and open-well water recharge before the upcoming monsoon.
-          </p>
-          <div className="pt-2 flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 w-full sm:w-auto">
-            <Button
-              variant="gold"
-              size="lg"
-              showArrow
-              className="w-full sm:w-auto"
-              onClick={() => navigate('/support')}
-            >
-              Support Infrastructure Fund
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="w-full sm:w-auto text-[#f7f2e7] border-[#f7f2e7]/40 hover:bg-[#f7f2e7] hover:text-[#1f3d1f]"
-              onClick={() => navigate('/contact')}
-            >
-              Schedule an On-Site Visit
-            </Button>
+      {/* 5. FUNDING REQUIREMENTS & BREAKDOWN (Slide 23) */}
+      <section className="bg-[#FAF8F3] py-16 sm:py-20 border-t border-[#E3DDD2]">
+        <Container>
+          <div className="space-y-12">
+            
+            <div className="max-w-3xl space-y-2">
+              <span className="text-xs font-semibold uppercase tracking-widest text-[#8B5A2B]">
+                Resource Mobilization (Slide 23)
+              </span>
+              <h2 className="text-2xl sm:text-4xl font-bold text-[#2E4F2B]">
+                Infrastructure Funding Requirements
+              </h2>
+              <p className="text-sm text-[#5A5046] leading-relaxed">
+                The founding member is sourcing the 12-acre land through personal funding. To develop the community and host 50+ people for events, camps, and permanent living, <strong>₹25 Lakhs</strong> in infrastructure funding is needed.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              
+              {/* Breakdown Bar Chart */}
+              <div className="lg:col-span-7 bg-[#F5F2EB] border border-[#E3DDD2] p-6 sm:p-8 rounded-sm space-y-5">
+                <div className="flex items-center justify-between border-b border-[#E3DDD2] pb-3">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#8B5A2B]">
+                    Item / Allocation
+                  </span>
+                  <span className="text-xs font-bold text-[#2E4F2B]">
+                    Total Need: ₹25 Lakhs
+                  </span>
+                </div>
+
+                <div className="space-y-4">
+                  {fundingBreakdown.map((item, idx) => (
+                    <div key={idx} className="space-y-1.5">
+                      <div className="flex justify-between text-xs font-medium">
+                        <span className="text-[#241D17]">{item.label}</span>
+                        <span className="font-bold text-[#8B5A2B]">{item.amount}</span>
+                      </div>
+                      <div className="h-3 bg-[#E3DDD2] rounded-xs overflow-hidden">
+                        <div
+                          className="h-full bg-[#2E4F2B] rounded-xs"
+                          style={{ width: `${item.percent}%` }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Donation Methods Info Box */}
+              <div className="lg:col-span-5 bg-[#F5F2EB] border border-[#E3DDD2] p-6 sm:p-8 rounded-sm space-y-4">
+                <h3 className="text-base font-bold text-[#2E4F2B]">
+                  Diverse Forms of Contribution
+                </h3>
+                <p className="text-xs text-[#5A5046] leading-relaxed">
+                  Donations can take many forms — seeds, saplings, tools, books, volunteer time, or direct funding of specific infrastructure like a house or community hall.
+                </p>
+                <div className="p-4 bg-[#FAF8F3] border border-[#E3DDD2] rounded-xs space-y-2">
+                  <p className="text-xs font-semibold text-[#8B5A2B]">
+                    Transparent Stewardship:
+                  </p>
+                  <p className="text-[11px] text-[#5A5046] leading-relaxed">
+                    All funds flow through SEYON Nature Life Foundation. All permanent land assets remain safeguarded with IYALVANAM Asset Trust.
+                  </p>
+                </div>
+                <div className="pt-2">
+                  <Button variant="primary" size="md" showArrow onClick={() => navigate('/join')}>
+                    Express Your Support
+                  </Button>
+                </div>
+              </div>
+
+            </div>
+
           </div>
-        </div>
-      </Container>
+        </Container>
+      </section>
 
     </div>
   );

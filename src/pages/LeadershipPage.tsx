@@ -7,8 +7,10 @@ import {
   Quote, 
   TreePine, 
   Sprout, 
-  Compass,
-  HeartHandshake
+  Compass, 
+  HeartHandshake, 
+  MessageCircle,
+  Sparkles
 } from 'lucide-react';
 import { Container } from '../components/common/Container';
 import { Button } from '../components/common/Button';
@@ -29,193 +31,165 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ navigate }) => {
     }).catch(() => {});
   }, []);
 
-  const founder = profiles.find((p) => p.designation === 'FOUNDER') || {
-    displayName: 'Rajesh',
-    roleTitle: 'Founder & Vision Steward',
-    roleTitleTamil: 'நிறுவனர் & தொலைநோக்கு வழிகாட்டி',
-    shortBio: 'A former banker who chose to step away from the corporate world and question the way modern society defines life, success and freedom.',
-    fullBiography: `Rajesh is a former banker who chose to step away from the corporate world and question the way modern society defines life, success and freedom.
-
-His journey took him through farming, travel and a search for communities where people could live with greater simplicity, freedom and connection. Along the way, he began to see a deeper disconnect—between humans and nature, between people and each other, and between the way life was designed to be lived and the systems built around it.
-
-Today, Rajesh is working to turn that realization into something tangible through IYALVANAM – Center for Natural Living and SEYON.
-
-His vision is simple yet profound: to create spaces where people can step away from the noise of modern life, reconnect with nature, rediscover community, and explore a life guided by natural principles rather than imposed systems.
-
-For Rajesh, this is not just a project. It is a journey back to what is fundamental—freedom, nature, connection and a meaningful way of living.`,
-    profileImage: '/images/founder-emblem.jpg',
-    quote: '“For us, this is not just a project. It is a journey back to what is fundamental—freedom, nature, connection and a meaningful way of living.”',
-  };
-
-  const coFounder = profiles.find((p) => p.designation === 'CO_FOUNDER') || {
+  const shanmugavel = {
     displayName: 'Shanmugavel',
-    roleTitle: 'Co-Founder & Operational Steward',
+    phone: '+91 96007 56007',
+    roleTitle: 'Co-Founder & Operational Steward (SEYON Nature Life Foundation)',
     roleTitleTamil: 'இணை நிறுவனர் & கள ஒருங்கிணைப்பாளர்',
-    shortBio: 'Designer and mechanical engineering researcher from Coimbatore whose 45-day ICU recovery inspired the SEYON Nature Life movement and 50+ experiential camps.',
+    profileImage: '/images/co-founder-emblem.jpg',
+    quote: '“Let us live happily together with nature, as much as possible.”',
     fullBiography: `Shanmugavel, from Coimbatore, is a designer and researcher in mechanical engineering whose life took an unexpected turn after spending 45 days in intensive care during the COVID-19 pandemic.
 
 His journey toward recovery led him to explore health, natural food and a simpler way of living. During six months of travel and research, he discovered the remarkable simplicity of foods such as coconut and banana and began experiencing profound changes in his own well-being.
 
 His search eventually brought him to Sivasailam, at the foothills of Pothigai, where the experience of natural surroundings deeply influenced his understanding of life. It inspired him to move closer to nature and share his experiences of natural food and natural living with others.
 
-SEYON Nature Life Foundation was created in the post-COVID period with a simple purpose—to help people experience natural living rather than merely hear about it. Through monthly nature camps, SEYON has so far conducted 50+ camps, giving 1,000+ people an opportunity to experience nature, natural food and a simpler way of life.
+SEYON Nature Life Foundation was created in the post-COVID period with a simple purpose—to help people experience natural living rather than merely hear about it. Through monthly nature camps, SEYON has so far conducted 50+ camps, giving 1,000+ people an opportunity to experience nature, natural food and a simpler way of life. Today, Shanmugavel continues to explore, learn and share this journey, hoping to create a bridge for those who wish to reconnect with nature.`
+  };
 
-Today, Shanmugavel continues to explore, learn and share this journey, hoping to create a bridge for those who wish to reconnect with nature.`,
-    profileImage: '/images/co-founder-emblem.jpg',
-    quote: '“Let us live happily together with nature, as much as possible.”',
+  const rajesh = {
+    displayName: 'Rajesh Vijendran',
+    phone: '+91 98412 79234',
+    roleTitle: 'Founder & Vision Steward (IYALVANAM Center for Natural Living)',
+    roleTitleTamil: 'நிறுவனர் & தொலைநோக்கு வழிகாட்டி',
+    profileImage: '/images/founder-emblem.jpg',
+    quote: '“He doesn’t claim to have all the answers. He is simply exploring, learning and creating a small space where people can come together and discover a more natural way of living.”',
+    fullBiography: `Rajesh comes from a corporate banking background, but over the years he began questioning the way modern life is structured and the distance it has created between people, nature and a simple way of living.
+
+He stepped away from the corporate world, explored farming, travelled, and spent time looking for a more connected way of life. These experiences gradually shaped his understanding of what he feels is truly important—living closer to nature, having meaningful relationships, sharing with others, and finding greater simplicity in everyday life.
+
+Today, he is part of the journey behind IYALVANAM – Center for Natural Living and SEYON, working alongside others who share a similar curiosity and aspiration.
+
+He doesn't claim to have all the answers. He is simply exploring, learning and trying to create a small space where people can come together, question what we have taken for granted, and discover a more natural and meaningful way of living.`
   };
 
   return (
-    <div className="bg-[#f4eedb] text-[#261a12] space-y-16 sm:space-y-24 pb-20 sm:pb-32">
+    <div className="bg-[#F5F2EB] text-[#241D17] space-y-16 sm:space-y-24 pb-20 sm:pb-32">
       
-      {/* 1. Header Statement */}
-      <section className="pt-10 sm:pt-16 pb-8 border-b border-[#6b2816]/12 bg-[#faf6eb]">
+      {/* 1. Header Statement (Slide 24) */}
+      <section className="pt-12 sm:pt-20 pb-12 border-b border-[#E3DDD2] bg-[#FAF8F3]">
         <Container>
-          <div className="max-w-3xl space-y-3">
-            <span className="text-xs font-serif uppercase tracking-widest text-[#6b2816] font-semibold block">
-              Our People & Stewards
+          <div className="max-w-3xl space-y-4">
+            <span className="text-xs font-semibold uppercase tracking-widest text-[#8B5A2B] block">
+              Founders & Stewards • வழிகாட்டிகள்
             </span>
-            <h1 className="text-3xl sm:text-5xl font-serif-display font-bold text-[#1b331b] tracking-tight leading-tight">
-              Our Leadership
+            <h1 className="text-3xl sm:text-5xl font-bold text-[#2E4F2B] tracking-tight leading-tight">
+              Founders of Iyalvanam & Seyon
             </h1>
-            <p className="text-sm font-tamil text-[#6b2816] font-medium">
-              இயல்வனம் & சேயோன் வழிகாட்டிகள் – தத்துவமும் செயல்பாடும்
+            <p className="text-sm text-[#8B5A2B] font-medium">
+              “இயற்கை வழியே இயல்பு வழி • இயன்ற வரை இயற்கைக்கு திரும்புவோம்”
             </p>
-            <p className="text-base sm:text-lg text-[#574637] font-serif-body leading-relaxed pt-1">
-              Meet the people behind the vision of Iyalvanam & Seyon—dedicated to simple, sovereign, and nature-aligned living.
+            <p className="text-base sm:text-lg text-[#5A5046] leading-relaxed pt-1">
+              Meet the stewards behind IYALVANAM – Center for Natural Living and SEYON Nature Life Foundation.
             </p>
           </div>
         </Container>
       </section>
 
-      {/* 2. Founder Section (Rajesh) */}
-      <section>
-        <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
-            
-            <div className="lg:col-span-5 space-y-4">
-              <div className="aspect-[4/5] overflow-hidden rounded-xl border border-[#6b2816]/15 bg-[#faf6eb]">
+      {/* 2. Founders Grid (Slide 24) */}
+      <Container>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          
+          {/* Shanmugavel Card */}
+          <div className="bg-[#FAF8F3] border border-[#E3DDD2] p-6 sm:p-8 rounded-sm space-y-6">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 border-b border-[#E3DDD2] pb-6">
+              <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-[#8B5A2B] shrink-0 bg-[#ECE6D8]">
                 <img
-                  src={founder.profileImage}
-                  alt={founder.displayName}
+                  src={shanmugavel.profileImage}
+                  alt={shanmugavel.displayName}
                   className="w-full h-full object-cover"
-                  loading="lazy"
                 />
               </div>
-              <div className="text-xs text-[#574637] font-serif flex items-center justify-between border-t border-[#6b2816]/10 pt-3">
-                <span>Dharmapuramadam Sanctuary</span>
-                <span className="font-semibold text-[#1b331b]">Founder</span>
-              </div>
-            </div>
-
-            <div className="lg:col-span-7 space-y-6">
               <div className="space-y-1">
-                <span className="text-xs font-serif uppercase tracking-widest text-[#6b2816] font-semibold">
-                  Founder & Vision Steward
-                </span>
-                <h2 className="text-3xl sm:text-4xl font-serif-display font-bold text-[#1b331b]">
-                  {founder.displayName}
+                <h2 className="text-2xl font-bold text-[#241D17]">
+                  {shanmugavel.displayName}
                 </h2>
-                <p className="text-xs font-tamil text-[#6b2816]">
-                  {founder.roleTitleTamil}
+                <p className="text-xs font-semibold text-[#8B5A2B]">
+                  {shanmugavel.roleTitle}
                 </p>
-              </div>
-
-              <div className="text-sm sm:text-base text-[#574637] font-serif-body leading-relaxed space-y-4 whitespace-pre-line">
-                {founder.fullBiography}
-              </div>
-
-              <blockquote className="border-l-2 border-[#6b2816] pl-4 italic text-sm text-[#6b2816] font-serif">
-                {founder.quote}
-              </blockquote>
-
-              <div className="pt-2">
-                <Button
-                  variant="primary"
-                  size="md"
-                  showArrow
-                  onClick={() => navigate('/leadership/founder')}
-                >
-                  View Founder Profile (Rajesh)
-                </Button>
+                <div className="flex items-center gap-2 text-xs text-[#5A5046] pt-1">
+                  <Phone className="w-3.5 h-3.5 text-[#2E4F2B]" />
+                  <a href={`tel:${shanmugavel.phone}`} className="hover:text-[#2E4F2B] font-mono font-medium">
+                    {shanmugavel.phone}
+                  </a>
+                </div>
               </div>
             </div>
 
+            <div className="space-y-4 text-xs sm:text-sm text-[#5A5046] leading-relaxed">
+              {shanmugavel.fullBiography.split('\n\n').map((para, idx) => (
+                <p key={idx}>{para}</p>
+              ))}
+            </div>
+
+            <blockquote className="border-l-3 border-[#8B5A2B] pl-4 italic text-xs sm:text-sm text-[#241D17] bg-[#F5F2EB] py-3 pr-3">
+              {shanmugavel.quote}
+            </blockquote>
           </div>
-        </Container>
-      </section>
 
-      {/* 3. Co-Founder Section (Shanmugavel) */}
-      <section className="bg-[#faf6eb] py-16 sm:py-24 border-t border-b border-[#6b2816]/12">
-        <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
-            
-            <div className="lg:col-span-7 space-y-6 order-2 lg:order-1">
-              <div className="space-y-1">
-                <span className="text-xs font-serif uppercase tracking-widest text-[#1b331b] font-semibold">
-                  Co-Founder & Operational Steward
-                </span>
-                <h2 className="text-3xl sm:text-4xl font-serif-display font-bold text-[#6b2816]">
-                  {coFounder.displayName}
-                </h2>
-                <p className="text-xs font-tamil text-[#1b331b]">
-                  {coFounder.roleTitleTamil}
-                </p>
-              </div>
-
-              <div className="text-sm sm:text-base text-[#574637] font-serif-body leading-relaxed space-y-4 whitespace-pre-line">
-                {coFounder.fullBiography}
-              </div>
-
-              <blockquote className="border-l-2 border-[#1b331b] pl-4 italic text-sm text-[#1b331b] font-serif">
-                {coFounder.quote}
-              </blockquote>
-
-              <div className="pt-2">
-                <Button
-                  variant="secondary"
-                  size="md"
-                  showArrow
-                  onClick={() => navigate('/leadership/co-founder')}
-                >
-                  View Co-Founder Profile (Shanmugavel)
-                </Button>
-              </div>
-            </div>
-
-            <div className="lg:col-span-5 space-y-4 order-1 lg:order-2">
-              <div className="aspect-[4/5] overflow-hidden rounded-xl border border-[#6b2816]/15 bg-[#f4eedb]">
+          {/* Rajesh Vijendran Card */}
+          <div className="bg-[#FAF8F3] border border-[#E3DDD2] p-6 sm:p-8 rounded-sm space-y-6">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 border-b border-[#E3DDD2] pb-6">
+              <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-[#2E4F2B] shrink-0 bg-[#ECE6D8]">
                 <img
-                  src={coFounder.profileImage}
-                  alt={coFounder.displayName}
+                  src={rajesh.profileImage}
+                  alt={rajesh.displayName}
                   className="w-full h-full object-cover"
-                  loading="lazy"
                 />
               </div>
-              <div className="text-xs text-[#574637] font-serif flex items-center justify-between border-t border-[#6b2816]/10 pt-3">
-                <span>50+ Nature Camps • 1,000+ Participants</span>
-                <span className="font-semibold text-[#6b2816]">Co-Founder</span>
+              <div className="space-y-1">
+                <h2 className="text-2xl font-bold text-[#241D17]">
+                  {rajesh.displayName}
+                </h2>
+                <p className="text-xs font-semibold text-[#2E4F2B]">
+                  {rajesh.roleTitle}
+                </p>
+                <div className="flex items-center gap-2 text-xs text-[#5A5046] pt-1">
+                  <Phone className="w-3.5 h-3.5 text-[#2E4F2B]" />
+                  <a href={`tel:${rajesh.phone}`} className="hover:text-[#2E4F2B] font-mono font-medium">
+                    {rajesh.phone}
+                  </a>
+                </div>
               </div>
             </div>
 
-          </div>
-        </Container>
-      </section>
+            <div className="space-y-4 text-xs sm:text-sm text-[#5A5046] leading-relaxed">
+              {rajesh.fullBiography.split('\n\n').map((para, idx) => (
+                <p key={idx}>{para}</p>
+              ))}
+            </div>
 
-      {/* 4. Shared Vision Statement */}
-      <section>
+            <blockquote className="border-l-3 border-[#2E4F2B] pl-4 italic text-xs sm:text-sm text-[#241D17] bg-[#F5F2EB] py-3 pr-3">
+              {rajesh.quote}
+            </blockquote>
+          </div>
+
+        </div>
+      </Container>
+
+      {/* 3. Official WhatsApp Community Call (Slide 25) */}
+      <section className="bg-[#FAF8F3] py-16 sm:py-20 border-t border-[#E3DDD2]">
         <Container>
-          <div className="max-w-3xl space-y-6">
-            <h3 className="text-2xl sm:text-3xl font-serif-display font-bold text-[#1b331b]">
-              Shared Purpose & Collective Stewardship
+          <div className="max-w-2xl mx-auto text-center space-y-6">
+            <span className="text-xs font-semibold uppercase tracking-widest text-[#8B5A2B]">
+              Stay Connected (இணைந்திருங்கள்)
+            </span>
+            <h3 className="text-2xl sm:text-4xl font-bold text-[#2E4F2B]">
+              Join the Official WhatsApp Community
             </h3>
-            <p className="text-sm sm:text-base text-[#574637] font-serif-body leading-relaxed">
-              Rajesh and Shanmugavel bring together deep philosophical clarity and hands-on operational discipline. Together, they guide the Iyalvanam Asset Trust and SEYON Nature Life Foundation to create a safe haven for future generations.
+            <p className="text-sm text-[#5A5046]">
+              Receive monthly camp notices, seed exchange updates, and community dialogues directly from our founders.
             </p>
             <div className="pt-2">
-              <Button variant="outline" size="md" onClick={() => navigate('/contact')}>
-                Connect with the Stewards
-              </Button>
+              <a
+                href="https://tinyurl.com/2zap33fy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs sm:text-sm font-semibold tracking-wide shadow-xs transition-all"
+              >
+                <MessageCircle className="w-4 h-4" />
+                <span>Join Official WhatsApp Group</span>
+              </a>
             </div>
           </div>
         </Container>

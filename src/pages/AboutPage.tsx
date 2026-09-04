@@ -1,5 +1,20 @@
 import React, { useEffect } from 'react';
-import { ArrowRight, Leaf, Sparkles, Heart, Sun, Droplets, ShieldCheck, Layers, BookOpen, Users } from 'lucide-react';
+import { 
+  ArrowRight, 
+  Leaf, 
+  Sparkles, 
+  Heart, 
+  Sun, 
+  Droplets, 
+  ShieldCheck, 
+  Layers, 
+  BookOpen, 
+  Users, 
+  Shield, 
+  Scale, 
+  Key, 
+  FileText 
+} from 'lucide-react';
 import { Container } from '../components/common/Container';
 import { Button } from '../components/common/Button';
 
@@ -59,7 +74,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ navigate }) => {
       num: '04',
       title: 'Mountain Commons & Pure Water',
       tamil: 'மலைச் சாரல் நிலம் & ஊற்று நீர்',
-      desc: '4.5+ acres at Dharmapuramadam, Tenkasi, sustained by natural aquifers and protected under perpetual non-commercial trust.',
+      desc: '12 acres at Dharmapuramadam, Tenkasi, sustained by natural aquifers and protected under perpetual non-commercial trust.',
       path: '/sanctuary',
     },
     {
@@ -115,7 +130,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ navigate }) => {
         </Container>
       </section>
 
-      {/* 2. Etymology Section */}
+      {/* 2. Etymology Section (Slide 2 & 3) */}
       <Container>
         <div className="space-y-10">
           <div className="max-w-2xl space-y-2">
@@ -156,7 +171,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ navigate }) => {
         </div>
       </Container>
 
-      {/* 3. Foundational Vision & Purpose */}
+      {/* 3. Foundational Vision & Purpose (Slide 5 & 7) */}
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start border-t border-[#E3DDD2] pt-16">
           
@@ -179,14 +194,14 @@ export const AboutPage: React.FC<AboutPageProps> = ({ navigate }) => {
             </p>
 
             <p>
-              Located at Dharmapuramadam at the base of the Agastiyar Malai Biosphere in Tenkasi District, our sanctuary spans 4.5+ acres of mineral-rich red loam soil fed by mountain aquifers and dual monsoons.
+              Located at Dharmapuramadam at the base of the Agastiyar Malai Biosphere in Tenkasi District, our sanctuary spans 12 acres of mineral-rich red loam soil fed by mountain aquifers, the Illupai River, and dual monsoons.
             </p>
           </div>
 
         </div>
       </Container>
 
-      {/* 4. Eight Pillars of Natural Life */}
+      {/* 4. Eight Pillars of Natural Life (Slide 6) */}
       <section className="bg-[#FAF8F3] py-16 sm:py-20 border-t border-b border-[#E3DDD2]">
         <Container>
           <div className="space-y-12">
@@ -231,63 +246,111 @@ export const AboutPage: React.FC<AboutPageProps> = ({ navigate }) => {
         </Container>
       </section>
 
-      {/* 5. The Dual Trust Structure */}
+      {/* 5. COMMUNITY STRUCTURE & GOVERNANCE ARCHITECTURE (Slide 17) */}
       <Container>
         <div className="space-y-12">
           
           <div className="max-w-2xl space-y-2">
             <span className="text-xs font-semibold uppercase tracking-widest text-[#8B5A2B]">
-              Legal & Spiritual Harmony
+              Governance Architecture (Slide 17)
             </span>
             <h2 className="text-2xl sm:text-3xl font-bold text-[#2E4F2B]">
-              Two Trusts. One Unified Sanctuary.
+              Community Structure & Governance
             </h2>
+            <p className="text-sm text-[#5A5046]">
+              A balance of perpetual non-commercial land protection and experiential educational platforms.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-[#E3DDD2] pt-8">
+          {/* Structured Governance Pyramid */}
+          <div className="bg-[#FAF8F3] border border-[#E3DDD2] p-6 sm:p-10 rounded-sm space-y-8">
             
-            <div className="bg-[#FAF8F3] border border-[#E3DDD2] p-8 rounded-sm space-y-4">
-              <span className="text-xs font-semibold uppercase tracking-widest text-[#2E4F2B] block">
-                01 / Perpetual Asset Trust
+            {/* Top Philosophy Core */}
+            <div className="max-w-md mx-auto bg-[#F5F2EB] border-2 border-[#2E4F2B] p-5 rounded-sm text-center space-y-1.5 shadow-xs">
+              <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#8B5A2B] block">
+                Top Tier
               </span>
-              <h3 className="text-2xl font-bold text-[#2E4F2B]">
-                IYALVANAM Asset Trust
+              <h3 className="text-lg font-bold text-[#2E4F2B]">
+                Philosophy Core
               </h3>
-              <p className="text-sm text-[#5A5046] leading-relaxed">
-                Safeguards the sanctuary commons. Under strict legal covenants, land, trees, and water bodies can never be divided, mortgaged, sold, or commercially exploited.
+              <p className="text-xs font-semibold text-[#8B5A2B]">
+                Non-Ownership · Stewardship · Ecology First
               </p>
-              <div className="pt-2">
-                <Button variant="outline" size="sm" onClick={() => navigate('/sanctuary')}>
-                  Explore Sanctuary Land
-                </Button>
-              </div>
+              <p className="text-[11px] text-[#5A5046]">
+                Holds land, owns assets, protects ecology perpetually.
+              </p>
             </div>
 
-            <div className="bg-[#FAF8F3] border border-[#E3DDD2] p-8 rounded-sm space-y-4">
-              <span className="text-xs font-semibold uppercase tracking-widest text-[#8B5A2B] block">
-                02 / Experiential Platform
+            {/* Middle: Dual Trust Branches */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              
+              <div className="bg-[#F5F2EB] border border-[#E3DDD2] p-6 rounded-sm space-y-3">
+                <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#2E4F2B] block">
+                  Asset Trust
+                </span>
+                <h4 className="text-base font-bold text-[#241D17]">
+                  IYALVANAM Land Trust
+                </h4>
+                <p className="text-xs text-[#5A5046] leading-relaxed">
+                  Holds all land and assets. Hosts the community activities and programs. Protects the ecology under non-commercial covenants.
+                </p>
+                <div className="pt-2 border-t border-[#E3DDD2]">
+                  <span className="text-[11px] font-semibold text-[#8B5A2B] block">Land Usage Agreement:</span>
+                  <span className="text-xs text-[#5A5046]">No ownership transfer · Revocable use · Controlled access</span>
+                </div>
+              </div>
+
+              <div className="bg-[#F5F2EB] border border-[#E3DDD2] p-6 rounded-sm space-y-3">
+                <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#8B5A2B] block">
+                  Operational Trust
+                </span>
+                <h4 className="text-base font-bold text-[#241D17]">
+                  SEYON Nature Life Foundation
+                </h4>
+                <p className="text-xs text-[#5A5046] leading-relaxed">
+                  Manages people, conducts programs, and facilitates day-to-day operations, nature camps, and workshops.
+                </p>
+                <div className="pt-2 border-t border-[#E3DDD2]">
+                  <span className="text-[11px] font-semibold text-[#8B5A2B] block">Member Agreement:</span>
+                  <span className="text-xs text-[#5A5046]">No individual ownership of land, housing, or shared assets — ever.</span>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Bottom 4 Circles */}
+            <div className="border-t border-[#E3DDD2] pt-6">
+              <span className="text-xs font-semibold uppercase tracking-widest text-[#8B5A2B] block text-center mb-4">
+                The Four Circles of Participation
               </span>
-              <h3 className="text-2xl font-bold text-[#8B5A2B]">
-                SEYON Nature Life Foundation
-              </h3>
-              <p className="text-sm text-[#5A5046] leading-relaxed">
-                Conducts hands-on nature camps, raw food workshops (coconut, banana), children's ecological stays, and orientations for seeking families.
-              </p>
-              <div className="pt-2">
-                <Button variant="outline" size="sm" onClick={() => navigate('/leadership')}>
-                  Meet Stewards & Founders
-                </Button>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+                <div className="bg-[#F5F2EB] border border-[#E3DDD2] p-4 rounded-sm">
+                  <span className="text-xs font-bold text-[#2E4F2B] block">Visitors</span>
+                  <span className="text-[11px] text-[#5A5046]">(Short Stay)</span>
+                </div>
+                <div className="bg-[#F5F2EB] border border-[#E3DDD2] p-4 rounded-sm">
+                  <span className="text-xs font-bold text-[#2E4F2B] block">Volunteers</span>
+                  <span className="text-[11px] text-[#5A5046]">(Learning Phase)</span>
+                </div>
+                <div className="bg-[#F5F2EB] border border-[#E3DDD2] p-4 rounded-sm">
+                  <span className="text-xs font-bold text-[#2E4F2B] block">Members</span>
+                  <span className="text-[11px] text-[#5A5046]">(Committed)</span>
+                </div>
+                <div className="bg-[#F5F2EB] border border-[#E3DDD2] p-4 rounded-sm">
+                  <span className="text-xs font-bold text-[#2E4F2B] block">Stewards</span>
+                  <span className="text-[11px] text-[#5A5046]">(Full-Time Living)</span>
+                </div>
               </div>
             </div>
 
           </div>
 
-          <div className="pt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 border-t border-[#E3DDD2]">
+          <div className="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
             <Button variant="primary" size="md" showArrow onClick={() => navigate('/join')}>
               Learn How to Join
             </Button>
-            <Button variant="secondary" size="md" onClick={() => navigate('/contact')}>
-              Plan a Sanctuary Visit
+            <Button variant="secondary" size="md" onClick={() => navigate('/leadership')}>
+              Meet the Founders
             </Button>
           </div>
 
@@ -297,4 +360,3 @@ export const AboutPage: React.FC<AboutPageProps> = ({ navigate }) => {
     </div>
   );
 };
-

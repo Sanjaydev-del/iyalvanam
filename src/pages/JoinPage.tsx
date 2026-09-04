@@ -12,7 +12,10 @@ import {
   Calendar,
   Lock,
   TreePine,
-  Sprout
+  Sprout,
+  UserCheck,
+  Compass,
+  DollarSign
 } from 'lucide-react';
 import { Container } from '../components/common/Container';
 import { Button } from '../components/common/Button';
@@ -79,30 +82,36 @@ export const JoinPage: React.FC<JoinPageProps> = ({ navigate, showToast }) => {
     }
   };
 
-  const steps = [
+  const pathways = [
     {
-      num: '01',
-      title: 'Alignment & Principles',
-      tamil: 'இயைபு & விழுமியங்கள்',
-      desc: 'Study the natural living manifesto, understand the dual-trust perpetual land safeguard, and resonate with non-artificial living.',
+      level: '1',
+      title: 'Visitors (பார்வையாளர்கள்)',
+      duration: '3–5 Days',
+      desc: 'Experiential nature camps, weekend workshops, and initial immersion into the soil life.',
     },
     {
-      num: '02',
-      title: 'Direct Dialogue & Visit',
-      tamil: 'நேரடித் தொடர்பு & வருகை',
-      desc: 'Submit your inquiry, connect with community stewards, and attend a hands-on weekend orientation at Dharmapuramadam.',
+      level: '2',
+      title: 'Volunteers (தன்னார்வலர்கள்)',
+      duration: '15–30 Days',
+      desc: 'Hands-on participation in natural building, earthen agriculture, well maintenance, and cooking.',
     },
     {
-      num: '03',
-      title: 'Mutual Living Stay',
-      tamil: 'வாழ்வியல் அனுபவம்',
-      desc: 'Experience daily soil stewardship, heirloom cooking, spring water hydration, and collective silence over 1 to 3 months.',
+      level: '3',
+      title: 'Members (உறுப்பினர்கள்)',
+      duration: '1–3 Months',
+      desc: 'Transition phase, deep alignment with the natural living manifesto and consensus circle.',
     },
     {
-      num: '04',
-      title: 'Consensus Invitation',
-      tamil: 'ஒருமித்த அழைப்பு',
-      desc: 'Circle consultation and formal mutual invitation to settle as a permanent resident steward family in the sanctuary.',
+      level: '4',
+      title: 'Custodians (நிலக் காவலர்கள்)',
+      duration: 'Permanent Living',
+      desc: 'Full-time residency, lifelong stewardship of the commons, and participation in governance.',
+    },
+    {
+      level: '5',
+      title: 'Well Wishers (நல விரும்பிகள்)',
+      duration: 'Occasional Support',
+      desc: 'External aligned supporters offering seeds, tools, wisdom, and infrastructure funds.',
     },
   ];
 
@@ -114,164 +123,202 @@ export const JoinPage: React.FC<JoinPageProps> = ({ navigate, showToast }) => {
         <Container>
           <div className="max-w-3xl space-y-4">
             <span className="text-xs font-semibold uppercase tracking-widest text-[#8B5A2B] block">
-              Join the Fellowship • இணைவோம்
+              Membership & Alignment Pathways (Slide 20)
             </span>
             <h1 className="text-3xl sm:text-5xl font-bold text-[#2E4F2B] tracking-tight leading-tight">
-              Becoming a Resident Steward of Iyalvanam
+              Membership Pathways & Custodian Alignment
             </h1>
             <p className="text-sm text-[#8B5A2B] font-medium">
               “சுதந்திரமும் இயற்கையோடு இணைந்த கூட்டு வாழ்வும்”
             </p>
             <p className="text-base sm:text-lg text-[#5A5046] leading-relaxed pt-1">
-              Iyalvanam is not a gated commercial estate or real estate development; it is a sacred fellowship of families choosing non-artificial living, ancestral ecology, and consensus stewardship under perpetual trust.
+              Iyalvanam and SEYON welcome people at every stage of alignment — from curious visitors to permanent custodians of the sacred land.
             </p>
           </div>
         </Container>
       </section>
 
-      {/* 2. Responsive 4-Step Pathway */}
+      {/* 2. Five Membership Pathways (Slide 20) */}
       <Container>
         <div className="space-y-10">
           <div className="max-w-2xl space-y-2">
             <span className="text-xs font-semibold uppercase tracking-widest text-[#8B5A2B]">
-              The Pathway
+              The 5 Stages of Alignment
             </span>
             <h2 className="text-2xl sm:text-4xl font-bold text-[#2E4F2B]">
-              The Four-Stage Alignment Pathway
+              Membership Pathways
             </h2>
             <p className="text-sm text-[#5A5046]">
-              A gradual, transparent journey designed to ensure deep alignment between seeking families and the sanctuary ecosystem.
+              A natural, unhurried progression from initial curiosity to lifelong land stewardship.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
-            {steps.map((step, idx) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+            {pathways.map((p) => (
               <div 
-                key={step.num}
-                className="bg-[#FAF8F3] border border-[#E3DDD2] p-6 rounded-sm space-y-4 hover:border-[#2E4F2B]/40 transition-colors flex flex-col justify-between"
+                key={p.level}
+                className="bg-[#FAF8F3] border border-[#E3DDD2] p-6 rounded-sm space-y-3 hover:border-[#2E4F2B]/40 transition-colors flex flex-col justify-between"
               >
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between border-b border-[#E3DDD2] pb-3">
-                    <span className="text-xl font-mono font-bold text-[#2E4F2B]">
-                      {step.num}
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between border-b border-[#E3DDD2] pb-2">
+                    <span className="text-lg font-mono font-bold text-[#2E4F2B]">
+                      Level {p.level}
                     </span>
-                    <span className="text-[10px] uppercase tracking-wider font-semibold text-[#8B5A2B] bg-[#ECE6D8] px-2 py-0.5 rounded-xs">
-                      Stage {idx + 1}
+                    <span className="text-[10px] uppercase font-bold text-[#8B5A2B] bg-[#ECE6D8] px-2 py-0.5 rounded-xs">
+                      {p.duration}
                     </span>
                   </div>
-                  <h3 className="text-base font-bold text-[#241D17]">
-                    {step.title}
+                  <h3 className="text-sm font-bold text-[#241D17]">
+                    {p.title}
                   </h3>
-                  <p className="text-xs text-[#8B5A2B] font-medium">
-                    {step.tamil}
-                  </p>
                   <p className="text-xs text-[#5A5046] leading-relaxed">
-                    {step.desc}
+                    {p.desc}
                   </p>
                 </div>
-
-                {idx < steps.length - 1 && (
-                  <div className="hidden lg:block pt-2 text-right text-xs font-mono text-[#8B5A2B]/60">
-                    Next Step →
-                  </div>
-                )}
               </div>
             ))}
           </div>
         </div>
       </Container>
 
-      {/* 3. Financial Structure & Transparency */}
+      {/* 3. Custodian Entry & Exit Protocols (Slide 21) */}
       <section className="bg-[#FAF8F3] py-16 sm:py-20 border-t border-b border-[#E3DDD2]">
         <Container>
           <div className="space-y-12">
             
             <div className="max-w-2xl space-y-2">
               <span className="text-xs font-semibold uppercase tracking-widest text-[#8B5A2B]">
-                Financial Transparency
+                Governance Protocols (Slide 21)
               </span>
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#2E4F2B]">
-                Community Foundations & Resource Allocation
+              <h2 className="text-2xl sm:text-4xl font-bold text-[#2E4F2B]">
+                Custodian Entry & Exit
               </h2>
-              <p className="text-sm text-[#5A5046]">
-                Every rupee contributed is dedicated exclusively to sanctuary commons infrastructure.
-              </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               
-              <div className="bg-[#F5F2EB] border border-[#E3DDD2] p-8 rounded-sm space-y-4">
-                <span className="text-xs font-semibold uppercase tracking-widest text-[#8B5A2B] block">
-                  01 / Contribution
-                </span>
-                <h3 className="text-xl font-bold text-[#241D17]">
-                  Joining Contribution
-                </h3>
-                <div className="p-4 bg-[#FAF8F3] border border-[#E3DDD2] rounded-xs space-y-1">
-                  <div className="text-2xl font-bold text-[#2E4F2B]">
-                    ₹1,00,000
-                  </div>
-                  <div className="text-xs text-[#5A5046]">For up to 3 family members</div>
-                  <div className="text-xs font-semibold text-[#8B5A2B] pt-0.5">
-                    + ₹25,000 per additional member
-                  </div>
-                </div>
-                <p className="text-xs text-[#5A5046] leading-relaxed">
-                  <strong>Non-refundable:</strong> Dedicated 100% to permanent trust land purchase, open well infrastructure, and agroforestry development.
-                </p>
-              </div>
-
+              {/* Entry Protocol */}
               <div className="bg-[#F5F2EB] border border-[#E3DDD2] p-8 rounded-sm space-y-4">
                 <span className="text-xs font-semibold uppercase tracking-widest text-[#2E4F2B] block">
-                  02 / Self-Reliance
+                  Entry by Alignment
                 </span>
                 <h3 className="text-xl font-bold text-[#241D17]">
-                  Personal Preparedness
+                  By Alignment, Not Commercial Application
                 </h3>
-                <p className="text-xs text-[#5A5046] leading-relaxed">
-                  Joining members maintain personal financial stability for clothing, travel, and personal expenses during the transition.
+                <p className="text-xs sm:text-sm text-[#5A5046] leading-relaxed">
+                  There is no formal corporate application. Entry happens through direct interaction — clarity of intent and mutual resonance with natural laws. If aligned, the individual or family is invited to join.
                 </p>
-                <ul className="space-y-2 text-xs text-[#5A5046] pt-1">
-                  <li className="flex items-start gap-2">
-                    <LeafBullet className="w-3 h-3 text-[#2E4F2B] mt-0.5 shrink-0" />
-                    <span>Independent emergency savings fund.</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <LeafBullet className="w-3 h-3 text-[#2E4F2B] mt-0.5 shrink-0" />
-                    <span>Willingness for daily physical soil work (shramadaan).</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <LeafBullet className="w-3 h-3 text-[#2E4F2B] mt-0.5 shrink-0" />
-                    <span>Embracing simplicity and minimal consumption.</span>
-                  </li>
-                </ul>
+                <div className="p-4 bg-[#FAF8F3] border border-[#E3DDD2] rounded-xs space-y-2 text-xs text-[#5A5046]">
+                  <strong className="text-[#241D17] block">No Ownership or Claims:</strong>
+                  <p>On leaving, no individual can claim land, housing, infrastructure, or shared assets — ever.</p>
+                </div>
               </div>
 
+              {/* Voluntary Exit & Continuity */}
               <div className="bg-[#F5F2EB] border border-[#E3DDD2] p-8 rounded-sm space-y-4">
                 <span className="text-xs font-semibold uppercase tracking-widest text-[#8B5A2B] block">
-                  03 / Peaceful Transition
+                  Voluntary Exit & Continuity
                 </span>
                 <h3 className="text-xl font-bold text-[#241D17]">
-                  Voluntary Exit Policy
+                  Dignified Voluntary Exit
                 </h3>
-                <p className="text-xs text-[#5A5046] leading-relaxed">
-                  Members may choose to leave the community voluntarily at any time with complete dignity, peace, and mutual blessing.
-                </p>
-                <div className="p-3 bg-[#FAF8F3] border border-[#E3DDD2] text-xs text-[#5A5046] space-y-1">
-                  <p>• Joining contribution is non-refundable.</p>
-                  <p>• No individual claims on trust land assets.</p>
-                  <p>• Movable personal belongings remain your own.</p>
+                <ul className="text-xs sm:text-sm text-[#5A5046] space-y-2">
+                  <li>• Inform in advance with sufficient transition time.</li>
+                  <li>• Hand over responsibilities properly to the circle.</li>
+                  <li>• Joining contribution is non-refundable (allocated to permanent commons).</li>
+                  <li>• Voluntary contributions may be refunded without interest, subject to availability of funds.</li>
+                </ul>
+                <div className="p-4 bg-[#FAF8F3] border border-[#E3DDD2] rounded-xs space-y-1 text-xs text-[#5A5046]">
+                  <strong className="text-[#241D17] block">Ecosystem Continuity:</strong>
+                  <p>Individuals may transition. The community remains stable. Alignment is ongoing — participation is continuous.</p>
                 </div>
               </div>
 
             </div>
+
           </div>
         </Container>
       </section>
 
-      {/* 4. Interactive Inquiry Form Section */}
+      {/* 4. Financial Contribution Policy (Slide 22) */}
       <Container>
-        <div id="join-form-section" className="space-y-8">
+        <div className="space-y-12">
+          
+          <div className="max-w-3xl space-y-2">
+            <span className="text-xs font-semibold uppercase tracking-widest text-[#8B5A2B]">
+              Resource Model (Slide 22)
+            </span>
+            <h2 className="text-2xl sm:text-4xl font-bold text-[#2E4F2B]">
+              Financial Contribution Policy
+            </h2>
+            <p className="text-sm text-[#5A5046]">
+              Money is not a criterion to join. Alignment is. Financial contribution supports the building of the system — it is a commitment, not a fee.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <div className="bg-[#FAF8F3] border border-[#E3DDD2] p-6 rounded-sm space-y-3">
+              <span className="text-xs font-semibold uppercase tracking-widest text-[#8B5A2B] block">
+                01 / Custodians
+              </span>
+              <h3 className="text-base font-bold text-[#241D17]">
+                One-Time Contribution
+              </h3>
+              <div className="p-3 bg-[#F5F2EB] border border-[#E3DDD2] rounded-xs space-y-1">
+                <div className="text-xl font-bold text-[#2E4F2B]">₹1,00,000</div>
+                <div className="text-[11px] text-[#5A5046]">Family up to 3 members</div>
+                <div className="text-[11px] font-semibold text-[#8B5A2B]">+ ₹25,000 / addl. member</div>
+              </div>
+              <p className="text-xs text-[#5A5046] leading-relaxed">
+                Non-refundable donation for setup. No ownership, no financial claim, no control.
+              </p>
+            </div>
+
+            <div className="bg-[#FAF8F3] border border-[#E3DDD2] p-6 rounded-sm space-y-3">
+              <span className="text-xs font-semibold uppercase tracking-widest text-[#2E4F2B] block">
+                02 / Additional Support
+              </span>
+              <h3 className="text-base font-bold text-[#241D17]">
+                Voluntary Support
+              </h3>
+              <p className="text-xs text-[#5A5046] leading-relaxed">
+                Voluntary, based on individual capacity. All funds flow through SEYON. All assets remain with Iyalvanam.
+              </p>
+            </div>
+
+            <div className="bg-[#FAF8F3] border border-[#E3DDD2] p-6 rounded-sm space-y-3">
+              <span className="text-xs font-semibold uppercase tracking-widest text-[#8B5A2B] block">
+                03 / Preparedness
+              </span>
+              <h3 className="text-base font-bold text-[#241D17]">
+                Personal Preparedness
+              </h3>
+              <p className="text-xs text-[#5A5046] leading-relaxed">
+                Members are asked to hold enough funds to manage their own personal expenses for <strong>2 years</strong>, as the community is still being built.
+              </p>
+            </div>
+
+            <div className="bg-[#FAF8F3] border border-[#E3DDD2] p-6 rounded-sm space-y-3">
+              <span className="text-xs font-semibold uppercase tracking-widest text-[#2E4F2B] block">
+                04 / Well Wishers
+              </span>
+              <h3 className="text-base font-bold text-[#241D17]">
+                Events & Non-Monetary
+              </h3>
+              <p className="text-xs text-[#5A5046] leading-relaxed">
+                Contributions through camp fees, events, and donations — not only money, but seeds, saplings, books, tools, or funding specific infrastructure.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+      </Container>
+
+      {/* 5. Interactive Inquiry Form Section */}
+      <Container>
+        <div id="join-form-section" className="space-y-8 pt-8 border-t border-[#E3DDD2]">
           <div className="max-w-2xl space-y-2">
             <span className="text-xs font-semibold uppercase tracking-widest text-[#8B5A2B]">
               Direct Inquiry
