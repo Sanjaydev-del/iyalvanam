@@ -1,27 +1,5 @@
 @import "tailwindcss";
 
-@theme {
-  --color-forest: #2E4F2B;
-  --color-forest-dark: #1E351C;
-  --color-forest-light: #3D6739;
-  --color-earth: #8B5A2B;
-  --color-earth-dark: #66411E;
-  --color-earth-soft: #A6733E;
-  --color-paper: #F5F2EB;
-  --color-paper-card: #FAF8F3;
-  --color-paper-tint: #ECE6D8;
-  --color-sand: #D4C5A9;
-  --color-sand-dark: #BDB198;
-  --color-text-main: #241D17;
-  --color-text-muted: #5C5044;
-  --color-text-light: #7E7163;
-
-  --font-serif: 'Playfair Display', Georgia, Cambria, 'Times New Roman', serif;
-  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-  --font-tamil: 'Noto Sans Tamil', 'Noto Serif Tamil', sans-serif;
-  --font-tamil-serif: 'Noto Serif Tamil', Georgia, serif;
-}
-
 @layer base {
   :root {
     --forest: #2E4F2B;
