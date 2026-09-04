@@ -12,7 +12,6 @@ import {
   HeartPulse, 
   CheckCircle2, 
   XCircle, 
-  Phone, 
   Mail, 
   MessageCircle, 
   Droplets, 
@@ -32,7 +31,7 @@ interface LandingPageProps {
   showToast?: (type: 'success' | 'error' | 'info', message: string, title?: string) => void;
 }
 
-export const LandingPage: React.FC<LandingPageProps> = () => {
+export const LandingPage: React.FC<LandingPageProps> = ({ navigate }) => {
   const { content, language } = useLanguage();
 
   useEffect(() => {
@@ -145,18 +144,28 @@ export const LandingPage: React.FC<LandingPageProps> = () => {
               </div>
             </div>
 
-            {/* Immersive Fine-Art Documentary Landscape Photograph */}
-            <div className="relative aspect-[16/9] sm:aspect-[21/9] overflow-hidden rounded-2xl border border-[#D4C5A9] shadow-xs bg-[#ECE6D8]">
-              <img
-                src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=2000&q=85"
-                alt="Western Ghats lush forest canopy and mountain sanctuary"
-                className="w-full h-full object-cover filter contrast-[0.98] brightness-[0.96]"
-                loading="eager"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent pointer-events-none" />
-              <div className={`absolute bottom-4 left-4 sm:bottom-6 sm:left-6 text-[#FAF8F3] text-xs sm:text-sm max-w-lg drop-shadow-sm ${bodyFont}`}>
-                <span className="font-semibold block">{content.hero.imageCaptionTitle}</span>
-                <span className="text-[11px] opacity-90">{content.hero.imageCaptionSub}</span>
+            {/* Integrated Editorial Documentary Photograph */}
+            <div className="space-y-3 pt-2">
+              <div className="relative aspect-[16/9] sm:aspect-[21/9] overflow-hidden rounded-2xl border border-[#D4C5A9] shadow-xs bg-[#ECE6D8]">
+                <img
+                  src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=2000&q=85"
+                  alt="Western Ghats lush forest canopy and mountain sanctuary"
+                  className="w-full h-full object-cover filter contrast-[0.98] brightness-[0.96]"
+                  loading="eager"
+                />
+              </div>
+
+              {/* Integrated Editorial Caption Bar */}
+              <div className={`flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 px-2 text-xs text-[#5C5044] border-b border-[#D4C5A9]/50 pb-3 ${bodyFont}`}>
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#2E4F2B]" />
+                  <span className="font-semibold text-[#241D17]">{content.hero.imageCaptionTitle}</span>
+                  <span className="text-[#8B5A2B] hidden sm:inline">•</span>
+                  <span className="text-[11px] text-[#5C5044]">{content.hero.imageCaptionSub}</span>
+                </div>
+                <span className="text-[10px] font-mono text-[#8B5A2B] uppercase tracking-wider">
+                  8.96° N, 77.31° E • Dharmapuramadam
+                </span>
               </div>
             </div>
 
@@ -576,29 +585,105 @@ export const LandingPage: React.FC<LandingPageProps> = () => {
               </p>
             </div>
 
-            {/* 3-Part Editorial Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 border-t border-[#D4C5A9] pt-8">
-              {content.community.columns.map((col, idx) => (
-                <div key={idx} className="space-y-4">
-                  <div className="w-10 h-10 rounded-xl bg-[#ECE6D8] flex items-center justify-center text-[#2E4F2B]">
-                    {idx === 0 ? <Wheat className="w-5 h-5" /> : idx === 1 ? <HeartPulse className="w-5 h-5 text-[#8B5A2B]" /> : <Hammer className="w-5 h-5" />}
+            {/* 3 Distinctly Art-Directed Pillars */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch pt-4">
+              
+              {/* Pillar 1: Natural Food — Botanical Heirloom Grain Composition */}
+              <div className="p-7 sm:p-8 rounded-3xl bg-[#FAF8F3] border border-[#D4C5A9] flex flex-col justify-between space-y-6 shadow-xs relative overflow-hidden">
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between pb-3 border-b border-[#D4C5A9]/50">
+                    <span className="text-xs uppercase tracking-widest font-serif font-bold text-[#8B5A2B]">
+                      01 • Natural Food
+                    </span>
+                    <Wheat className="w-5 h-5 text-[#8B5A2B]" />
                   </div>
-                  <h3 className={`font-bold text-xl text-[#2E4F2B] ${headingFont}`}>
-                    {col.title}
+                  <h3 className={`text-2xl font-bold text-[#2E4F2B] leading-tight ${headingFont}`}>
+                    {content.community.columns[0].title}
                   </h3>
                   <p className={`text-xs sm:text-sm text-[#5C5044] leading-relaxed ${bodyFont}`}>
-                    {col.desc}
+                    {content.community.columns[0].desc}
                   </p>
-                  <ul className={`space-y-2 text-xs text-[#241D17] pt-2 ${bodyFont}`}>
-                    {col.points.map((pt, ptIdx) => (
-                      <li key={ptIdx} className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#2E4F2B]" />
-                        <span>{pt}</span>
+                </div>
+
+                <div className="pt-4 border-t border-[#D4C5A9]/40 space-y-2.5">
+                  <span className="text-[10px] font-serif uppercase tracking-wider font-bold text-[#2E4F2B] block">
+                    Living Nourishment Practices
+                  </span>
+                  <ul className={`space-y-2 text-xs text-[#241D17] ${bodyFont}`}>
+                    {content.community.columns[0].points.map((pt, ptIdx) => (
+                      <li key={ptIdx} className="flex items-start gap-2.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#8B5A2B] shrink-0 mt-1.5" />
+                        <span className="leading-snug">{pt}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
-              ))}
+              </div>
+
+              {/* Pillar 2: Living Health — Circadian Solar Rhythm & Hydration */}
+              <div className="p-7 sm:p-8 rounded-3xl bg-[#ECE6D8]/80 border border-[#BDB198]/70 flex flex-col justify-between space-y-6 shadow-xs relative overflow-hidden">
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between pb-3 border-b border-[#BDB198]/50">
+                    <span className="text-xs uppercase tracking-widest font-serif font-bold text-[#2E4F2B]">
+                      02 • Living Health
+                    </span>
+                    <Sun className="w-5 h-5 text-[#2E4F2B]" />
+                  </div>
+                  <h3 className={`text-2xl font-bold text-[#2E4F2B] leading-tight ${headingFont}`}>
+                    {content.community.columns[1].title}
+                  </h3>
+                  <p className={`text-xs sm:text-sm text-[#5C5044] leading-relaxed ${bodyFont}`}>
+                    {content.community.columns[1].desc}
+                  </p>
+                </div>
+
+                <div className="pt-4 border-t border-[#BDB198]/50 space-y-2.5">
+                  <span className="text-[10px] font-serif uppercase tracking-wider font-bold text-[#8B5A2B] block">
+                    Circadian Harmony & Natural Water
+                  </span>
+                  <div className={`divide-y divide-[#BDB198]/40 text-xs text-[#241D17] ${bodyFont}`}>
+                    {content.community.columns[1].points.map((pt, ptIdx) => (
+                      <div key={ptIdx} className="py-2 flex items-center justify-between">
+                        <span>{pt}</span>
+                        <HeartPulse className="w-3.5 h-3.5 text-[#2E4F2B] shrink-0 ml-2 opacity-60" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Pillar 3: Sacred Work & Craft — Earth Masonry & Handcraft */}
+              <div className="p-7 sm:p-8 rounded-3xl bg-[#FAF8F3] border border-[#D4C5A9] flex flex-col justify-between space-y-6 shadow-xs relative overflow-hidden">
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between pb-3 border-b border-[#D4C5A9]/50">
+                    <span className="text-xs uppercase tracking-widest font-serif font-bold text-[#8B5A2B]">
+                      03 • Sacred Work & Craft
+                    </span>
+                    <Hammer className="w-5 h-5 text-[#8B5A2B]" />
+                  </div>
+                  <h3 className={`text-2xl font-bold text-[#2E4F2B] leading-tight ${headingFont}`}>
+                    {content.community.columns[2].title}
+                  </h3>
+                  <p className={`text-xs sm:text-sm text-[#5C5044] leading-relaxed ${bodyFont}`}>
+                    {content.community.columns[2].desc}
+                  </p>
+                </div>
+
+                <div className="pt-4 border-t border-[#D4C5A9]/40 space-y-2.5">
+                  <span className="text-[10px] font-serif uppercase tracking-wider font-bold text-[#2E4F2B] block">
+                    Hand-Crafted Sovereign Labor
+                  </span>
+                  <ul className={`space-y-2 text-xs text-[#241D17] ${bodyFont}`}>
+                    {content.community.columns[2].points.map((pt, ptIdx) => (
+                      <li key={ptIdx} className="flex items-start gap-2.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#2E4F2B] shrink-0 mt-1.5" />
+                        <span className="leading-snug">{pt}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
             </div>
           </div>
         </Container>
@@ -611,7 +696,7 @@ export const LandingPage: React.FC<LandingPageProps> = () => {
         <Container>
           <div className="space-y-16">
             
-            {/* 3-Step Pathway Stepper */}
+            {/* 3-Step Connected Pathway Stepper */}
             <div className="space-y-10">
               <div className="max-w-2xl space-y-2">
                 <span className={`text-xs uppercase tracking-widest text-[#8B5A2B] font-bold block ${labelFont}`}>
@@ -625,21 +710,49 @@ export const LandingPage: React.FC<LandingPageProps> = () => {
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 border-t border-[#D4C5A9] pt-8">
-                {content.contribution.steps.map((step, idx) => (
-                  <div key={idx} className="space-y-3">
-                    <div className="flex items-center justify-between text-xs pb-2 border-b border-[#D4C5A9]/50">
-                      <span className="font-serif font-bold text-[#8B5A2B]">{step.stepNumber}</span>
-                      <span className="text-[#5C5044] font-medium">{step.stepType}</span>
+              {/* Connected Desktop Pathway: 01 ───────── 02 ───────── 03 */}
+              <div className="relative w-full pt-2">
+                {/* Horizontal Timeline Connector on Desktop */}
+                <div className="hidden md:block absolute top-[44px] left-[12%] right-[12%] h-[2px] bg-[#D4C5A9] z-0 pointer-events-none" />
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 w-full min-w-0 items-stretch">
+                  {content.contribution.steps.map((step, idx) => (
+                    <div 
+                      key={idx} 
+                      className="relative z-10 flex flex-col justify-between p-6 sm:p-7 rounded-2xl bg-[#FAF8F3] border border-[#D4C5A9] shadow-xs space-y-5 min-w-0"
+                    >
+                      {/* Step Header with Connected Badge */}
+                      <div className="flex items-center justify-between">
+                        <div className="w-11 h-11 rounded-full bg-[#FAF8F3] border-2 border-[#2E4F2B] text-[#2E4F2B] font-serif font-bold text-sm flex items-center justify-center shadow-xs shrink-0">
+                          0{idx + 1}
+                        </div>
+                        <span className="text-[11px] uppercase tracking-wider font-serif font-bold text-[#8B5A2B] bg-[#ECE6D8] px-2.5 py-1 rounded-md">
+                          {step.stepType}
+                        </span>
+                      </div>
+
+                      {/* Content */}
+                      <div className="space-y-2.5 flex-1">
+                        <h3 className={`font-bold text-lg sm:text-xl text-[#2E4F2B] leading-snug ${headingFont}`}>
+                          {step.title}
+                        </h3>
+                        <p className={`text-xs sm:text-sm text-[#5C5044] leading-relaxed ${bodyFont}`}>
+                          {step.desc}
+                        </p>
+                      </div>
+
+                      {/* Footer Sequence Indicator */}
+                      <div className="pt-3 border-t border-[#D4C5A9]/40 flex items-center justify-between text-[11px] text-[#8B5A2B] font-serif">
+                        <span>Pathway Step 0{idx + 1}</span>
+                        {idx < 2 ? (
+                          <span className="hidden md:inline text-xs text-[#2E4F2B] font-medium">Continue →</span>
+                        ) : (
+                          <span className="text-xs text-[#2E4F2B] font-bold">Sanctuary Arrival ✓</span>
+                        )}
+                      </div>
                     </div>
-                    <h3 className={`font-bold text-lg text-[#2E4F2B] ${headingFont}`}>
-                      {step.title}
-                    </h3>
-                    <p className={`text-xs sm:text-sm text-[#5C5044] leading-relaxed ${bodyFont}`}>
-                      {step.desc}
-                    </p>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
 
@@ -709,7 +822,7 @@ export const LandingPage: React.FC<LandingPageProps> = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 border-t border-[#D4C5A9] pt-10">
               
               {/* Founder 1: Rajesh */}
-              <div className="space-y-6 flex flex-col justify-between">
+              <div className="space-y-6 flex flex-col justify-between p-7 sm:p-8 rounded-3xl bg-[#FAF8F3] border border-[#D4C5A9]">
                 <div className="space-y-6">
                   <div className="flex items-center gap-5">
                     <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden border-2 border-[#2E4F2B]/30 shrink-0 bg-[#ECE6D8] shadow-xs">
@@ -743,24 +856,25 @@ export const LandingPage: React.FC<LandingPageProps> = () => {
                     {content.founders.founderBio2}
                   </p>
 
-                  <blockquote className={`p-4 bg-[#FAF8F3] border-l-3 border-[#2E4F2B] rounded-r-xl text-xs sm:text-sm italic text-[#241D17] ${headingFont}`}>
+                  <blockquote className={`p-4 bg-[#ECE6D8]/60 border-l-3 border-[#2E4F2B] rounded-r-xl text-xs sm:text-sm italic text-[#241D17] ${headingFont}`}>
                     {content.founders.founderQuote}
                   </blockquote>
                 </div>
 
-                <div className="pt-2">
-                  <a
-                    href="tel:+919600756007"
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#2E4F2B] text-[#FAF8F3] text-xs font-semibold hover:bg-[#1A3018] transition-colors shadow-xs"
+                <div className="pt-3 border-t border-[#D4C5A9]/50 flex items-center justify-between">
+                  <button
+                    onClick={() => navigate('/leadership/founder')}
+                    className="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-serif font-bold text-[#2E4F2B] hover:text-[#1E351C] transition-colors py-1 group cursor-pointer"
                   >
-                    <Phone className="w-3.5 h-3.5 text-[#D4C5A9]" />
-                    <span>{content.founders.founderCallBtn}</span>
-                  </a>
+                    <span>Read Full Story & Vision</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-[#8B5A2B] group-hover:translate-x-1 transition-transform" />
+                  </button>
+                  <span className="text-[11px] text-[#8B5A2B] font-serif">Founder Profile →</span>
                 </div>
               </div>
 
               {/* Founder 2: Shanmugavel */}
-              <div className="space-y-6 flex flex-col justify-between">
+              <div className="space-y-6 flex flex-col justify-between p-7 sm:p-8 rounded-3xl bg-[#FAF8F3] border border-[#D4C5A9]">
                 <div className="space-y-6">
                   <div className="flex items-center gap-5">
                     <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden border-2 border-[#8B5A2B]/30 shrink-0 bg-[#ECE6D8] shadow-xs">
@@ -794,19 +908,20 @@ export const LandingPage: React.FC<LandingPageProps> = () => {
                     {content.founders.coFounderBio2}
                   </p>
 
-                  <blockquote className={`p-4 bg-[#FAF8F3] border-l-3 border-[#8B5A2B] rounded-r-xl text-xs sm:text-sm italic text-[#241D17] ${headingFont}`}>
+                  <blockquote className={`p-4 bg-[#ECE6D8]/60 border-l-3 border-[#8B5A2B] rounded-r-xl text-xs sm:text-sm italic text-[#241D17] ${headingFont}`}>
                     {content.founders.coFounderQuote}
                   </blockquote>
                 </div>
 
-                <div className="pt-2">
-                  <a
-                    href="tel:+919444098765"
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#8B5A2B] text-[#FAF8F3] text-xs font-semibold hover:bg-[#66411E] transition-colors shadow-xs"
+                <div className="pt-3 border-t border-[#D4C5A9]/50 flex items-center justify-between">
+                  <button
+                    onClick={() => navigate('/leadership/co-founder')}
+                    className="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-serif font-bold text-[#8B5A2B] hover:text-[#5C3818] transition-colors py-1 group cursor-pointer"
                   >
-                    <Phone className="w-3.5 h-3.5 text-[#D4C5A9]" />
-                    <span>{content.founders.coFounderCallBtn}</span>
-                  </a>
+                    <span>Read Full Mission & Camps</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-[#2E4F2B] group-hover:translate-x-1 transition-transform" />
+                  </button>
+                  <span className="text-[11px] text-[#2E4F2B] font-serif">Co-Founder Profile →</span>
                 </div>
               </div>
 

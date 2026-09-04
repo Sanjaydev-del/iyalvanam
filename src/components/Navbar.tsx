@@ -3,10 +3,7 @@ import {
   Menu, 
   X, 
   ChevronRight, 
-  ArrowRight,
-  MapPin,
-  MessageCircle,
-  Phone
+  MessageCircle 
 } from 'lucide-react';
 import { IyalvanamEmblem, SeyonEmblem } from './OrganicIcons';
 import { useLanguage } from '../context/LanguageContext';
@@ -110,17 +107,18 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, navigate }) => {
     <>
       {/* ========================================================================= */}
       {/* 1. DESKTOP & LAPTOP LEFT SIDEBAR NAVBAR (lg: >= 1024px)                  */}
+      {/* Quiet Editorial Navigation Rail — Minimal, Human, Uncluttered            */}
       {/* ========================================================================= */}
       <aside
         id="desktop-sidebar-nav"
         className="hidden lg:flex flex-col fixed left-0 top-0 bottom-0 w-72 xl:w-80 bg-[#FAF8F3] border-r border-[#D4C5A9]/50 z-40 select-none justify-between overflow-y-auto"
       >
-        {/* Top Branding Section + Language Switcher */}
-        <div className="p-6 xl:p-7 space-y-4 border-b border-[#D4C5A9]/40">
+        {/* Top Branding Header with Single Global Language Selector */}
+        <div className="p-6 xl:p-7 space-y-3.5 border-b border-[#D4C5A9]/40">
           <div className="flex items-center justify-between pb-1">
             <div className="flex items-center gap-2">
-              <IyalvanamEmblem size={30} className="w-7.5 h-7.5 text-[#2E4F2B]" />
-              <SeyonEmblem size={30} className="w-7.5 h-7.5 text-[#8B5A2B]" />
+              <IyalvanamEmblem size={28} className="w-7 h-7 text-[#2E4F2B]" />
+              <SeyonEmblem size={28} className="w-7 h-7 text-[#8B5A2B]" />
             </div>
             {/* Desktop Language Switcher */}
             <LanguageToggle size="sm" />
@@ -128,31 +126,18 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, navigate }) => {
 
           <div 
             onClick={() => handleNav('#hero')}
-            className="cursor-pointer group space-y-1"
+            className="cursor-pointer group space-y-1 block"
           >
-            <span className="text-base xl:text-lg font-serif-heading font-bold text-[#2E4F2B] tracking-tight block leading-snug">
+            <span className="text-base xl:text-lg font-serif-heading font-bold text-[#2E4F2B] tracking-tight block leading-snug group-hover:text-[#1E351C] transition-colors">
               IYALVANAM & SEYON
             </span>
             <span className={`text-[11px] block font-medium ${language === 'ta' ? 'font-tamil text-[#2E4F2B]' : 'text-[#8B5A2B] font-serif'}`}>
               {content.nav.subTitle}
             </span>
-            <span className="text-[10px] text-[#5C5044] font-serif uppercase tracking-wider block">
-              {content.nav.tagline}
-            </span>
-          </div>
-
-          <div className="pt-2 border-t border-[#D4C5A9]/30 flex items-center justify-between text-[11px] text-[#5C5044]">
-            <span className="flex items-center gap-1.5 font-medium">
-              <MapPin className="w-3.5 h-3.5 text-[#8B5A2B] shrink-0" />
-              <span>{content.nav.locationBadge}</span>
-            </span>
-            <span className={`text-[10px] ${language === 'ta' ? 'font-tamil text-[#2E4F2B] font-semibold' : 'text-[#8B5A2B]'}`}>
-              Western Ghats
-            </span>
           </div>
         </div>
 
-        {/* Navigation Jump Links (Single Active Language) */}
+        {/* Navigation Rail Links */}
         <nav className="flex-1 px-4 py-4 space-y-1 overflow-y-auto">
           {navItems.map((item) => {
             const isAnchor = item.path.startsWith('#');
@@ -165,7 +150,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, navigate }) => {
               <button
                 key={item.path}
                 onClick={() => handleNav(item.path)}
-                className={`w-full text-left px-3.5 py-2 rounded-lg text-xs font-medium tracking-wide transition-all flex items-center justify-between group cursor-pointer ${
+                className={`w-full text-left px-3.5 py-2.5 rounded-lg text-xs font-medium tracking-wide transition-all flex items-center justify-between group cursor-pointer ${
                   language === 'ta' ? 'font-tamil' : 'font-serif'
                 } ${
                   isActive
@@ -174,33 +159,23 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, navigate }) => {
                 }`}
               >
                 <span>{item.name}</span>
-                <ChevronRight className={`w-3.5 h-3.5 transition-opacity ${isActive ? 'opacity-100' : 'opacity-30 group-hover:opacity-70'}`} />
+                <ChevronRight className={`w-3.5 h-3.5 transition-opacity ${isActive ? 'opacity-100 text-[#FAF8F3]' : 'opacity-25 group-hover:opacity-70 text-[#8B5A2B]'}`} />
               </button>
             );
           })}
         </nav>
 
-        {/* Bottom Actions & WhatsApp */}
-        <div className="p-5 xl:p-6 border-t border-[#D4C5A9]/40 space-y-3 bg-[#FAF8F3]">
+        {/* Bottom Primary Conversion Action (Single CTA) */}
+        <div className="p-5 xl:p-6 border-t border-[#D4C5A9]/40 bg-[#FAF8F3]">
           <a
             href="https://tinyurl.com/2zap33fy"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full py-2.5 px-3 rounded-lg bg-[#2E4F2B] hover:bg-[#1E351C] text-[#FAF8F3] text-xs font-semibold text-center flex items-center justify-center gap-2 transition-all cursor-pointer shadow-xs"
+            className="w-full py-3 px-4 rounded-xl bg-[#2E4F2B] hover:bg-[#1E351C] text-[#FAF8F3] text-xs font-semibold text-center flex items-center justify-center gap-2.5 transition-all cursor-pointer shadow-xs"
           >
             <MessageCircle className="w-4 h-4 text-[#D4C5A9]" />
             <span className={language === 'ta' ? 'font-tamil' : 'font-serif'}>{content.nav.joinCommunity}</span>
           </a>
-
-          <div className="pt-2 flex items-center justify-between text-[11px] text-[#5C5044] font-serif">
-            <span className="flex items-center gap-1">
-              <Phone className="w-3 h-3 text-[#8B5A2B]" />
-              <a href="tel:+919600756007" className="hover:text-[#2E4F2B] hover:underline">
-                {content.nav.callFounder}
-              </a>
-            </span>
-            <span className="text-[10px] text-[#8B5A2B]">Rajesh (Founder)</span>
-          </div>
         </div>
       </aside>
 
@@ -267,12 +242,6 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, navigate }) => {
               className="w-full max-h-[calc(100vh-53px)] overflow-y-auto bg-[#FAF8F3] border-b border-[#D4C5A9] px-5 py-5 space-y-4 shadow-xl"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Language Switcher Row in Drawer */}
-              <div className="pb-3 border-b border-[#D4C5A9]/40 flex items-center justify-between">
-                <span className="text-xs font-medium text-[#5C5044]">Language / மொழி:</span>
-                <LanguageToggle size="sm" />
-              </div>
-
               <div className="grid grid-cols-1 gap-1">
                 {navItems.map((item) => {
                   const isAnchor = item.path.startsWith('#');
@@ -298,30 +267,13 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, navigate }) => {
                 })}
               </div>
 
-              {/* Mobile Drawer Direct Phone Numbers */}
-              <div className="p-3.5 bg-[#ECE6D8]/60 rounded-xl border border-[#D4C5A9]/60 space-y-2">
-                <span className="text-[10px] font-serif uppercase tracking-wider text-[#8B5A2B] font-bold block">
-                  {content.nav.foundersContactHeader}
-                </span>
-                <div className="flex flex-col gap-1.5 text-xs font-serif text-[#241D17]">
-                  <a href="tel:+919600756007" className="flex items-center justify-between hover:text-[#2E4F2B]">
-                    <span>• Rajesh (Founder):</span>
-                    <span className="font-semibold">+91 96007 56007</span>
-                  </a>
-                  <a href="tel:+919444098765" className="flex items-center justify-between hover:text-[#2E4F2B]">
-                    <span>• Shanmugavel (Co-Founder):</span>
-                    <span className="font-semibold">+91 94440 98765</span>
-                  </a>
-                </div>
-              </div>
-
-              {/* Mobile Drawer WhatsApp Button */}
+              {/* Mobile Drawer Primary CTA */}
               <div className="pt-2 border-t border-[#D4C5A9]/40">
                 <a
                   href="https://tinyurl.com/2zap33fy"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full py-3 rounded-xl bg-[#2E4F2B] text-[#FAF8F3] text-xs font-semibold text-center flex items-center justify-center gap-2 shadow-xs cursor-pointer"
+                  className="w-full py-3 rounded-xl bg-[#2E4F2B] hover:bg-[#1E351C] text-[#FAF8F3] text-xs font-semibold text-center flex items-center justify-center gap-2 shadow-xs cursor-pointer"
                 >
                   <MessageCircle className="w-4 h-4 text-[#D4C5A9]" />
                   <span className={language === 'ta' ? 'font-tamil' : 'font-serif'}>{content.nav.joinCommunity}</span>

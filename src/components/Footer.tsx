@@ -4,11 +4,11 @@ import {
   Mail, 
   Phone, 
   MessageCircle,
-  ArrowRight
+  ArrowRight,
+  ExternalLink
 } from 'lucide-react';
 import { IyalvanamEmblem, SeyonEmblem } from './OrganicIcons';
 import { useLanguage } from '../context/LanguageContext';
-import { LanguageToggle } from './LanguageToggle';
 
 interface FooterProps {
   navigate: (path: string) => void;
@@ -55,18 +55,16 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
             </p>
           </div>
 
-          <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="pt-2 flex items-center justify-center">
             <a
               href="https://tinyurl.com/2zap33fy"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-4 rounded-xl bg-[#8B5A2B] hover:bg-[#66411E] text-[#FAF8F3] text-sm font-semibold tracking-wide flex items-center gap-3 transition-all shadow-md cursor-pointer"
+              className="px-9 py-4 rounded-xl bg-[#8B5A2B] hover:bg-[#66411E] text-[#FAF8F3] text-sm font-semibold tracking-wide flex items-center gap-3 transition-all shadow-md cursor-pointer"
             >
               <MessageCircle className="w-5 h-5 text-[#D4C5A9]" />
               <span className={isTamil ? 'font-tamil' : 'font-serif'}>{ftr.bannerBtn}</span>
             </a>
-
-            <LanguageToggle size="md" />
           </div>
         </div>
       </div>
@@ -122,8 +120,16 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
           </span>
           <div className="space-y-3 text-[#F5F2EB]/85 font-sans">
             <div className="p-3.5 bg-[#1A3018] rounded-xl border border-[#D4C5A9]/20 space-y-1">
-              <div className={`font-bold text-xs text-[#FAF8F3] ${isTamil ? 'font-tamil' : 'font-serif'}`}>
-                {content.founders.founderName}
+              <div className="flex items-center justify-between">
+                <div className={`font-bold text-xs text-[#FAF8F3] ${isTamil ? 'font-tamil' : 'font-serif'}`}>
+                  {content.founders.founderName}
+                </div>
+                <button
+                  onClick={() => navigate('/leadership/founder')}
+                  className="text-[10px] text-[#D4C5A9] hover:text-[#FAF8F3] underline cursor-pointer"
+                >
+                  Profile →
+                </button>
               </div>
               <div className={`text-[11px] text-[#D4C5A9] ${isTamil ? 'font-tamil' : 'font-serif'}`}>
                 {ftr.founderTitle}
@@ -135,8 +141,16 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
             </div>
 
             <div className="p-3.5 bg-[#1A3018] rounded-xl border border-[#D4C5A9]/20 space-y-1">
-              <div className={`font-bold text-xs text-[#FAF8F3] ${isTamil ? 'font-tamil' : 'font-serif'}`}>
-                {content.founders.coFounderName}
+              <div className="flex items-center justify-between">
+                <div className={`font-bold text-xs text-[#FAF8F3] ${isTamil ? 'font-tamil' : 'font-serif'}`}>
+                  {content.founders.coFounderName}
+                </div>
+                <button
+                  onClick={() => navigate('/leadership/co-founder')}
+                  className="text-[10px] text-[#D4C5A9] hover:text-[#FAF8F3] underline cursor-pointer"
+                >
+                  Profile →
+                </button>
               </div>
               <div className={`text-[11px] text-[#D4C5A9] ${isTamil ? 'font-tamil' : 'font-serif'}`}>
                 {ftr.coFounderTitle}
