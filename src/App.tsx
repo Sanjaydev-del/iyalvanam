@@ -108,7 +108,7 @@ export default function App() {
 
   return (
     <AuthProvider>
-      <div className="min-h-screen flex flex-col bg-[#f0e6d2] text-[#2d2013] font-sans antialiased selection:bg-[#7a2e1a] selection:text-[#f7f2e7]">
+      <div className="min-h-screen flex flex-col bg-[#F5F2EB] text-[#241D17] font-sans antialiased selection:bg-[#2E4F2B] selection:text-[#F5F2EB]">
         {/* Navigation Component (Left Sidebar on Desktop lg+, Top Sticky on Mobile) */}
         <Navbar currentPath={currentPath} navigate={navigate} />
 

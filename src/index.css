@@ -1,32 +1,63 @@
 @import "tailwindcss";
 
+@theme {
+  --color-forest: #2E4F2B;
+  --color-forest-dark: #1E351C;
+  --color-forest-light: #3D6739;
+  --color-earth: #8B5A2B;
+  --color-earth-dark: #66411E;
+  --color-earth-soft: #A6733E;
+  --color-paper: #F5F2EB;
+  --color-paper-card: #FAF8F3;
+  --color-paper-tint: #ECE6D8;
+  --color-sand: #D4C5A9;
+  --color-sand-dark: #BDB198;
+  --color-text-main: #241D17;
+  --color-text-muted: #5C5044;
+  --color-text-light: #7E7163;
+
+  --font-serif: 'Playfair Display', Georgia, Cambria, 'Times New Roman', serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-tamil: 'Noto Sans Tamil', 'Noto Serif Tamil', sans-serif;
+  --font-tamil-serif: 'Noto Serif Tamil', Georgia, serif;
+}
+
 @layer base {
   :root {
-    --color-forest: #1b331b;
-    --color-forest-dark: #122412;
-    --color-terracotta: #6b2816;
-    --color-terracotta-dark: #501d0f;
-    --color-parchment: #f4eedb;
-    --color-parchment-light: #faf6eb;
-    --color-parchment-deep: #e8dfc8;
-    --color-espresso: #261a12;
-    --color-muted: #574637;
-    --color-border: rgba(107, 40, 22, 0.12);
+    --forest: #2E4F2B;
+    --forest-dark: #1E351C;
+    --forest-light: #3D6739;
+    --earth: #8B5A2B;
+    --earth-dark: #66411E;
+    --earth-soft: #A6733E;
+    --paper: #F5F2EB;
+    --paper-card: #FAF8F3;
+    --paper-tint: #ECE6D8;
+    --sand: #D4C5A9;
+    --sand-dark: #BDB198;
+    --text-main: #241D17;
+    --text-muted: #5C5044;
+    --text-light: #7E7163;
   }
 
   html {
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     scroll-behavior: smooth;
-    background-color: #f4eedb;
-    color: #261a12;
+    background-color: #F5F2EB;
+    color: #241D17;
     -webkit-font-smoothing: antialiased;
   }
 
   body {
-    background-color: #f4eedb;
-    color: #261a12;
+    background-color: #F5F2EB;
+    color: #241D17;
     margin: 0;
     padding: 0;
+    line-height: 1.6;
+  }
+
+  .font-serif-heading {
+    font-family: 'Playfair Display', Georgia, Cambria, 'Times New Roman', serif;
   }
 
   .font-serif-display {
@@ -38,27 +69,31 @@
   }
 
   .font-tamil {
-    font-family: 'Noto Serif Tamil', 'Noto Sans Tamil', serif;
+    font-family: 'Noto Sans Tamil', 'Noto Serif Tamil', sans-serif;
+  }
+
+  .font-tamil-serif {
+    font-family: 'Noto Serif Tamil', Georgia, serif;
   }
 
   ::selection {
-    background-color: #6b2816;
-    color: #faf6eb;
+    background-color: #2E4F2B;
+    color: #F5F2EB;
   }
 }
 
-/* Restrained scrollbar */
+/* Calm, natural scrollbar */
 ::-webkit-scrollbar {
   width: 7px;
   height: 7px;
 }
 ::-webkit-scrollbar-track {
-  background: #e8dfc8;
+  background: #ECE6D8;
 }
 ::-webkit-scrollbar-thumb {
-  background: #574637;
+  background: #BDB198;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #1b331b;
+  background: #2E4F2B;
 }
