@@ -4,6 +4,7 @@ import { useLanguage } from '../context/LanguageContext';
 
 export const SpiritualProgression: React.FC = () => {
   const { content, language } = useLanguage();
+  const isTamil = language === 'ta';
 
   const icons = [
     <Heart key="heart" className="w-5 h-5 text-[#8B5A2B]" />,
@@ -12,43 +13,42 @@ export const SpiritualProgression: React.FC = () => {
   ];
 
   return (
-    <div className="w-full space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
+    <div className="w-full relative">
+      {/* Connected Line on Desktop */}
+      <div className="hidden md:block absolute top-12 left-16 right-16 h-0.5 bg-[#D4C5A9]/70 z-0" />
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
         {content.spiritual.shifts.map((shift, idx) => (
           <div
             key={idx}
-            className="bg-[#FAF8F3] border border-[#D4C5A9] rounded-2xl p-6 flex flex-col justify-between space-y-5 shadow-xs hover:border-[#2E4F2B]/50 transition-colors"
+            className="flex flex-col space-y-4 relative"
           >
-            {/* Visual Shift Header */}
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-serif font-bold text-[#8B5A2B] bg-[#ECE6D8] px-2.5 py-1 rounded-md border border-[#D4C5A9]">
-                  {shift.stage}
-                </span>
-                <div className="w-8 h-8 rounded-full bg-[#ECE6D8] flex items-center justify-center">
-                  {icons[idx]}
-                </div>
+            {/* Step Node Marker */}
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-[#FAF8F3] border-2 border-[#2E4F2B] flex items-center justify-center shadow-xs shrink-0">
+                {icons[idx]}
               </div>
-
-              {/* Visual From -> To pill */}
-              <div className="p-3 bg-[#ECE6D8]/50 rounded-xl border border-[#D4C5A9]/60 flex items-center justify-between text-xs">
-                <div className={`text-[#5C5044] line-through decoration-[#8B5A2B]/60 font-semibold ${language === 'ta' ? 'font-tamil' : 'font-serif'}`}>
-                  {shift.from}
-                </div>
-
-                <div className="px-2">
-                  <ArrowRight className="w-4 h-4 text-[#2E4F2B]" />
-                </div>
-
-                <div className={`text-[#2E4F2B] text-right font-bold ${language === 'ta' ? 'font-tamil text-[#8B5A2B]' : 'font-serif'}`}>
-                  {shift.to}
-                </div>
-              </div>
+              <span className="text-xs font-serif uppercase tracking-widest text-[#8B5A2B] font-bold">
+                {shift.stage}
+              </span>
             </div>
 
-            {/* Description */}
-            <div className="space-y-1.5 text-xs text-[#5C5044]">
-              <p className={`leading-relaxed text-[#241D17] ${language === 'ta' ? 'font-tamil' : 'font-sans'}`}>
+            {/* Shift Stepper Card */}
+            <div className="p-6 bg-[#FAF8F3] border border-[#D4C5A9]/70 rounded-xl space-y-4 hover:border-[#2E4F2B]/40 transition-colors shadow-2xs flex-1 flex flex-col justify-between">
+              
+              {/* Transition Indicator */}
+              <div className="flex items-center justify-between pb-3 border-b border-[#D4C5A9]/40 text-xs">
+                <span className={`text-[#7E7163] line-through decoration-[#8B5A2B]/60 font-medium ${isTamil ? 'font-tamil' : 'font-serif'}`}>
+                  {shift.from}
+                </span>
+                <ArrowRight className="w-4 h-4 text-[#2E4F2B] shrink-0 mx-2" />
+                <span className={`text-[#2E4F2B] font-bold ${isTamil ? 'font-tamil text-[#8B5A2B]' : 'font-serif'}`}>
+                  {shift.to}
+                </span>
+              </div>
+
+              {/* Description */}
+              <p className={`text-xs sm:text-sm text-[#5C5044] leading-relaxed ${isTamil ? 'font-tamil' : 'font-sans'}`}>
                 {shift.desc}
               </p>
             </div>

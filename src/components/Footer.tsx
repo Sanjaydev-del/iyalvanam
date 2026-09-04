@@ -3,7 +3,8 @@ import {
   MapPin, 
   Mail, 
   Phone, 
-  MessageCircle
+  MessageCircle,
+  ArrowRight
 } from 'lucide-react';
 import { IyalvanamEmblem, SeyonEmblem } from './OrganicIcons';
 import { useLanguage } from '../context/LanguageContext';
@@ -16,6 +17,7 @@ interface FooterProps {
 export const Footer: React.FC<FooterProps> = ({ navigate }) => {
   const { content, language } = useLanguage();
   const ftr = content.footer;
+  const isTamil = language === 'ta';
 
   const handleNav = (target: string) => {
     if (target.startsWith('#')) {
@@ -36,74 +38,74 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
   };
 
   return (
-    <footer id="main-footer" className="bg-[#1E351C] text-[#F5F2EB] border-t border-[#D4C5A9]/20">
+    <footer id="main-footer" className="bg-[#122210] text-[#F5F2EB] border-t border-[#D4C5A9]/20">
       
-      {/* Top Prominent Closing & WhatsApp CTA Banner */}
-      <div className="bg-[#2E4F2B] border-b border-[#D4C5A9]/20 py-10 px-6 sm:px-10">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="space-y-2 text-center md:text-left">
-            <span className={`text-xs uppercase tracking-widest text-[#D4C5A9] font-semibold block ${language === 'ta' ? 'font-tamil' : 'font-serif'}`}>
+      {/* Full-Bleed Deep Forest Green Closing Pause & WhatsApp Connection */}
+      <div className="bg-[#1A3018] py-16 sm:py-24 px-6 sm:px-12 border-b border-[#D4C5A9]/20">
+        <div className="max-w-4xl mx-auto text-center space-y-8">
+          <div className="space-y-3">
+            <span className={`text-xs uppercase tracking-widest text-[#D4C5A9] font-bold block ${isTamil ? 'font-tamil' : 'font-serif'}`}>
               {ftr.bannerTagline}
             </span>
-            <h3 className={`text-xl sm:text-2xl font-bold text-[#F5F2EB] ${language === 'ta' ? 'font-tamil' : 'font-serif-heading'}`}>
+            <h3 className={`text-2xl sm:text-4xl lg:text-5xl font-bold text-[#FAF8F3] leading-tight max-w-3xl mx-auto ${isTamil ? 'font-tamil' : 'font-serif-heading'}`}>
               {ftr.bannerHeading}
             </h3>
-            <p className={`text-xs sm:text-sm text-[#F5F2EB]/80 max-w-xl ${language === 'ta' ? 'font-tamil' : 'font-sans'}`}>
+            <p className={`text-sm sm:text-base text-[#F5F2EB]/80 max-w-2xl mx-auto leading-relaxed pt-2 ${isTamil ? 'font-tamil' : 'font-sans'}`}>
               {ftr.bannerSub}
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
+          <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
               href="https://tinyurl.com/2zap33fy"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-3.5 rounded-xl bg-[#8B5A2B] hover:bg-[#66411E] text-[#FAF8F3] text-sm font-semibold tracking-wide flex items-center gap-2.5 transition-all shadow-md cursor-pointer"
+              className="px-8 py-4 rounded-xl bg-[#8B5A2B] hover:bg-[#66411E] text-[#FAF8F3] text-sm font-semibold tracking-wide flex items-center gap-3 transition-all shadow-md cursor-pointer"
             >
               <MessageCircle className="w-5 h-5 text-[#D4C5A9]" />
-              <span className={language === 'ta' ? 'font-tamil' : 'font-serif'}>{ftr.bannerBtn}</span>
+              <span className={isTamil ? 'font-tamil' : 'font-serif'}>{ftr.bannerBtn}</span>
             </a>
-            {/* Language Switcher in Footer */}
+
             <LanguageToggle size="md" />
           </div>
         </div>
       </div>
 
-      {/* Main Footer Content Grid */}
-      <div className="max-w-6xl mx-auto px-6 sm:px-10 py-12 sm:py-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 border-b border-[#D4C5A9]/15 text-xs">
+      {/* Main Editorial Footer Content */}
+      <div className="max-w-6xl mx-auto px-6 sm:px-10 py-14 sm:py-18 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 border-b border-[#D4C5A9]/15 text-xs">
         
-        {/* Brand & Mission Statement */}
+        {/* Brand */}
         <div className="space-y-4">
           <div className="flex items-center gap-2.5">
-            <IyalvanamEmblem size={30} className="w-7.5 h-7.5 text-[#D4C5A9]" />
-            <SeyonEmblem size={30} className="w-7.5 h-7.5 text-[#D4C5A9]" />
+            <IyalvanamEmblem size={32} className="w-8 h-8 text-[#D4C5A9]" />
+            <SeyonEmblem size={32} className="w-8 h-8 text-[#D4C5A9]" />
             <div>
               <span className="font-serif-heading font-bold tracking-tight block text-sm text-[#FAF8F3]">
                 IYALVANAM & SEYON
               </span>
-              <span className={`text-[11px] text-[#D4C5A9] block ${language === 'ta' ? 'font-tamil' : 'font-serif'}`}>
+              <span className={`text-[11px] text-[#D4C5A9] block ${isTamil ? 'font-tamil' : 'font-serif'}`}>
                 {content.nav.subTitle}
               </span>
             </div>
           </div>
-          <p className={`text-xs text-[#F5F2EB]/80 leading-relaxed ${language === 'ta' ? 'font-tamil' : 'font-sans'}`}>
+          <p className={`text-xs text-[#F5F2EB]/80 leading-relaxed ${isTamil ? 'font-tamil' : 'font-sans'}`}>
             {ftr.brandDesc}
           </p>
           <div className="text-[11px] text-[#D4C5A9] space-y-1">
             <div className="flex items-center gap-1.5">
               <MapPin className="w-3.5 h-3.5 text-[#D4C5A9]" />
-              <span className={language === 'ta' ? 'font-tamil' : 'font-serif'}>{ftr.sanctuaryAddress}</span>
+              <span className={isTamil ? 'font-tamil' : 'font-serif'}>{ftr.sanctuaryAddress}</span>
             </div>
-            <div className={`pl-5 text-[#F5F2EB]/70 ${language === 'ta' ? 'font-tamil' : 'font-serif'}`}>{ftr.districtState}</div>
+            <div className={`pl-5 text-[#F5F2EB]/70 ${isTamil ? 'font-tamil' : 'font-serif'}`}>{ftr.districtState}</div>
           </div>
         </div>
 
-        {/* Quick Anchors */}
+        {/* Section Anchors */}
         <div className="space-y-3">
-          <span className={`text-[10px] font-bold uppercase tracking-widest text-[#D4C5A9] block ${language === 'ta' ? 'font-tamil' : 'font-serif'}`}>
+          <span className={`text-[10px] font-bold uppercase tracking-widest text-[#D4C5A9] block ${isTamil ? 'font-tamil' : 'font-serif'}`}>
             {ftr.sectionsTitle}
           </span>
-          <ul className={`space-y-2 text-[#F5F2EB]/85 ${language === 'ta' ? 'font-tamil' : 'font-serif'}`}>
+          <ul className={`space-y-2 text-[#F5F2EB]/85 ${isTamil ? 'font-tamil' : 'font-serif'}`}>
             <li><button onClick={() => handleNav('#hero')} className="hover:text-[#D4C5A9] transition-colors cursor-pointer">{ftr.navHero}</button></li>
             <li><button onClick={() => handleNav('#etymology')} className="hover:text-[#D4C5A9] transition-colors cursor-pointer">{ftr.navEtymology}</button></li>
             <li><button onClick={() => handleNav('#philosophy')} className="hover:text-[#D4C5A9] transition-colors cursor-pointer">{ftr.navPhilosophy}</button></li>
@@ -113,17 +115,17 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
           </ul>
         </div>
 
-        {/* Leadership & Direct Phone Links */}
+        {/* Founders Direct Contacts */}
         <div className="space-y-3">
-          <span className={`text-[10px] font-bold uppercase tracking-widest text-[#D4C5A9] block ${language === 'ta' ? 'font-tamil' : 'font-serif'}`}>
+          <span className={`text-[10px] font-bold uppercase tracking-widest text-[#D4C5A9] block ${isTamil ? 'font-tamil' : 'font-serif'}`}>
             {ftr.stewardsTitle}
           </span>
           <div className="space-y-3 text-[#F5F2EB]/85 font-sans">
-            <div className="p-3 bg-[#2E4F2B]/60 rounded-lg border border-[#D4C5A9]/20 space-y-1">
-              <div className={`font-bold text-xs text-[#FAF8F3] ${language === 'ta' ? 'font-tamil' : 'font-serif'}`}>
+            <div className="p-3.5 bg-[#1A3018] rounded-xl border border-[#D4C5A9]/20 space-y-1">
+              <div className={`font-bold text-xs text-[#FAF8F3] ${isTamil ? 'font-tamil' : 'font-serif'}`}>
                 {content.founders.founderName}
               </div>
-              <div className={`text-[11px] text-[#D4C5A9] ${language === 'ta' ? 'font-tamil' : 'font-serif'}`}>
+              <div className={`text-[11px] text-[#D4C5A9] ${isTamil ? 'font-tamil' : 'font-serif'}`}>
                 {ftr.founderTitle}
               </div>
               <a href="tel:+919600756007" className="inline-flex items-center gap-1.5 text-xs text-[#FAF8F3] hover:text-[#D4C5A9] pt-1">
@@ -132,11 +134,11 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
               </a>
             </div>
 
-            <div className="p-3 bg-[#2E4F2B]/60 rounded-lg border border-[#D4C5A9]/20 space-y-1">
-              <div className={`font-bold text-xs text-[#FAF8F3] ${language === 'ta' ? 'font-tamil' : 'font-serif'}`}>
+            <div className="p-3.5 bg-[#1A3018] rounded-xl border border-[#D4C5A9]/20 space-y-1">
+              <div className={`font-bold text-xs text-[#FAF8F3] ${isTamil ? 'font-tamil' : 'font-serif'}`}>
                 {content.founders.coFounderName}
               </div>
-              <div className={`text-[11px] text-[#D4C5A9] ${language === 'ta' ? 'font-tamil' : 'font-serif'}`}>
+              <div className={`text-[11px] text-[#D4C5A9] ${isTamil ? 'font-tamil' : 'font-serif'}`}>
                 {ftr.coFounderTitle}
               </div>
               <a href="tel:+919444098765" className="inline-flex items-center gap-1.5 text-xs text-[#FAF8F3] hover:text-[#D4C5A9] pt-1">
@@ -147,25 +149,25 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
           </div>
         </div>
 
-        {/* Dual Trust Legal Framework */}
+        {/* Dual Trust Structure */}
         <div className="space-y-3">
-          <span className={`text-[10px] font-bold uppercase tracking-widest text-[#D4C5A9] block ${language === 'ta' ? 'font-tamil' : 'font-serif'}`}>
+          <span className={`text-[10px] font-bold uppercase tracking-widest text-[#D4C5A9] block ${isTamil ? 'font-tamil' : 'font-serif'}`}>
             {ftr.trustStructureTitle}
           </span>
           <div className="space-y-2 text-[#F5F2EB]/85 text-xs">
             <div>
-              <strong className={`block text-[#FAF8F3] ${language === 'ta' ? 'font-tamil' : 'font-serif'}`}>
+              <strong className={`block text-[#FAF8F3] ${isTamil ? 'font-tamil' : 'font-serif'}`}>
                 1. IYALVANAM Asset Trust
               </strong>
-              <p className={`text-[11px] text-[#F5F2EB]/70 leading-snug ${language === 'ta' ? 'font-tamil' : 'font-sans'}`}>
+              <p className={`text-[11px] text-[#F5F2EB]/70 leading-snug ${isTamil ? 'font-tamil' : 'font-sans'}`}>
                 {ftr.assetTrustDesc}
               </p>
             </div>
             <div className="pt-1">
-              <strong className={`block text-[#FAF8F3] ${language === 'ta' ? 'font-tamil' : 'font-serif'}`}>
+              <strong className={`block text-[#FAF8F3] ${isTamil ? 'font-tamil' : 'font-serif'}`}>
                 2. SEYON Nature Life Foundation
               </strong>
-              <p className={`text-[11px] text-[#F5F2EB]/70 leading-snug ${language === 'ta' ? 'font-tamil' : 'font-sans'}`}>
+              <p className={`text-[11px] text-[#F5F2EB]/70 leading-snug ${isTamil ? 'font-tamil' : 'font-sans'}`}>
                 {ftr.operationalTrustDesc}
               </p>
             </div>
@@ -185,8 +187,8 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
 
       {/* Copyright Bar */}
       <div className="max-w-6xl mx-auto px-6 sm:px-10 py-6 text-xs text-[#F5F2EB]/60 flex flex-col sm:flex-row items-center justify-between gap-3">
-        <span className={language === 'ta' ? 'font-tamil' : 'font-serif'}>{ftr.copyright}</span>
-        <span className={`text-[11px] text-[#D4C5A9]/80 ${language === 'ta' ? 'font-tamil' : 'font-serif'}`}>
+        <span className={isTamil ? 'font-tamil' : 'font-serif'}>{ftr.copyright}</span>
+        <span className={`text-[11px] text-[#D4C5A9]/80 ${isTamil ? 'font-tamil' : 'font-serif'}`}>
           {ftr.bottomTagline}
         </span>
       </div>

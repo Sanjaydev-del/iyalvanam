@@ -2,17 +2,26 @@
 
 @layer base {
   :root {
+    /* Brand Greens */
+    --forest-dark: #122210;
+    --forest-deep: #1A3018;
     --forest: #2E4F2B;
-    --forest-dark: #1E351C;
     --forest-light: #3D6739;
+
+    /* Earth & Ochre */
+    --earth-dark: #5C3818;
     --earth: #8B5A2B;
-    --earth-dark: #66411E;
     --earth-soft: #A6733E;
+    --gold-accent: #C49A38;
+
+    /* Paper & Sand Surfaces */
     --paper: #F5F2EB;
-    --paper-card: #FAF8F3;
     --paper-tint: #ECE6D8;
+    --paper-card: #FAF8F3;
     --sand: #D4C5A9;
     --sand-dark: #BDB198;
+
+    /* High Contrast Text */
     --text-main: #241D17;
     --text-muted: #5C5044;
     --text-light: #7E7163;
@@ -31,7 +40,7 @@
     color: #241D17;
     margin: 0;
     padding: 0;
-    line-height: 1.6;
+    line-height: 1.65;
   }
 
   .font-serif-heading {
@@ -60,17 +69,17 @@
   }
 }
 
-/* Calm, natural scrollbar */
+/* Subtle, calm scrollbar */
 ::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
   background: #ECE6D8;
 }
 ::-webkit-scrollbar-thumb {
   background: #BDB198;
-  border-radius: 4px;
+  border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #2E4F2B;
