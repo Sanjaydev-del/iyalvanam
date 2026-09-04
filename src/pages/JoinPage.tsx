@@ -20,6 +20,7 @@ import {
 import { Container } from '../components/common/Container';
 import { Button } from '../components/common/Button';
 import { LeafBullet } from '../components/OrganicIcons';
+import { FAQSection } from '../components/FAQSection';
 import { api } from '../services/api';
 
 interface JoinPageProps {
@@ -316,9 +317,19 @@ export const JoinPage: React.FC<JoinPageProps> = ({ navigate, showToast }) => {
         </div>
       </Container>
 
-      {/* 5. Interactive Inquiry Form Section */}
+      {/* 5. Comprehensive 25 Community FAQs Section */}
+      <section className="bg-[#FAF8F3] py-16 sm:py-20 border-t border-b border-[#E3DDD2]">
+        <Container>
+          <FAQSection 
+            title="Community Clarity & 25 Frequently Asked Questions"
+            subtitle="Essential answers regarding life, stewardship, finances, hierarchy, children, and exit terms at Iyalvanam & Seyon."
+          />
+        </Container>
+      </section>
+
+      {/* 6. Interactive Inquiry Form Section */}
       <Container>
-        <div id="join-form-section" className="space-y-8 pt-8 border-t border-[#E3DDD2]">
+        <div id="join-form-section" className="space-y-8 pt-4">
           <div className="max-w-2xl space-y-2">
             <span className="text-xs font-semibold uppercase tracking-widest text-[#8B5A2B]">
               Direct Inquiry

@@ -304,46 +304,13 @@ export const ContactPage: React.FC<ContactPageProps> = ({ navigate, showToast })
         </div>
       </Container>
 
-      {/* 3. Frequently Asked Questions (Accordion) */}
+      {/* 3. Frequently Asked Questions & Community Clarity */}
       <Container>
-        <div className="bg-[#FAF8F3] border border-[#E3DDD2] p-6 sm:p-10 rounded-sm space-y-8">
-          <div className="max-w-2xl space-y-2">
-            <span className="text-xs font-semibold uppercase tracking-widest text-[#8B5A2B]">
-              Visitor Guidance
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#2E4F2B]">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-sm text-[#5A5046]">
-              Essential protocols to ensure a harmonious sanctuary visit.
-            </p>
-          </div>
-
-          <div className="space-y-3 max-w-3xl">
-            {faqs.map((faq, idx) => (
-              <div
-                key={idx}
-                className="bg-[#F5F2EB] border border-[#E3DDD2] rounded-sm overflow-hidden"
-              >
-                <button
-                  onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                  className="w-full p-4 sm:p-5 text-left font-semibold text-[#241D17] flex items-center justify-between gap-3 text-sm sm:text-base hover:text-[#2E4F2B] min-h-[48px] transition-colors"
-                >
-                  <span>{faq.q}</span>
-                  {openFaq === idx ? (
-                    <ChevronUp className="w-4 h-4 text-[#8B5A2B] shrink-0" />
-                  ) : (
-                    <ChevronDown className="w-4 h-4 text-[#2E4F2B] shrink-0" />
-                  )}
-                </button>
-                {openFaq === idx && (
-                  <div className="px-4 pb-4 sm:px-5 sm:pb-5 text-xs sm:text-sm text-[#5A5046] leading-relaxed border-t border-[#E3DDD2] pt-3">
-                    {faq.a}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
+        <div className="bg-[#FAF8F3] border border-[#E3DDD2] p-6 sm:p-10 rounded-sm">
+          <FAQSection 
+            title="Frequently Asked Questions & Visitor Guidance"
+            subtitle="25 essential questions covering life, visits, finances, children, housing, and community ethos."
+          />
         </div>
       </Container>
 
