@@ -125,17 +125,20 @@ export default function App() {
   return (
     <LanguageProvider>
       <AuthProvider>
-        <div className="min-h-screen flex flex-col bg-[#F5F2EB] text-[#241D17] font-sans antialiased selection:bg-[#2E4F2B] selection:text-[#F5F2EB]">
-          {/* Top Global Navigation Bar */}
+        <div className="min-h-screen bg-[#F5F2EB] text-[#241D17] font-sans antialiased selection:bg-[#2E4F2B] selection:text-[#F5F2EB] overflow-x-hidden">
+          {/* Global Navigation: Left Sidebar on Desktop (lg+) & Header + Menu on Mobile (<lg) */}
           <Navbar currentPath={currentPath} navigate={navigate} />
 
-          {/* Full-Width Content Container */}
-          <main className="flex-1 w-full min-w-0">
-            {renderRoute()}
-          </main>
+          {/* Main Layout Area: Offset by left sidebar on desktop (lg:pl-64 xl:pl-72), top header on mobile (pt-16) */}
+          <div className="lg:pl-64 xl:pl-72 min-h-screen flex flex-col pt-16 lg:pt-0">
+            {/* Page Content */}
+            <main className="flex-1 w-full min-w-0">
+              {renderRoute()}
+            </main>
 
-          {/* Global Footer */}
-          <Footer navigate={navigate} />
+            {/* Global Footer */}
+            <Footer navigate={navigate} />
+          </div>
 
           {/* Toast Notification Container */}
           <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none">
@@ -155,3 +158,4 @@ export default function App() {
     </LanguageProvider>
   );
 }
+

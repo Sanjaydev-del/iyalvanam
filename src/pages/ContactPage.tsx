@@ -5,21 +5,16 @@ import {
   Phone, 
   Send, 
   CheckCircle2, 
-  AlertTriangle, 
   Compass, 
   Train, 
   Plane, 
   Bus, 
-  Clock, 
-  ShieldAlert,
-  HelpCircle,
   ChevronDown,
   ChevronUp
 } from 'lucide-react';
 import { Container } from '../components/common/Container';
-import { SectionHeading } from '../components/common/SectionHeading';
 import { Button } from '../components/common/Button';
-import { BotanicalFlourish, LeafBullet } from '../components/OrganicIcons';
+import { LeafBullet } from '../components/OrganicIcons';
 import { api } from '../services/api';
 
 interface ContactPageProps {
@@ -94,27 +89,23 @@ export const ContactPage: React.FC<ContactPageProps> = ({ navigate, showToast })
   ];
 
   return (
-    <div className="bg-[#f0e6d2] text-[#2d2013] space-y-12 sm:space-y-16 md:space-y-20 pb-16 sm:pb-24">
+    <div className="bg-[#F5F2EB] text-[#241D17] space-y-16 sm:space-y-24 pb-20 sm:pb-32">
       
       {/* 1. Header Banner */}
-      <section className="pt-10 sm:pt-16 pb-8 sm:pb-12 border-b border-[#7a2e1a]/15 bg-[#f7f2e7]">
+      <section className="pt-12 sm:pt-20 pb-12 border-b border-[#E3DDD2] bg-[#FAF8F3]">
         <Container>
-          <div className="text-center max-w-3xl mx-auto space-y-3 sm:space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1f3d1f]/10 text-[#1f3d1f] border border-[#1f3d1f]/20 text-[11px] sm:text-xs font-serif font-bold uppercase tracking-widest">
-              <Compass className="w-3.5 h-3.5 text-[#7a2e1a]" />
-              <span>Contact & Coordinates • தொடர்பு</span>
-            </div>
-
-            <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-serif-display font-bold text-[#2d2013] tracking-tight leading-tight break-words">
+          <div className="max-w-3xl space-y-4">
+            <span className="text-xs font-semibold uppercase tracking-widest text-[#8B5A2B] block">
+              Contact & Coordinates • தொடர்பு
+            </span>
+            <h1 className="text-3xl sm:text-5xl font-bold text-[#2E4F2B] tracking-tight leading-tight">
               Connect with the Iyalvanam Circle
             </h1>
-
-            <p className="text-xs sm:text-sm font-tamil text-[#7a2e1a] font-semibold break-words">
+            <p className="text-sm text-[#8B5A2B] font-medium">
               “தொடர்பு கொண்டு களம் காண வருக”
             </p>
-
-            <p className="text-sm sm:text-base md:text-lg text-[#3d2f21]/85 font-serif-body leading-relaxed max-w-2xl mx-auto break-words">
-              Whether you have questions about our philosophy, wish to schedule an alignment visit, or offer support, our community stewards are here to help.
+            <p className="text-base sm:text-lg text-[#5A5046] leading-relaxed pt-1">
+              Whether you have questions regarding our non-artificial philosophy, wish to schedule an alignment stay, or seek to offer support, our community stewards are here to assist.
             </p>
           </div>
         </Container>
@@ -122,45 +113,45 @@ export const ContactPage: React.FC<ContactPageProps> = ({ navigate, showToast })
 
       {/* 2. Contact Info & Message Form Grid */}
       <Container>
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           
           {/* Left Column: Direct Coordinates */}
           <div className="lg:col-span-5 space-y-6">
             
-            <div className="p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#f7f2e7] border border-[#7a2e1a]/15 shadow-sm space-y-6">
+            <div className="bg-[#FAF8F3] border border-[#E3DDD2] p-6 sm:p-8 rounded-sm space-y-6">
               <div>
-                <span className="text-[10px] font-bold uppercase tracking-widest text-[#7a2e1a]">
+                <span className="text-xs font-semibold uppercase tracking-widest text-[#8B5A2B]">
                   Sanctuary Coordinates
                 </span>
-                <h3 className="text-xl font-bold font-serif-display text-[#1f3d1f] mt-1">
+                <h3 className="text-xl font-bold text-[#2E4F2B] mt-1">
                   Location & Contacts
                 </h3>
               </div>
 
-              <div className="space-y-4 text-xs sm:text-sm text-[#3d2f21]">
+              <div className="space-y-4 text-sm text-[#5A5046]">
                 <div className="flex items-start gap-3">
-                  <MapPin className="w-5 h-5 text-[#7a2e1a] shrink-0 mt-0.5" />
+                  <MapPin className="w-5 h-5 text-[#8B5A2B] shrink-0 mt-0.5" />
                   <div>
-                    <strong className="block text-[#2d2013]">Iyalvanam Sanctuary</strong>
+                    <strong className="block text-[#241D17]">Iyalvanam Sanctuary</strong>
                     <span>Dharmapuramadam, Tenkasi District, Tamil Nadu – 627803</span>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <Mail className="w-5 h-5 text-[#1f3d1f] shrink-0" />
+                  <Mail className="w-5 h-5 text-[#2E4F2B] shrink-0" />
                   <div>
-                    <strong className="block text-[#2d2013]">Email Dispatch</strong>
-                    <a href="mailto:contact@iyalvanam.org" className="hover:text-[#7a2e1a] font-medium">
+                    <strong className="block text-[#241D17]">Email Dispatch</strong>
+                    <a href="mailto:contact@iyalvanam.org" className="hover:text-[#8B5A2B] font-medium transition-colors">
                       contact@iyalvanam.org
                     </a>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <Phone className="w-5 h-5 text-[#1f3d1f] shrink-0" />
+                  <Phone className="w-5 h-5 text-[#2E4F2B] shrink-0" />
                   <div>
-                    <strong className="block text-[#2d2013]">Phone / WhatsApp</strong>
-                    <a href="tel:+919600756007" className="hover:text-[#7a2e1a] font-medium">
+                    <strong className="block text-[#241D17]">Phone / WhatsApp</strong>
+                    <a href="tel:+919600756007" className="hover:text-[#8B5A2B] font-medium transition-colors">
                       +91 96007 56007
                     </a>
                   </div>
@@ -169,22 +160,22 @@ export const ContactPage: React.FC<ContactPageProps> = ({ navigate, showToast })
             </div>
 
             {/* Travel Directions Card */}
-            <div className="p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#f7f2e7] border border-[#7a2e1a]/15 shadow-sm space-y-4">
-              <h4 className="text-base font-serif-display font-bold text-[#1f3d1f] flex items-center gap-2">
-                <Train className="w-4 h-4 text-[#7a2e1a]" />
+            <div className="bg-[#FAF8F3] border border-[#E3DDD2] p-6 sm:p-8 rounded-sm space-y-4">
+              <h4 className="text-base font-bold text-[#2E4F2B] flex items-center gap-2">
+                <Train className="w-4 h-4 text-[#8B5A2B]" />
                 <span>How to Reach Tenkasi</span>
               </h4>
-              <ul className="space-y-2.5 text-xs text-[#3d2f21]/85 font-serif-body">
+              <ul className="space-y-3 text-xs text-[#5A5046]">
                 <li className="flex items-start gap-2">
-                  <LeafBullet className="w-3 h-3 text-[#1f3d1f] mt-1 shrink-0" />
-                  <span><strong>By Train:</strong> Tenkasi Junction (TSI) or Ambasamudram (ASD). Direct overnight trains from Chennai/Bangalore.</span>
+                  <LeafBullet className="w-3 h-3 text-[#2E4F2B] mt-1 shrink-0" />
+                  <span><strong>By Train:</strong> Tenkasi Junction (TSI) or Ambasamudram (ASD). Direct overnight trains from Chennai and Bangalore.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <LeafBullet className="w-3 h-3 text-[#1f3d1f] mt-1 shrink-0" />
+                  <LeafBullet className="w-3 h-3 text-[#2E4F2B] mt-1 shrink-0" />
                   <span><strong>By Air:</strong> Tuticorin Airport (TCR - 85 km) or Madurai Airport (IXM - 150 km).</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <LeafBullet className="w-3 h-3 text-[#1f3d1f] mt-1 shrink-0" />
+                  <LeafBullet className="w-3 h-3 text-[#2E4F2B] mt-1 shrink-0" />
                   <span><strong>Local Transit:</strong> Frequent buses & auto-rickshaws available from Tenkasi bus stand to Dharmapuramadam.</span>
                 </li>
               </ul>
@@ -194,22 +185,22 @@ export const ContactPage: React.FC<ContactPageProps> = ({ navigate, showToast })
 
           {/* Right Column: Interactive Note Form */}
           <div className="lg:col-span-7">
-            <div className="bg-[#f7f2e7] rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-10 border-2 border-[#1f3d1f]/20 shadow-sm space-y-6">
+            <div className="bg-[#FAF8F3] border border-[#E3DDD2] p-6 sm:p-10 rounded-sm space-y-6">
               
               <div>
-                <span className="text-[10px] font-bold uppercase tracking-widest text-[#7a2e1a]">
+                <span className="text-xs font-semibold uppercase tracking-widest text-[#8B5A2B]">
                   Direct Note
                 </span>
-                <h3 className="text-xl sm:text-2xl font-serif-display font-bold text-[#2d2013] mt-1">
+                <h3 className="text-2xl font-bold text-[#2E4F2B] mt-1">
                   Send a Message to Stewards
                 </h3>
               </div>
 
               {isSent ? (
-                <div className="bg-[#f0e6d2] rounded-2xl p-6 sm:p-8 text-center space-y-4 border border-[#1f3d1f]/20">
-                  <CheckCircle2 className="w-10 sm:w-12 h-10 sm:h-12 mx-auto text-[#1f3d1f]" />
-                  <h4 className="text-xl font-serif-display font-bold text-[#1f3d1f]">Message Dispatched!</h4>
-                  <p className="text-xs sm:text-sm text-[#3d2f21] max-w-sm mx-auto font-serif-body">
+                <div className="bg-[#F5F2EB] border border-[#2E4F2B]/30 rounded-sm p-8 text-center space-y-4">
+                  <CheckCircle2 className="w-12 h-12 mx-auto text-[#2E4F2B]" />
+                  <h4 className="text-xl font-bold text-[#2E4F2B]">Message Dispatched!</h4>
+                  <p className="text-sm text-[#5A5046] max-w-sm mx-auto">
                     Thank you for reaching out. We honor your note and will reply at the earliest opportunity.
                   </p>
                   <Button variant="primary" size="sm" onClick={() => setIsSent(false)}>
@@ -219,8 +210,8 @@ export const ContactPage: React.FC<ContactPageProps> = ({ navigate, showToast })
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs font-bold uppercase tracking-widest text-[#7a2e1a] mb-1">
+                    <div className="space-y-1.5">
+                      <label className="block text-xs font-semibold uppercase tracking-wider text-[#8B5A2B]">
                         Your Name *
                       </label>
                       <input
@@ -229,12 +220,12 @@ export const ContactPage: React.FC<ContactPageProps> = ({ navigate, showToast })
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         placeholder="e.g. Meera Sundaram"
-                        className="w-full min-h-[48px] px-4 py-3 rounded-xl bg-[#f0e6d2] border border-[#7a2e1a]/30 text-sm sm:text-base text-[#2d2013] focus:outline-none focus:ring-2 focus:ring-[#1f3d1f]"
+                        className="w-full min-h-[48px] px-4 py-2.5 rounded-sm bg-[#F5F2EB] border border-[#E3DDD2] text-sm text-[#241D17] focus:outline-none focus:border-[#2E4F2B]"
                       />
                     </div>
 
-                    <div>
-                      <label className="block text-xs font-bold uppercase tracking-widest text-[#7a2e1a] mb-1">
+                    <div className="space-y-1.5">
+                      <label className="block text-xs font-semibold uppercase tracking-wider text-[#8B5A2B]">
                         Email Address *
                       </label>
                       <input
@@ -243,14 +234,14 @@ export const ContactPage: React.FC<ContactPageProps> = ({ navigate, showToast })
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="e.g. meera@nature.org"
-                        className="w-full min-h-[48px] px-4 py-3 rounded-xl bg-[#f0e6d2] border border-[#7a2e1a]/30 text-sm sm:text-base text-[#2d2013] focus:outline-none focus:ring-2 focus:ring-[#1f3d1f]"
+                        className="w-full min-h-[48px] px-4 py-2.5 rounded-sm bg-[#F5F2EB] border border-[#E3DDD2] text-sm text-[#241D17] focus:outline-none focus:border-[#2E4F2B]"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs font-bold uppercase tracking-widest text-[#7a2e1a] mb-1">
+                    <div className="space-y-1.5">
+                      <label className="block text-xs font-semibold uppercase tracking-wider text-[#8B5A2B]">
                         Phone / WhatsApp
                       </label>
                       <input
@@ -258,18 +249,18 @@ export const ContactPage: React.FC<ContactPageProps> = ({ navigate, showToast })
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         placeholder="e.g. +91 98401 56789"
-                        className="w-full min-h-[48px] px-4 py-3 rounded-xl bg-[#f0e6d2] border border-[#7a2e1a]/30 text-sm sm:text-base text-[#2d2013] focus:outline-none focus:ring-2 focus:ring-[#1f3d1f]"
+                        className="w-full min-h-[48px] px-4 py-2.5 rounded-sm bg-[#F5F2EB] border border-[#E3DDD2] text-sm text-[#241D17] focus:outline-none focus:border-[#2E4F2B]"
                       />
                     </div>
 
-                    <div>
-                      <label className="block text-xs font-bold uppercase tracking-widest text-[#7a2e1a] mb-1">
+                    <div className="space-y-1.5">
+                      <label className="block text-xs font-semibold uppercase tracking-wider text-[#8B5A2B]">
                         Subject
                       </label>
                       <select
                         value={formData.subject}
                         onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                        className="w-full min-h-[48px] px-4 py-3 rounded-xl bg-[#f0e6d2] border border-[#7a2e1a]/30 text-sm sm:text-base text-[#2d2013] focus:outline-none focus:ring-2 focus:ring-[#1f3d1f]"
+                        className="w-full min-h-[48px] px-4 py-2.5 rounded-sm bg-[#F5F2EB] border border-[#E3DDD2] text-sm text-[#241D17] focus:outline-none focus:border-[#2E4F2B]"
                       >
                         <option value="General Inquiry & Land Visit">General Inquiry & Land Visit</option>
                         <option value="Resident Family Transition">Resident Family Transition</option>
@@ -279,8 +270,8 @@ export const ContactPage: React.FC<ContactPageProps> = ({ navigate, showToast })
                     </div>
                   </div>
 
-                  <div>
-                    <label className="block text-xs font-bold uppercase tracking-widest text-[#7a2e1a] mb-1">
+                  <div className="space-y-1.5">
+                    <label className="block text-xs font-semibold uppercase tracking-wider text-[#8B5A2B]">
                       Message *
                     </label>
                     <textarea
@@ -289,19 +280,21 @@ export const ContactPage: React.FC<ContactPageProps> = ({ navigate, showToast })
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       placeholder="Share your thoughts, inquiries, or visit schedule intentions..."
-                      className="w-full px-4 py-3 rounded-xl bg-[#f0e6d2] border border-[#7a2e1a]/30 text-sm sm:text-base text-[#2d2013] focus:outline-none focus:ring-2 focus:ring-[#1f3d1f]"
+                      className="w-full px-4 py-3 rounded-sm bg-[#F5F2EB] border border-[#E3DDD2] text-sm text-[#241D17] focus:outline-none focus:border-[#2E4F2B]"
                     />
                   </div>
 
-                  <Button
-                    type="submit"
-                    variant="primary"
-                    size="lg"
-                    disabled={isSubmitting}
-                    className="w-full justify-center min-h-[50px]"
-                  >
-                    {isSubmitting ? 'Sending...' : 'Send Message to Stewards'}
-                  </Button>
+                  <div className="pt-2">
+                    <Button
+                      type="submit"
+                      variant="primary"
+                      size="md"
+                      disabled={isSubmitting}
+                      className="w-full sm:w-auto justify-center min-h-[48px]"
+                    >
+                      {isSubmitting ? 'Sending...' : 'Send Message to Stewards'}
+                    </Button>
+                  </div>
                 </form>
               )}
 
@@ -313,34 +306,38 @@ export const ContactPage: React.FC<ContactPageProps> = ({ navigate, showToast })
 
       {/* 3. Frequently Asked Questions (Accordion) */}
       <Container>
-        <div className="p-6 sm:p-10 md:p-12 rounded-2xl sm:rounded-3xl bg-[#f7f2e7] border-2 border-[#7a2e1a]/20 space-y-6 sm:space-y-8">
-          <SectionHeading
-            badge="Visitor Guidance"
-            title="Frequently Asked Questions"
-            titleTamil="அடிக்கடி கேட்கப்படும் வினாக்கள்"
-            subtitle="Essential protocols to ensure a harmonious sanctuary visit."
-            align="center"
-          />
+        <div className="bg-[#FAF8F3] border border-[#E3DDD2] p-6 sm:p-10 rounded-sm space-y-8">
+          <div className="max-w-2xl space-y-2">
+            <span className="text-xs font-semibold uppercase tracking-widest text-[#8B5A2B]">
+              Visitor Guidance
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#2E4F2B]">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-sm text-[#5A5046]">
+              Essential protocols to ensure a harmonious sanctuary visit.
+            </p>
+          </div>
 
-          <div className="space-y-3 max-w-3xl mx-auto">
+          <div className="space-y-3 max-w-3xl">
             {faqs.map((faq, idx) => (
               <div
                 key={idx}
-                className="rounded-2xl bg-[#f0e6d2] border border-[#7a2e1a]/15 overflow-hidden transition-colors"
+                className="bg-[#F5F2EB] border border-[#E3DDD2] rounded-sm overflow-hidden"
               >
                 <button
                   onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                  className="w-full p-4 sm:p-5 text-left font-serif-display font-bold text-[#2d2013] flex items-center justify-between gap-3 text-sm sm:text-base hover:text-[#1f3d1f] min-h-[48px]"
+                  className="w-full p-4 sm:p-5 text-left font-semibold text-[#241D17] flex items-center justify-between gap-3 text-sm sm:text-base hover:text-[#2E4F2B] min-h-[48px] transition-colors"
                 >
                   <span>{faq.q}</span>
                   {openFaq === idx ? (
-                    <ChevronUp className="w-4 h-4 text-[#7a2e1a] shrink-0" />
+                    <ChevronUp className="w-4 h-4 text-[#8B5A2B] shrink-0" />
                   ) : (
-                    <ChevronDown className="w-4 h-4 text-[#1f3d1f] shrink-0" />
+                    <ChevronDown className="w-4 h-4 text-[#2E4F2B] shrink-0" />
                   )}
                 </button>
                 {openFaq === idx && (
-                  <div className="px-4 pb-4 sm:px-5 sm:pb-5 text-xs sm:text-sm text-[#3d2f21]/85 leading-relaxed font-serif-body border-t border-[#7a2e1a]/10 pt-3">
+                  <div className="px-4 pb-4 sm:px-5 sm:pb-5 text-xs sm:text-sm text-[#5A5046] leading-relaxed border-t border-[#E3DDD2] pt-3">
                     {faq.a}
                   </div>
                 )}
