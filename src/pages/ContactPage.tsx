@@ -15,6 +15,7 @@ import {
 import { Container } from '../components/common/Container';
 import { Button } from '../components/common/Button';
 import { LeafBullet } from '../components/OrganicIcons';
+import { FAQSection } from '../components/FAQSection';
 import { api } from '../services/api';
 
 interface ContactPageProps {
